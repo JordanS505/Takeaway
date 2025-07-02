@@ -154,22 +154,24 @@ public class JDBCUtenteDao implements UtenteDao {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
-			String nome = rs.getString("nome");
-			String cognome = rs.getString("cognome");
-			String emailUtente = rs.getString("email");
-			LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
-			String username = rs.getString("username");
-			String password = rs.getString("password");
-			String ruolo = rs.getString("ruolo");
-			
-			if(ruolo.equalsIgnoreCase("user")) {
-			u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.user);
-			}
-			if(ruolo.equalsIgnoreCase("admin")) {
-				u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.admin);
-			}
-			if(ruolo.equalsIgnoreCase("ristoratore")) {
-				u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.ristoratore);
+			if(rs.next()) {
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String emailUtente = rs.getString("email");
+				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String ruolo = rs.getString("ruolo");
+				
+				if(ruolo.equalsIgnoreCase("user")) {
+				u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.user);
+				}
+				if(ruolo.equalsIgnoreCase("admin")) {
+					u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.admin);
+				}
+				if(ruolo.equalsIgnoreCase("ristoratore")) {
+					u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.ristoratore);
+				}
 			}
 		}
 		return u;
@@ -257,7 +259,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	}
 	
 	public void updatePasswordByEmail(String email, String nuovaPassword) throws Exception {
-		String query = "UPDATE utenti SET password = ? WHERE email = ?";
+		String query = "UPDATE utente SET password = ? WHERE email = ?";
 		try (Connection connection = dataSource.getConnection();
 			 PreparedStatement ps = connection.prepareStatement(query)) {
 			 ps.setString(1, nuovaPassword);

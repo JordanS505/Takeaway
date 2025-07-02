@@ -97,9 +97,8 @@
                 <div class="d-flex align-items-center justify-content-center my-3" style="max-width: 400px; margin: 0 auto;">
                     <div class="flex-grow-1 border-top"></div>
                         <span class="mx-2 text-muted small">Non hai ancora un account?</span>
-                            <div class="flex-grow-1 border-top"></div>
-                    </div>
-
+                    <div class="flex-grow-1 border-top"></div>
+                </div>
                 <a href="<%=request.getContextPath()%>/Registrazione" class="btn btn-outline-secondary rounded-4 w-100 mx-auto fw-bold" id="tastoCreaAcc" style="max-width: 400px;">Crea un Account</a>
             </div>
         </div>

@@ -14,7 +14,7 @@
     		src: url('${pageContext.request.contextPath}/src/Rubik-Black.ttf') format('truetype');
 		}
     	
-    	h1, #tastoReg {
+    	h1, input[type="submit"] {
     		font-family: 'Rubik', sans-serif;
     	}
     	
@@ -108,12 +108,7 @@
             <div class="col">
                 <div class="mx-auto" style="max-width: 400px;">
                     <label for="confirmPassword" class="form-label fw-bold small mb-1">Inserisci password</label>
-                    <div class="d-flex">
-				        <input type="password" class="form-control rounded-4 rounded-end-0" id="confirmPassword" name="confirmPassword" placeholder="Password" style="flex-grow:1;">
-				        <button type="button" class="btn btn-outline-secondary  rounded-4 rounded-start-0 border border-light-subtle" id="togglePassword" aria-label="Mostra o nascondi password">
-				          <img id="eyeIcon" src="<%=request.getContextPath()%>/src/eye.png" alt="Mostra password" style="width: 24px; height: 24px;">
-				        </button>
-				    </div>
+				    <input type="password" class="form-control rounded-4" id="confirmPassword" name="confirmPassword" placeholder="Password" style="flex-grow:1;">
                 </div>
             </div>
         </div>
