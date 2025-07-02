@@ -254,5 +254,15 @@ public class JDBCUtenteDao implements UtenteDao {
 		}
 		return false;
 	}
+	
+	public void updatePasswordByEmail(String email, String nuovaPassword) throws Exception {
+		String query = "UPDATE utenti SET password = ? WHERE email = ?";
+		try (Connection connection = dataSource.getConnection();
+			 PreparedStatement ps = connection.prepareStatement(query)) {
+			 ps.setString(1, nuovaPassword);
+			 ps.setString(2, email);
+			 ps.executeUpdate();
+		}
+	}
 
 }

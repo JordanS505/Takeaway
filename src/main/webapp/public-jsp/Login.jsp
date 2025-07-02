@@ -30,11 +30,11 @@
 
 <body class="d-flex flex-column min-vh-100">
     
-    <nav class="navbar bg-light mb-4">
+    <nav class="navbar bg-success mb-4">
         <div class="container-fluid">
             <a href="<%=request.getContextPath()%>/HomePageServlet" class="navbar-brand">
-            <img src="<%=request.getContextPath()%>/src/back.png" alt="back" width="24">
-            <img src="<%=request.getContextPath()%>/src/enjoEat-b.png" alt="logo-black" height="40">
+            <img src="<%=request.getContextPath()%>/src/back-w.png" alt="back" width="24">
+            <img src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="logo-black" height="40">
             </a>
         </div>
     </nav>
@@ -60,7 +60,12 @@
             <div class="col">
                 <div class="mx-auto" style="max-width: 400px;">
                     <label for="password" class="form-label fw-bold small mb-1">Inserisci password</label>
-                    <input type="password" class="form-control w-100 rounded-4" id="password" name="password" placeholder="Password">
+                    <div class="d-flex">
+				        <input type="password" class="form-control rounded-4 rounded-end-0" id="password" name="Password" placeholder="Password" style="flex-grow:1;">
+				        <button type="button" class="btn btn-outline-secondary  rounded-4 rounded-start-0 border border-light-subtle" id="togglePassword" aria-label="Mostra o nascondi password">
+				          <img id="eyeIcon" src="<%=request.getContextPath()%>/src/eye.png" alt="Mostra password" style="width: 24px; height: 24px;">
+				        </button>
+				    </div>
                 </div>
             </div>
         </div>
@@ -106,7 +111,23 @@
             <small class="text-muted">&copy; 2025 EnjoEat. Tutti i diritti riservati.</small>
         </div>
     </footer>
+	<script>
+	let input=document.getElementById('password')
+	let toggleBtn = document.getElementById("togglePassword");
+	let eyeIcon = document.getElementById("eyeIcon");
+	let passwordInput = document.getElementById("password");
 
+
+	toggleBtn.addEventListener("click", function () {
+	    if (passwordInput.type === "password") {
+	        passwordInput.type = "text";
+	        eyeIcon.src = "<%=request.getContextPath()%>/src/eyeoff.png";
+	    } else {
+	        passwordInput.type = "password";
+	        eyeIcon.src = "<%=request.getContextPath()%>/src/eye.png";
+	    }
+	});
+	</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" ></script>
 </body>
 </html>

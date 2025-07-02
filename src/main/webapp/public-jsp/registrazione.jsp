@@ -29,15 +29,14 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Header -->
-  <nav class="bg-color-success">
-    <div class="logo">
-      <a href="<%=request.getContextPath() %>/HomePageServlet">
-        <img src="<%=request.getContextPath() %>/src/enjoEat-w.png" alt="Logo" />
-      </a>
-    </div>
-
-  </nav>
+  <nav class="navbar bg-success mb-4">
+        <div class="container-fluid">
+            <a href="<%=request.getContextPath()%>/HomePageServlet" class="navbar-brand">
+            <img src="<%=request.getContextPath()%>/src/back-w.png" alt="back" width="24">
+            <img src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="logo-black" height="40">
+            </a>
+        </div>
+    </nav>
 
     <div class="container pt-5">
         <div class="row mb-3">
