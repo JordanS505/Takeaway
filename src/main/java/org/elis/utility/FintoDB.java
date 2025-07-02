@@ -8,8 +8,6 @@ import org.elis.model.*;
 public class FintoDB {
 	private List<Utente> utenti = new ArrayList<>();
 
-	private List<Ristorante> ristoranti = new ArrayList<>();
-
 	private List<Ordine> ordini = new ArrayList<>();
 
 	private List<ElementoOrdine> elementiOrdini = new ArrayList<>();

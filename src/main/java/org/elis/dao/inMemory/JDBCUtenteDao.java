@@ -12,6 +12,7 @@ import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import com.mysql.cj.protocol.Resultset;
 
 public class JDBCUtenteDao implements UtenteDao {
 	
@@ -262,6 +263,68 @@ public class JDBCUtenteDao implements UtenteDao {
 			 ps.setString(1, nuovaPassword);
 			 ps.setString(2, email);
 			 ps.executeUpdate();
+		}
+	}
+
+	@Override
+	public List<Utente> findRistoratori() throws Exception {
+		try(Connection connectio = dataSource.getConnection()){
+			String query = "select * from Utente where ruolo='ristoratore'";
+			PreparedStatement ps = connectio.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			List <Utente> ristoratori= new ArrayList<>();
+			while(rs.next()) {
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String username = rs.getString("username");
+				String email = rs.getString("email");
+				String data= rs.getString("data_nascita");
+				LocalDate dataNascita = LocalDate.parse(data);
+				String nomeRistorante = rs.getString("nome_ristorante");
+				String indirizzoRistorante = rs.getString("indirizzo");
+				Double votoM = rs.getDouble("votom");
+				Utente u = new Utente(username, null, nome, cognome, email, dataNascita, nomeRistorante, indirizzoRistorante, null, Ruolo.ristoratore);
+				
+				ristoratori.add(u);
+			}
+			return ristoratori;
+		}
+		
+	}
+
+	@Override
+	public Utente findRistoranteByIndirizzo(String indirizzo) throws Exception {
+		try(Connection connectio = dataSource.getConnection()){
+			String query = "select * from Utente where ruolo='ristoratore'";
+			PreparedStatement ps = connectio.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			Utente ristorante = null;
+			if(rs.next()) {
+				String nomeRistorante = rs.getString("nome_ristorante");
+				String indirizzoRistorante = rs.getString("indirizzo");
+				Double votoM = rs.getDouble("votom");
+				ristorante = new Utente(null, null, null, null, null, null, nomeRistorante, indirizzoRistorante, null, null);
+			}
+			return ristorante;
+		}
+		
+	}
+
+	@Override
+	public List<Utente> findRistoranteByNome(String ristorante) throws Exception {
+		try(Connection connectio = dataSource.getConnection()){
+			String query = "select * from Utente where ruolo='ristoratore'";
+			PreparedStatement ps = connectio.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			List<Utente> ristoranti = new ArrayList<>();
+			while(rs.next()) {
+				String nomeRistorante = rs.getString("nome_ristorante");
+				String indirizzoRistorante = rs.getString("indirizzo");
+				Double votoM = rs.getDouble("votom");
+				Utente u = new Utente(null, null, null, null, null, null, nomeRistorante, indirizzoRistorante, null,null);
+				ristoranti.add(u);
+			}
+			return ristoranti;
 		}
 	}
 

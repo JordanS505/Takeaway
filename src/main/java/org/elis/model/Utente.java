@@ -15,7 +15,13 @@ public class Utente {
 	
 	private LocalDate dataDiNascita;
 	
-	private Long idRistorante;
+	private String nomeRistorante;
+	
+	private String indirizzoRistorante;
+	
+	private String foto;
+	
+	private Double votoM;
 	
 	private Ruolo ruolo;
 	
@@ -27,21 +33,23 @@ public class Utente {
 		this.cognome = cognome;
 		this.email = email;
 		this.dataDiNascita = dataDiNascita;
-		this.idRistorante = null;
 		this.ruolo = ruolo;
 	}
-	
-	
 
+	
+	
 	public Utente(String username, String password, String nome, String cognome, String email, LocalDate dataDiNascita,
-			Long idRistorante, Ruolo ruolo) {
+			String nomeRistorante, String indirizzoRistorante, String foto, Ruolo ruolo) {
+		super();
 		this.username = username;
 		this.password = password;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
 		this.dataDiNascita = dataDiNascita;
-		this.idRistorante = idRistorante;
+		this.nomeRistorante = nomeRistorante;
+		this.indirizzoRistorante = indirizzoRistorante;
+		this.foto = foto;
 		this.ruolo = ruolo;
 	}
 
@@ -101,6 +109,38 @@ public class Utente {
 
 	public void setRuolo(Ruolo ruolo) {
 		this.ruolo = ruolo;
+	}
+
+	public String getNomeRistorante() {
+		return nomeRistorante;
+	}
+
+	public void setNomeRistorante(String nomeRistorante) {
+		this.nomeRistorante = nomeRistorante;
+	}
+
+	public String getIndirizzoRistorante() {
+		return indirizzoRistorante;
+	}
+
+	public void setIndirizzoRistorante(String indirizzoRistorante) {
+		this.indirizzoRistorante = indirizzoRistorante;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public Double getVotoM() {
+		return votoM;
+	}
+
+	public void setVotoM(Double votoM) {
+		this.votoM = votoM;
 	}
 	
 	

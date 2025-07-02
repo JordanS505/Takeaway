@@ -14,4 +14,10 @@ public interface UtenteDao extends GeneralDao<Utente> {
 	public List<Utente> findUtentiByNome(String nome) throws Exception;
 	
 	public List<Utente> findUtentiByCognome(String cognome) throws Exception;
+	
+	public List<Utente> findRistoratori() throws Exception;
+	
+	public Utente findRistoranteByIndirizzo(String indirizzo) throws Exception;
+	
+	public List<Utente> findRistoranteByNome(String ristorante) throws Exception;
 }

@@ -11,9 +11,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.elis.dao.inMemory.JDBCRistoranteDao;
 import org.elis.dao.inMemory.JDBCUtenteDao;
-import org.elis.model.Ristorante;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 import org.elis.utility.MyUtility;
@@ -47,7 +45,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 			categorie.add(c);
 		}
 		
-		JDBCRistoranteDao accessoRistorante = new JDBCRistoranteDao(MyUtility.getDataSource());
+		JDBCUtenteDao accessoRistorante = new JDBCUtenteDao(MyUtility.getDataSource());
 		try {
 			if(accessoRistorante.findRistoranteByIndirizzo(indirizzoRistorante)!=null) {
 				response.sendRedirect(request.getContextPath()+ "/DiventaPartnerServlet?error=indirizzoEsistente");
@@ -73,11 +71,9 @@ public class LogicaDiventaPartner extends HttpServlet {
 			return;
 		}
 		
-		Ristorante ristorante = new Ristorante(nomeRistorante,indirizzoRistorante);
-		Utente u = new Utente(username, password, nomeRistorante, cognome, email, dataDiNascita, Ruolo.ristoratore);
+		Utente u = new Utente(username, password, nomeRistorante, cognome, email, dataDiNascita,nomeRistorante,indirizzoRistorante,null, Ruolo.ristoratore);
 		JDBCUtenteDao accessoUtente = new JDBCUtenteDao(MyUtility.getDataSource());
 		try {
-			accessoRistorante.insert(ristorante);
 			
 			accessoUtente.insert(u);
 			
