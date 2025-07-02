@@ -28,53 +28,71 @@ public class LogicaRegistrazione extends HttpServlet {
 		String cognome = request.getParameter("Cognome");
 		String username = request.getParameter("Username");
 		String password = request.getParameter("Password");
+		String confirmPassword = request.getParameter("confirmPassword");
 		String email = request.getParameter("Email");
 		String dataNascita = request.getParameter("Nascita");
 		LocalDate dataDiNascita=null;
-		if(!controllaVuoto(nome, cognome, username, password, email, dataNascita)) {
+		
+		if(!controllaVuoto(nome, cognome, username, password, confirmPassword, email, dataNascita)) {
 			response.sendRedirect(request.getContextPath() + "/Registrazione?error=campiMancanti");
-			return;
-		}
-		dataDiNascita = LocalDate.parse(dataNascita);
-		if(!controllaMaiuscola(password) && !controllaSp(password)) {
-			response.sendRedirect(request.getContextPath() + "/Registrazione?error=passwordErrata");
-			return;
-		}
-		if(!controllaData(dataDiNascita)) {
-			response.sendRedirect(request.getContextPath() + "/Registrazione?error=minorenne");
 			return;
 		}
 		
 		JDBCUtenteDao uDao = new JDBCUtenteDao(MyUtility.getDataSource());
 		
 		try {
+			if (uDao.findUtenteByUsername(username) != null) {
+				response.sendRedirect(request.getContextPath() + "/Registrazione?error=utenteEsistente");
+				return;
+			}
+
+			if (uDao.findUtenteByEmail(email) != null) {
+				response.sendRedirect(request.getContextPath() + "/Registrazione?error=emailEsistente");
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		dataDiNascita = LocalDate.parse(dataNascita);
+		if(!controllaData(dataDiNascita)) {
+			response.sendRedirect(request.getContextPath() + "/Registrazione?error=minorenne");
+			return;
+		}
+		
+		if(!passwordForte(password)) {
+			response.sendRedirect(request.getContextPath() + "/Registrazione?error=passwordDebole");
+			return;
+		}
+		
+		if (password == null || confirmPassword == null || !password.equals(confirmPassword)) {
+			response.sendRedirect(request.getContextPath() + "/Registrazione?error=pswNC");
+			return;
+        }
+		
+		try {
 			uDao.insert(new Utente(username, password, nome, cognome, email, Ruolo.user));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	private boolean controllaVuoto(String nome,String cognome,String username,String password,
+	private boolean controllaVuoto(String nome,String cognome,String username,String password, String confirmPassword,
 			String email,String dataNascita) {
 		if(nome.isBlank() || cognome.isBlank() || username.isBlank() || password.isBlank() || email.isBlank() || dataNascita.isBlank())
 			return false;
 		return true;
 	}
 	
-	private boolean controllaMaiuscola(String parola) {
-		for(int i=0;i<parola.length();i++){
-			if(parola.charAt(i)>='A' && parola.charAt(i)<='Z')
-				return true;
-		}
-		return false;
-	}
+	private boolean passwordForte(String password) {
+	    if (password == null || password.length() < 8) return false;
 
-	private boolean controllaSp(String parola) {
-		if(parola.contains("%") || parola.contains("$") || parola.contains("!")) {
-			return true;
-		}
-		return false;
+	    boolean haMaiuscola = password.matches(".*[A-Z].*");
+	    boolean haMinuscola = password.matches(".*[a-z].*");
+	    boolean haNumero = password.matches(".*\\d.*");
+	    boolean haSpeciale = password.matches(".*[\\W_].*");
+
+	    return haMaiuscola && haMinuscola && haNumero && haSpeciale;
 	}
 
 	private boolean controllaData(LocalDate data) {
