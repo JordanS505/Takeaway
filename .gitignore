@@ -1,0 +1,6 @@
+src/main/resources/db_password
+.classpath
+.settings
+.project
+/target/
+/build/

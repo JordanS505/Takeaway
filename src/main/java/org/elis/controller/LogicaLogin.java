@@ -1,0 +1,46 @@
+package org.elis.controller;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import org.elis.dao.inMemory.JDBCUtenteDao;
+import org.elis.utility.MyUtility;
+
+@WebServlet("/LogicaLogin")
+public class LogicaLogin extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+   
+    public LogicaLogin() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		JDBCUtenteDao uDao = new JDBCUtenteDao(MyUtility.getDataSource());
+		
+		try {
+			if(uDao.login(email, password)) {
+				System.out.println("Autenticazione riuscita");
+			}
+			else {
+				response.sendRedirect(request.getContextPath() + "/LoginServlet?error=autenticazione fallita");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
