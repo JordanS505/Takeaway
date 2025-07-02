@@ -71,7 +71,7 @@ public class LogicaRegistrazione extends HttpServlet {
         }
 		
 		try {
-			uDao.insert(new Utente(username, password, nome, cognome, email, Ruolo.user));
+			uDao.insert(new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.user));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

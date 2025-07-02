@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <form action="" method="POST">
+        <form action="<%=request.getContextPath() %>/LogicaDiventaPartner" method="POST">
             <!-- Nome e Cognome -->
             <div class="row mb-3">
                 <div class="col mx-auto">
@@ -53,12 +53,12 @@
                     <div class="d-flex justify-content-between mx-auto gap-3" style="max-width: 400px;">
                         <div class="w-50">
                             <label for="username" class="form-label fw-bold small mb-1">Inserisci Username</label>
-                            <input type="text" class="form-control rounded-4" id="username" name="username"
+                            <input type="text" class="form-control rounded-4" id="username" name="Username"
                                 placeholder="Username">
                         </div>
                         <div class="w-50">
                             <label for="nascita" class="form-label fw-bold small mb-1">Inserisci Data di Nascita</label>
-                            <input type="date" class="form-control rounded-4" name="nascita" id="nascita">
+                            <input type="date" class="form-control rounded-4" name="Nascita" id="nascita">
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                     <div class="mx-auto" style="max-width: 400px;">
                         <label for="nomeristorante" class="form-label fw-bold small mb-1">Inserisci nome ristorante</label>
                         <input type="text" class="form-control w-100 rounded-4" id="nomeristorante"
-                            name="nomeristorante" placeholder="Nome ristorante">
+                            name="Nomeristorante" placeholder="Nome ristorante">
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                     <div class="mx-auto" style="max-width: 400px;">
                         <label for="indirizzoristorante" class="form-label fw-bold small mb-1">Inserisci indirizzo ristorante</label>
                         <input type="text" class="form-control w-100 rounded-4" id="indirizzoristorante"
-                            name="indirizzoristorante" placeholder="Indirizzo ristorante">
+                            name="Indirizzoristorante" placeholder="Indirizzo ristorante">
                     </div>
                 </div>
             </div>
@@ -95,31 +95,31 @@
 			            <div class="row">
 			                <div class="col-6">
 			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="categorie" value="pizzeria" id="pizzeria">
+			                        <input class="form-check-input" type="checkbox" name="Categorie" value="pizzeria" id="pizzeria">
 			                        <label class="form-check-label" for="pizzeria">Pizzeria</label>
 			                    </div>
 			                </div>
 			                <div class="col-6">
 			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="categorie" value="ristorante" id="ristorante">
+			                        <input class="form-check-input" type="checkbox" name="Categorie" value="ristorante" id="ristorante">
 			                        <label class="form-check-label" for="ristorante">Ristorante</label>
 			                    </div>
 			                </div>
 			                <div class="col-6">
 			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="categorie" value="giapponese" id="giapponese">
+			                        <input class="form-check-input" type="checkbox" name="Categorie" value="giapponese" id="giapponese">
 			                        <label class="form-check-label" for="giapponese">Giapponese</label>
 			                    </div>
 			                </div>
 			                <div class="col-6">
 			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="categorie" value="kebab" id="kebab">
+			                        <input class="form-check-input" type="checkbox" name="Categorie" value="kebab" id="kebab">
 			                        <label class="form-check-label" for="kebab">Kebab</label>
 			                    </div>
 			                </div>
 			                <div class="col-6">
 			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="categorie" value="indiano" id="indiano">
+			                        <input class="form-check-input" type="checkbox" name="Categorie" value="indiano" id="indiano">
 			                        <label class="form-check-label" for="indiano">Indiano</label>
 			                    </div>
 			                </div>
@@ -135,7 +135,7 @@
                 <div class="col">
                     <div class="mx-auto" style="max-width: 400px;">
                         <label for="email" class="form-label fw-bold small mb-1">Inserisci Email</label>
-                        <input type="email" class="form-control w-100 rounded-4" id="email" name="email"
+                        <input type="email" class="form-control w-100 rounded-4" id="email" name="Email"
                             placeholder="Email">
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                 <div class="col">
                     <div class="mx-auto" style="max-width: 400px;">
                         <label for="password" class="form-label fw-bold small mb-1">Inserisci password</label>
-                        <input type="password" class="form-control w-100 rounded-4" id="password" name="password"
+                        <input type="password" class="form-control w-100 rounded-4" id="password" name="Password"
                             placeholder="Password">
                     </div>
                 </div>
