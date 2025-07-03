@@ -19,7 +19,7 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
 
     @Override
     public void insert(ElementoOrdine entity) throws Exception {
-        String sql = "INSERT INTO ElementoOrdine (nome, prezzo, quantita) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Elemento_Ordine (nome, prezzo, quantita) VALUES (?, ?, ?)";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());
@@ -33,7 +33,7 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
     public ElementoOrdine selectById(Long id) throws Exception {
         ElementoOrdine elemento = null;
         try (Connection connection = dataSource.getConnection()) {
-            String query = "SELECT * FROM ElementoOrdine WHERE id = ?";
+            String query = "SELECT * FROM Elemento_Ordine WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
@@ -50,7 +50,7 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
     @Override
     public List<ElementoOrdine> findAll() throws Exception {
         List<ElementoOrdine> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ElementoOrdine";
+        String sql = "SELECT * FROM Elemento_Ordine";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -67,7 +67,7 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
 
     @Override
     public void delete(ElementoOrdine entity) throws Exception {
-        String sql = "DELETE FROM ElementoOrdine WHERE nome = ?";
+        String sql = "DELETE FROM Elemento_Ordine WHERE nome = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());
@@ -78,7 +78,7 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
     @Override
     public ElementoOrdine findElementoOrdineByNome(String nome) throws Exception {
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM ElementoOrdine WHERE nome = ?")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Elemento_Ordine WHERE nome = ?")) {
             ps.setString(1, nome);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
