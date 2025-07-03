@@ -12,16 +12,15 @@ import org.elis.enumerazioni.Ruolo;
 import org.elis.model.Utente;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import com.mysql.cj.protocol.Resultset;
 
 public class JDBCUtenteDao implements UtenteDao {
-	
+
 	private MysqlDataSource dataSource;
-	
+
 	public JDBCUtenteDao(MysqlDataSource datasource) {
 		this.dataSource = datasource;
 	}
-	
+
 	@Override
 	public void insert(Utente entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
@@ -47,22 +46,24 @@ public class JDBCUtenteDao implements UtenteDao {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
-			String nome = rs.getString("nome");
-			String cognome = rs.getString("cognome");
-			String email = rs.getString("email");
-			LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
-			String username = rs.getString("username");
-			String password = rs.getString("password");
-			String ruolo = rs.getString("ruolo");
-			
-			if(ruolo.equalsIgnoreCase("user")) {
-			u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
-			}
-			if(ruolo.equalsIgnoreCase("admin")) {
-				u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
-			}
-			if(ruolo.equalsIgnoreCase("ristoratore")) {
-				u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
+			if(rs.next()) {
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String email = rs.getString("email");
+				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String ruolo = rs.getString("ruolo");
+
+				if(ruolo.equalsIgnoreCase("user")) {
+					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+				}
+				if(ruolo.equalsIgnoreCase("admin")) {
+					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+				}
+				if(ruolo.equalsIgnoreCase("ristoratore")) {
+					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
+				}
 			}
 		}
 		return u;
@@ -84,9 +85,9 @@ public class JDBCUtenteDao implements UtenteDao {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
-				
+
 				if(ruolo.equalsIgnoreCase("user")) {
-				u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
 					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
@@ -125,25 +126,27 @@ public class JDBCUtenteDao implements UtenteDao {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
-			String nome = rs.getString("nome");
-			String cognome = rs.getString("cognome");
-			String email = rs.getString("email");
-			LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
-			String usernameUtente = rs.getString("username");
-			String password = rs.getString("password");
-			String ruolo = rs.getString("ruolo");
-			
-			if(ruolo.equalsIgnoreCase("user")) {
-			u = new Utente(usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+			if(rs.next()) {
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String email = rs.getString("email");
+				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				String usernameUtente = rs.getString("username");
+				String password = rs.getString("password");
+				String ruolo = rs.getString("ruolo");
+
+				if(ruolo.equalsIgnoreCase("user")) {
+					u = new Utente(usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+				}
+				if(ruolo.equalsIgnoreCase("admin")) {
+					u = new Utente(usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+				}
+				if(ruolo.equalsIgnoreCase("ristoratore")) {
+					u = new Utente(usernameUtente, password, nome, cognome, email, dataDiNascita,Ruolo.ristoratore);
+				}
 			}
-			if(ruolo.equalsIgnoreCase("admin")) {
-				u = new Utente(usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
-			}
-			if(ruolo.equalsIgnoreCase("ristoratore")) {
-				u = new Utente(usernameUtente, password, nome, cognome, email, dataDiNascita,Ruolo.ristoratore);
-			}
+			return u;
 		}
-		return u;
 	}
 
 	@Override
@@ -162,9 +165,9 @@ public class JDBCUtenteDao implements UtenteDao {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
-				
+
 				if(ruolo.equalsIgnoreCase("user")) {
-				u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.user);
+					u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
 					u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.admin);
@@ -193,9 +196,9 @@ public class JDBCUtenteDao implements UtenteDao {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
-				
+
 				if(ruolo.equalsIgnoreCase("user")) {
-				u = new Utente(username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
 					u = new Utente(username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.admin);
@@ -225,9 +228,9 @@ public class JDBCUtenteDao implements UtenteDao {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
-				
+
 				if(ruolo.equalsIgnoreCase("user")) {
-				u = new Utente(username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.user);
+					u = new Utente(username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
 					u = new Utente(username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.admin);
@@ -257,14 +260,14 @@ public class JDBCUtenteDao implements UtenteDao {
 		}
 		return false;
 	}
-	
+
 	public void updatePasswordByEmail(String email, String nuovaPassword) throws Exception {
 		String query = "UPDATE utente SET password = ? WHERE email = ?";
 		try (Connection connection = dataSource.getConnection();
-			 PreparedStatement ps = connection.prepareStatement(query)) {
-			 ps.setString(1, nuovaPassword);
-			 ps.setString(2, email);
-			 ps.executeUpdate();
+				PreparedStatement ps = connection.prepareStatement(query)) {
+			ps.setString(1, nuovaPassword);
+			ps.setString(2, email);
+			ps.executeUpdate();
 		}
 	}
 
@@ -286,12 +289,12 @@ public class JDBCUtenteDao implements UtenteDao {
 				String indirizzoRistorante = rs.getString("indirizzo");
 				Double votoM = rs.getDouble("votom");
 				Utente u = new Utente(username, null, nome, cognome, email, dataNascita, nomeRistorante, indirizzoRistorante, null, Ruolo.ristoratore);
-				
+
 				ristoratori.add(u);
 			}
 			return ristoratori;
 		}
-		
+
 	}
 
 	@Override
@@ -309,7 +312,7 @@ public class JDBCUtenteDao implements UtenteDao {
 			}
 			return ristorante;
 		}
-		
+
 	}
 
 	@Override

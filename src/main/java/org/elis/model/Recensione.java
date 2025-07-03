@@ -1,20 +1,20 @@
 package org.elis.model;
 
 public class Recensione {
-	private int voto;
+	private Double voto;
 	
 	private String Testo;
 
-	public Recensione(int voto, String testo) {
+	public Recensione(Double voto, String testo) {
 		this.voto = voto;
 		Testo = testo;
 	}
 
-	public int getVoto() {
+	public Double getVoto() {
 		return voto;
 	}
 
-	public void setVoto(int voto) {
+	public void setVoto(Double voto) {
 		this.voto = voto;
 	}
 
