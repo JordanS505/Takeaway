@@ -2,6 +2,8 @@ package org.elis.model;
 
 import java.time.LocalDate;
 
+import org.elis.enumerazioni.Ruolo;
+
 public class Utente {
 	private String username;
 	

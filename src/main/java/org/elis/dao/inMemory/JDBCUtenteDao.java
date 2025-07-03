@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.dao.UtenteDao;
-import org.elis.model.Ruolo;
+import org.elis.enumerazioni.Ruolo;
 import org.elis.model.Utente;
 
 import com.mysql.cj.jdbc.MysqlDataSource;

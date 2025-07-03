@@ -1,4 +1,4 @@
-package org.elis.model;
+package org.elis.enumerazioni;
 
 public enum Ruolo {
 

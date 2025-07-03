@@ -2,6 +2,8 @@ package org.elis.model;
 
 import java.time.LocalDateTime;
 
+import org.elis.enumerazioni.Stato;
+
 public class Ordine {
 	LocalDateTime data;
 	

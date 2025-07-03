@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.dao.inMemory.JDBCUtenteDao;
-import org.elis.model.Ruolo;
+import org.elis.enumerazioni.Ruolo;
 import org.elis.model.Utente;
 import org.elis.utility.MyUtility;
 
