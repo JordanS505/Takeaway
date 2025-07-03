@@ -37,5 +37,4 @@ public class ElementoOrdine {
 		this.quantita = quantita;
 	}
 	
-	
 }

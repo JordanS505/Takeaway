@@ -30,5 +30,4 @@ public class Ordine {
 		this.stato = stato;
 	}
 	
-	
 }

@@ -37,5 +37,4 @@ public class Ingrediente {
 		this.senzaGlutine = senzaGlutine;
 	}
 	
-	
 }
