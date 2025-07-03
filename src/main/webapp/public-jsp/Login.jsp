@@ -51,7 +51,7 @@
             <div class="col">
                 <div class="mx-auto" style="max-width: 400px;">
                     <label for="email" class="form-label fw-bold small mb-1">Inserisci Email</label>
-                    <input type="email" class="form-control w-100 rounded-4" id="email" name="email" placeholder="Email">
+                    <input type="email" class="form-control w-100 rounded-5" id="email" name="email" placeholder="Email">
                 </div>
             </div>
         </div>
@@ -61,8 +61,8 @@
                 <div class="mx-auto" style="max-width: 400px;">
                     <label for="password" class="form-label fw-bold small mb-1">Inserisci password</label>
                     <div class="d-flex">
-				        <input type="password" class="form-control rounded-4 rounded-end-0" id="password" name="Password" placeholder="Password" style="flex-grow:1;">
-				        <button type="button" class="btn btn-outline-secondary  rounded-4 rounded-start-0 border border-light-subtle" id="togglePassword" aria-label="Mostra o nascondi password">
+				        <input type="password" class="form-control rounded-5 rounded-end-0" id="password" name="Password" placeholder="Password" style="flex-grow:1;">
+				        <button type="button" class="btn btn-outline-secondary  rounded-5 rounded-start-0 border border-light-subtle" id="togglePassword" aria-label="Mostra o nascondi password">
 				          <img id="eyeIcon" src="<%=request.getContextPath()%>/src/eye.png" alt="Mostra password" style="width: 24px; height: 24px;">
 				        </button>
 				    </div>
@@ -81,7 +81,7 @@
 		
         <div class="row mb-3">
             <div class="col text-center">
-                <input class="form-control border-dark mx-auto border-2 rounded-4 bg-success text-light" id="tastoEntra" type="submit" value="Entra" style="max-width: 400px;">
+                <input class="form-control mx-auto rounded-5 bg-success text-light" id="tastoEntra" type="submit" value="Entra" style="max-width: 400px;">
             </div>
         </div>
         </form>
@@ -99,7 +99,7 @@
                         <span class="mx-2 text-muted small">Non hai ancora un account?</span>
                     <div class="flex-grow-1 border-top"></div>
                 </div>
-                <a href="<%=request.getContextPath()%>/Registrazione" class="btn btn-outline-secondary rounded-4 w-100 mx-auto fw-bold" id="tastoCreaAcc" style="max-width: 400px;">Crea un Account</a>
+                <a href="<%=request.getContextPath()%>/Registrazione" class="btn btn-outline-secondary rounded-5 w-100 mx-auto fw-bold" id="tastoCreaAcc" style="max-width: 400px;">Crea un Account</a>
             </div>
         </div>
     </div>

@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.elis.dao.OrdineDao;
 import org.elis.enumerazioni.Stato;
-import org.elis.model.Categoria;
 import org.elis.model.Ordine;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
