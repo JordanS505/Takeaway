@@ -20,10 +20,10 @@ import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
 
-import org.elis.dao.inMemory.JDBCUtenteDao;
+import org.elis.dao.DaoFactory;
+import org.elis.dao.UtenteDao;
 import org.elis.enumerazioni.Ruolo;
 import org.elis.model.Utente;
-import org.elis.utility.MyUtility;
 
 @WebServlet("/LogicaDiventaPartner")
 @MultipartConfig(maxFileSize = 1024*10*1000, maxRequestSize = 1024*15*1000)
@@ -76,7 +76,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 			categorie.add(c);
 		}
 		
-		JDBCUtenteDao accessoRistorante = new JDBCUtenteDao(MyUtility.getDataSource());
+		UtenteDao accessoRistorante = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
 			if(accessoRistorante.findRistoranteByIndirizzo(indirizzoRistorante)!=null) {
 				response.sendRedirect(request.getContextPath()+ "/DiventaPartnerServlet?error=indirizzoEsistente");
@@ -103,7 +103,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 		}
 		
 		Utente u = new Utente(username, password, nomeRistorante, cognome, email, dataDiNascita,nomeRistorante,indirizzoRistorante,null, Ruolo.ristoratore);
-		JDBCUtenteDao accessoUtente = new JDBCUtenteDao(MyUtility.getDataSource());
+		UtenteDao accessoUtente = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
 			
 			accessoUtente.insert(u);

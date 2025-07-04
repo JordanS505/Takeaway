@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import org.elis.dao.DaoFactory;
+import org.elis.dao.UtenteDao;
 import org.elis.dao.inMemory.JDBCUtenteDao;
-import org.elis.utility.MyUtility;
+
 
 @WebServlet("/LogicaLogin")
 public class LogicaLogin extends HttpServlet {
@@ -28,7 +30,7 @@ public class LogicaLogin extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		JDBCUtenteDao uDao = new JDBCUtenteDao(MyUtility.getDataSource());
+		UtenteDao uDao = DaoFactory.getDaoFactory().getUtenteDao();
 		
 		try {
 			if(uDao.login(email, password)) {

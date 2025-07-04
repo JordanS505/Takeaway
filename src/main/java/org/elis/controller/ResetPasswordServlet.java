@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import org.elis.dao.DaoFactory;
+import org.elis.dao.UtenteDao;
 import org.elis.dao.inMemory.JDBCUtenteDao;
-import org.elis.utility.MyUtility;
+
 
 @WebServlet("/ResetPasswordServlet")
 public class ResetPasswordServlet extends HttpServlet {
@@ -30,7 +32,7 @@ public class ResetPasswordServlet extends HttpServlet {
             throws ServletException, IOException {
     	String step = request.getParameter("step");
 
-        JDBCUtenteDao uDao = new JDBCUtenteDao(MyUtility.getDataSource());
+    	UtenteDao uDao = DaoFactory.getDaoFactory().getUtenteDao();
 
         if ("1".equals(step)) {
             // Primo step: controllo email

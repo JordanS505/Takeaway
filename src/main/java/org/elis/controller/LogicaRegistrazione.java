@@ -9,10 +9,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 
-import org.elis.dao.inMemory.JDBCUtenteDao;
+import org.elis.dao.DaoFactory;
+import org.elis.dao.UtenteDao;
 import org.elis.enumerazioni.Ruolo;
 import org.elis.model.Utente;
-import org.elis.utility.MyUtility;
+
 
 @WebServlet("/LogicaRegistrazione")
 public class LogicaRegistrazione extends HttpServlet {
@@ -38,7 +39,7 @@ public class LogicaRegistrazione extends HttpServlet {
 			return;
 		}
 		
-		JDBCUtenteDao uDao = new JDBCUtenteDao(MyUtility.getDataSource());
+		UtenteDao uDao = DaoFactory.getDaoFactory().getUtenteDao();
 		
 		try {
 			if (uDao.findUtenteByUsername(username) != null) {
