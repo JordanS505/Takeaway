@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <form action="<%=request.getContextPath() %>/LogicaDiventaPartner" method="POST">
+        <form action="<%=request.getContextPath() %>/LogicaDiventaPartner" enctype="multipart/form-data" method="POST">
             <!-- Nome e Cognome -->
             <div class="row mb-3">
                 <div class="col mx-auto">
@@ -84,6 +84,15 @@
                             name="Indirizzoristorante" placeholder="Indirizzo ristorante">
                     </div>
                 </div>
+            </div>
+            
+            <!-- Foto Ristorante  -->
+            <div class="row mb-3">
+            	<div class="col text">
+            		<div class="mx-auto" style="max-width: 400px;">
+            			<input class="form-control w-100 rounded-4" type="file" name=""></input>
+            		</div>
+            	</div>
             </div>
 
             <!-- ✅ Categorie (checkbox centrate) -->
@@ -151,14 +160,19 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- Bottone Registrati -->
             <div class="row mb-3">
                 <div class="col text-center">
-                    <input class="form-control border-dark mx-auto border-2 rounded-4 bg-success text-light"
-                        type="submit" value="Registrati" style="max-width: 400px;">
+                	<div class="mx-auto" style="max-width: 400px;">
+                    	<input class="form-control mx-auto rounded-4 bg-success text-light" type="submit" value="Registrati" style="max-width: 400px;">
+                    </div>
                 </div>
             </div>
+            
+            
+            
         </form>
 
         <!-- Messaggi di errore -->

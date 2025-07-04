@@ -169,7 +169,7 @@
         
         <div class="row mb-3">
             <div class="col text-center">
-                <input class="form-control border-dark mx-auto border-2 rounded-4 bg-success text-light" type="submit" id="tastoReg" value="Registrati" style="max-width: 400px;">
+                <input class="form-control mx-auto rounded-4 bg-success text-light" type="submit" id="tastoReg" value="Registrati" style="max-width: 400px;">
             </div>
         </div>
         </form>

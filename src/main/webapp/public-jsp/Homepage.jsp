@@ -15,6 +15,7 @@
         <div class="container-fluid">
             <a href="<%=request.getContextPath()%>/HomePageServlet" class="navbar-brand">
             <img src="<%=request.getContextPath()%>/src/enjoEat-b.png" alt="logo-black" height="40">
+             <img src="data:image/png;base64, zLSDKfgASDF*)23lekrJASFLKlaxcqaskfd" alt="logo-black" height="40">
             </a>
             
             <div class="d-flex gap-2">

@@ -1,15 +1,24 @@
 package org.elis.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.elis.dao.inMemory.JDBCUtenteDao;
 import org.elis.enumerazioni.Ruolo;
@@ -17,6 +26,7 @@ import org.elis.model.Utente;
 import org.elis.utility.MyUtility;
 
 @WebServlet("/LogicaDiventaPartner")
+@MultipartConfig(maxFileSize = 1024*10*1000, maxRequestSize = 1024*15*1000)
 public class LogicaDiventaPartner extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,6 +46,27 @@ public class LogicaDiventaPartner extends HttpServlet {
 		String indirizzoRistorante = request.getParameter("Indirizzoristorante");
 		List<String> categorie = new ArrayList<>();
 		String[] a = request.getParameterValues("Categorie");
+		Part file= request.getPart("fileFoto");
+		
+		byte[] arrayFile= file.getInputStream().readAllBytes();
+		
+		String imageString = Base64.getEncoder().encodeToString(arrayFile);
+		
+		PreparedStatement ps = null;
+		
+		try {
+			ps.setBlob(1, file.getInputStream());
+			
+			Blob blob = new SerialBlob(arrayFile);
+			
+			ps.setBlob(0, blob);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(a==null) {
 			response.sendRedirect(request.getContextPath()+"/DiventaPartnerServlet?error=categorieMancanti");
