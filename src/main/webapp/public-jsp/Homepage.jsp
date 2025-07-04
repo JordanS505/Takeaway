@@ -7,7 +7,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EnjoEat</title>
-  <link rel="stylesheet" href="../css/home.css" />
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Homepage.css" />
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
   <!-- Bootstrap CSS -->
@@ -23,20 +23,20 @@
   <header id="scroll-header">
     <div class="logo">
       <a href="#">
-        <img src="../res/logo-bianco.png" alt="Logo" />
+        <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
       </a>
     </div>
     <div class="hamburger" id="hamburger">
       <i class="fa-solid fa-bars"></i>
     </div>
     <nav class="navmenu" id="navmenu">
-      <a href="#" class="mobile-only">Accedi</a>
-      <a href="#" class="mobile-only">Diventa Partner</a>
-      <a href="#" class="mobile-only">Iscrizione Utente</a>
+      <a href="<%=request.getContextPath() %>/LoginServlet" class="mobile-only">Accedi</a>
+      <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" class="mobile-only">Diventa Partner</a>
+      <a href="<%=request.getContextPath() %>/Registrazione" class="mobile-only">Iscrizione Utente</a>
     </nav>
     <div class="icone">
-      <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-      <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
+      <a href="<%=request.getContextPath() %>/LoginServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
+      <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
       <a href="#" title="Carrello"><i class="fa-solid fa-cart-shopping" id="cart-icon"></i></a>
     </div>
   </header>
@@ -44,7 +44,7 @@
   <!-- Sezione 1 - Video -->
   <div class="sezionevideo d-flex align-items-center justify-content-center text-center">
       <video autoplay muted loop playsinline>
-      <source src="../res/video2.mp4" type="video/mp4">
+      <source src="<%=request.getContextPath() %>/src/res/video2.mp4" type="video/mp4">
     </video>
       <div class="video-overlay"></div>
       <div class="video-content container">
@@ -52,7 +52,7 @@
           <p class="lead">Ordina online e passa a ritirare senza attese. EnjoEat è il
         tuo punto di riferimento per l’asporto veloce e delizioso.</p>
           <a href="#altro" id="primobtn" class="btn mt-2 btn-lg rounded-5 p-3">ORDINA SUBITO!</a>
-          <a href="#altro" id="secondobtn" class="btn mt-2 btn-lg rounded-5 p-3">DIVENTA PARTNER</a>
+          <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" id="secondobtn" class="btn mt-2 btn-lg rounded-5 p-3">DIVENTA PARTNER</a>
         </div>
   </div>
 
@@ -69,7 +69,7 @@
         <div class="row">
           <div id="sezionecard1" class="d-flex justify-content-center flex-wrap gap-3">
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/pizzaa.jpg" alt="Pizza">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/pizzaa.jpg" alt="Pizza">
               <div class="card-body">
                 <p class="card-text">Hai voglia di pizza? Scopri le migliori pizzerie vicino a te, ordina online e
                   rilassati: al resto pensiamo noi!</p>
@@ -77,7 +77,7 @@
               </div>
             </div>
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/cardristorante.jpg" alt="Italiano">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/cardristorante.jpg" alt="Italiano">
               <div class="card-body">
                 <p class="card-text">Hai voglia di cucina italiana? Dalle lasagne alla parmigiana, scegli il tuo piatto
                   e ritiralo subito!</p>
@@ -85,7 +85,7 @@
               </div>
             </div>
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/cardhamburger.jpg" alt="Hamburger">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/cardhamburger.jpg" alt="Hamburger">
               <div class="card-body">
                 <p class="card-text">Hai voglia di hamburger? Panini succosi, patatine croccanti e salse irresistibili
                   a un clic da te.</p>
@@ -93,7 +93,7 @@
               </div>
             </div>
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/cardsushi.jpg" alt="Orientale">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/cardsushi.jpg" alt="Orientale">
               <div class="card-body">
                 <p class="card-text">Hai voglia di cucina orientale? Sushi, ramen e specialità asiatiche arrivano
                   fresche e pronte a sorprenderti.</p>
@@ -105,7 +105,7 @@
         <div class="row mt-3">
           <div id="sezionecard2" class="d-flex justify-content-center flex-wrap gap-3">
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/cardkebab.jpg" alt="Kebab">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/cardkebab.jpg" alt="Kebab">
               <div class="card-body">
                 <p class="card-text">Hai voglia di kebab? Scopri i migliori locali della zona e lasciati conquistare dai
                   loro sapori speziati.</p>
@@ -113,7 +113,7 @@
               </div>
             </div>
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/cardolci.jpg" alt="Dolci">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/cardolci.jpg" alt="Dolci">
               <div class="card-body">
                 <p class="card-text">Hai voglia di dolci? Torte, gelati e tante golosità per addolcire ogni
                   momento della giornata.</p>
@@ -121,7 +121,7 @@
               </div>
             </div>
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/cardhealthy.jpg" alt="Healthy">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/cardhealthy.jpg" alt="Healthy">
               <div class="card-body">
                 <p class="card-text">Hai voglia di mangiare sano? Bowl e piatti bilanciati per restare
                   leggero senza rinunciare al gusto.</p>
@@ -129,7 +129,7 @@
               </div>
             </div>
             <div class="card text-center rounded-5">
-              <img class="card-img-top" src="../res/cardvino.jpg" alt="Vino">
+              <img class="card-img-top" src="<%=request.getContextPath() %>/src/res/cardvino.jpg" alt="Vino">
               <div class="card-body">
                 <p class="card-text">Hai voglia di qualcosa di buono? Scopri le nostre etichette selezionate e ritirale
                   quando vuoi.</p>
@@ -179,7 +179,7 @@
           <div class="carousel-item active">
             <div class="recensione-card">
               <div class="recensione-left">
-                <img src="../res/ragazza1.jpg" alt="Profilo Anna Bianchi" class="recensione-img" />
+                <img src="<%=request.getContextPath() %>/src/res/ragazza1.jpg" alt="Profilo Anna Bianchi" class="recensione-img" />
                 <h5 class="recensione-nome">Anna Bianchi</h5>
               </div>
               <div class="recensione-right">
@@ -203,7 +203,7 @@
           <div class="carousel-item">
             <div class="recensione-card">
               <div class="recensione-left">
-                <img src="../res/ragazzo2.jpg" alt="Profilo Marco Rossi" class="recensione-img" />
+                <img src="<%=request.getContextPath() %>/src/res/ragazzo2.jpg" alt="Profilo Marco Rossi" class="recensione-img" />
                 <h5 class="recensione-nome">Marco Rossi</h5>
               </div>
               <div class="recensione-right">
@@ -226,7 +226,7 @@
           <div class="carousel-item">
             <div class="recensione-card">
               <div class="recensione-left">
-                <img src="../res/ragazza2.jpg" alt="Profilo Laura Verdi" class="recensione-img" />
+                <img src="<%=request.getContextPath() %>/src/res/ragazza2.jpg" alt="Profilo Laura Verdi" class="recensione-img" />
                 <h5 class="recensione-nome">Laura Verdi</h5>
               </div>
               <div class="recensione-right">
@@ -262,7 +262,7 @@
       <div class="row mt-3">
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Logo -->
-          <img src="../res/logo_giallo.png" alt="" id="logofooter">
+          <img src="<%=request.getContextPath()%>/src/res/logo_giallo.png" alt="" id="logofooter">
           <p id="fame">
             Entra in Enjoeat: che tu voglia ordinare o diventare partner,
             sei nel posto giusto.
@@ -287,9 +287,9 @@
           <h6 class="text-uppercase fw-bold mb-4">
             Profili
           </h6>
-          <p><a href="#!" class="text-reset text-decoration-none">Profilo Utente</a></p>
-          <p><a href="#!" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-          <p><a href="#!" class="text-reset text-decoration-none">Carrello</a></p>
+          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+          <p><a href="/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
+          <p><a href="#" class="text-reset text-decoration-none">Carrello</a></p>
         </div>
         <!-- Colonna Contatti -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -309,7 +309,7 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/script.js"></script>
+  <script src="<%=request.getContextPath() %>/js/script_homepage.js"></script>
 </body>
 
 </html>
