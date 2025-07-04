@@ -13,11 +13,11 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    <nav class="navbar bg-light mb-4">
-        <div class="container-fluid">
+    <nav class="navbar mb-4" style="background-color: #c1280f">
+        <div class="container-fluid" style="height:55px">
             <a href="<%=request.getContextPath()%>/HomePageServlet" class="navbar-brand">
-                <img src="<%=request.getContextPath()%>/src/back.png" alt="back" width="24">
-                <img src="<%=request.getContextPath()%>/src/enjoEat-b.png" alt="logo-black" height="40">
+            <img src="<%=request.getContextPath()%>/src/back-w.png" alt="back" width="24">
+            <img src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="logo-black" height="32">
             </a>
         </div>
     </nav>
@@ -166,7 +166,7 @@
             <div class="row mb-3">
                 <div class="col text-center">
                 	<div class="mx-auto" style="max-width: 400px;">
-                    	<input class="form-control mx-auto rounded-4 bg-success text-light" type="submit" value="Registrati" style="max-width: 400px;">
+                    	<input class="form-control mx-auto rounded-4 text-light" type="submit" value="Registrati" style="max-width: 400px; background-color: #c1280f">
                     </div>
                 </div>
             </div>
