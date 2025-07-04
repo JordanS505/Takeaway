@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="org.elis.model.Utente" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,37 +55,50 @@
             <div class="col-12 col-md-9">
                 
                 
-                <div class="card w-100 d-flex flex-column flex-md-row p-0 border-0 rounded-5 overflow-hidden mb-3" data-rating="3" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <img src="<%=request.getContextPath()%>/src/mc.jpg"
-					     alt="Immagine Ristorante"
-					     class="img-fluid flex-shrink-0 img-ristorante" 
-     					 style="object-fit: cover; height: 200px;">
-                    <div class="card-body d-flex flex-column justify-content-center flex-grow-1">
-                        <h3 class="card-title">McDonald's</h3>
-                        <p class="card-text mb-1 border rounded-5 text-center fw-bold text-secondary" style="width: 100px;">fast-food</p>
-                        <div class="d-flex align-items-center">
-                            <div class="rating">
-                                <i class="fa-solid fa-star text-secondary"></i>
-                                <i class="fa-solid fa-star text-secondary"></i>
-                                <i class="fa-solid fa-star text-secondary"></i>
-                                <i class="fa-solid fa-star text-secondary"></i>
-                                <i class="fa-solid fa-star text-secondary"></i>
-                            </div>
-                            <span class="ms-2 rating-value"></span>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-8">
-                                <div class="d-flex align-items-center">
-                                    <i class="posizione fa-solid fa-location-dot"></i>
-                                    <span>Via Palmiro Togliatti, 28</span>
-                                </div>
-                            </div>
-                            <div class="col-4 d-flex justify-content-end">
-                                <a href="#" class="btn btn-primary rounded-5 border-0" style="width: 150px; background-color: #ff9b19;">Ordina</a>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
+                <%
+				    List<Utente> ristoranti = (List<Utente>) request.getAttribute("ristoranti");
+				    if (ristoranti != null) {
+				        for (org.elis.model.Utente r : ristoranti) {
+				%>
+				    <div class="card w-100 d-flex flex-column flex-md-row p-0 border-0 rounded-5 overflow-hidden mb-3" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+				        <img src="<%= r.getFoto() %>"
+				             alt="Foto ristorante"
+				             class="img-fluid flex-shrink-0 img-ristorante"
+				             style="object-fit: cover; height: 200px;">
+				        <div class="card-body d-flex flex-column justify-content-center flex-grow-1">
+				            <h3 class="card-title"><%= r.getNomeRistorante() %></h3>
+				            <p class="tipologia-ristorante card-text mb-1 border rounded-5 text-center fw-bold text-secondary" style="width: 100px;">fast-food
+				            <%-- AGGIUNGERE LA FUNZIONE PER CHIAMARE LE TIPOLOGIE DEL RISTORANTE --%>
+				            </p>
+				            <div class="d-flex align-items-center">
+				                <div class="rating">
+				                
+				                	<%-- METODO PER ACCENDERE LE STELLINE DA CAPIRE, FATTO DA CHATGPT --%>
+				                	
+				                    <% int voto = r.getVotoM() != null ? (int) Math.round(r.getVotoM()) : 0;
+				                       for (int i = 0; i < 5; i++) { %>
+				                        <i class="fa-solid fa-star <%= i < voto ? "star-on" : "text-secondary" %>"></i>
+				                    <% } %>
+				                    
+				                    
+				                </div>
+				                <span class="ms-2 rating-value"><%= voto %>/5</span>
+				            </div>
+				            <div class="row pt-2">
+				                <div class="col-8 d-flex align-items-center">
+				                    <i class="posizione fa-solid fa-location-dot"></i>
+				                    <span><%= r.getIndirizzoRistorante() %></span>
+				                </div>
+				                <div class="col-4 d-flex justify-content-end">
+				                    <a href="#" class="btn btn-primary rounded-5 border-0" style="width: 150px; background-color: #ff9b19;">Ordina</a>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				<%
+				        }
+				    }
+				%>
             
             
             
@@ -93,6 +108,9 @@
     </div>
 
     <script>
+    
+    <%-- DA CAPIRE/RIFARE --%>
+    
     document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.card[data-rating]');
         

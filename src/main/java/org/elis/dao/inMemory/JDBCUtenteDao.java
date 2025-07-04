@@ -49,7 +49,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				ps.setString(7, entity.getRuolo().name());
 				ps.setString(8, entity.getNomeRistorante());
 				ps.setString(9, entity.getIndirizzoRistorante());
-				ps.setString(10, entity.getFoto());
+				ps.setBytes(10, entity.getFoto());
 				ps.setDouble(11, 0);
 				ps.executeUpdate();
 			}
@@ -292,28 +292,33 @@ public class JDBCUtenteDao implements UtenteDao {
 
 	@Override
 	public List<Utente> findRistoratori() throws Exception {
-		try(Connection connectio = dataSource.getConnection()){
-			String query = "select * from Utente where ruolo='ristoratore'";
-			PreparedStatement ps = connectio.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
-			List <Utente> ristoratori= new ArrayList<>();
-			while(rs.next()) {
-				String nome = rs.getString("nome");
-				String cognome = rs.getString("cognome");
-				String username = rs.getString("username");
-				String email = rs.getString("email");
-				String data= rs.getString("data_nascita");
-				LocalDate dataNascita = LocalDate.parse(data);
-				String nomeRistorante = rs.getString("nome_ristorante");
-				String indirizzoRistorante = rs.getString("indirizzo");
-				Double votoM = rs.getDouble("votom");
-				Utente u = new Utente(username, null, nome, cognome, email, dataNascita, nomeRistorante, indirizzoRistorante, null, Ruolo.ristoratore);
+	    List<Utente> ristoratori = new ArrayList<>();
 
-				ristoratori.add(u);
-			}
-			return ristoratori;
-		}
+	    try (Connection connection = dataSource.getConnection()) {
+	        String query = "SELECT * FROM Utente WHERE ruolo = 'ristoratore'";
+	        PreparedStatement ps = connection.prepareStatement(query);
+	        ResultSet rs = ps.executeQuery();
 
+	        while (rs.next()) {
+	            String nome = rs.getString("nome");
+	            String cognome = rs.getString("cognome");
+	            String username = rs.getString("username");
+	            String password = rs.getString("password");
+	            String email = rs.getString("email");
+	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
+	            String nomeRistorante = rs.getString("nome_ristorante");
+	            String indirizzoRistorante = rs.getString("indirizzo");
+	            byte[] foto = rs.getBytes("foto");
+	            Double votoM = rs.getDouble("votom");
+
+	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
+	                                  nomeRistorante, indirizzoRistorante, foto, votoM, Ruolo.ristoratore);
+
+	            ristoratori.add(u);
+	        }
+	    }
+
+	    return ristoratori;
 	}
 
 	@Override

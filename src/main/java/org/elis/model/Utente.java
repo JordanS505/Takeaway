@@ -1,6 +1,7 @@
 package org.elis.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.elis.enumerazioni.Ruolo;
 
@@ -20,8 +21,8 @@ public class Utente {
 	private String nomeRistorante;
 	
 	private String indirizzoRistorante;
-	
-	private String foto;
+
+	private byte[] foto;
 	
 	private Double votoM;
 	
@@ -41,7 +42,7 @@ public class Utente {
 	
 	
 	public Utente(String username, String password, String nome, String cognome, String email, LocalDate dataDiNascita,
-			String nomeRistorante, String indirizzoRistorante, String foto, Ruolo ruolo) {
+			String nomeRistorante, String indirizzoRistorante, byte[] foto, Ruolo ruolo) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -53,6 +54,24 @@ public class Utente {
 		this.indirizzoRistorante = indirizzoRistorante;
 		this.foto = foto;
 		this.ruolo = ruolo;
+	}
+
+
+
+	public Utente(String username, String password, String nome, String cognome, String email,
+			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, byte[] foto, Double votoM, Ruolo ruolo) {
+	    this.username = username;
+	    this.password = password;
+	    this.nome = nome;
+	    this.cognome = cognome;
+	    this.email = email;
+	    this.dataDiNascita = dataNascita;
+	    this.nomeRistorante = nomeRistorante;
+	    this.indirizzoRistorante = indirizzoRistorante;
+	    this.foto = foto;
+	    this.votoM = votoM;
+	    this.ruolo = Ruolo.ristoratore;
+
 	}
 
 
@@ -129,11 +148,11 @@ public class Utente {
 		this.indirizzoRistorante = indirizzoRistorante;
 	}
 
-	public String getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 
@@ -144,7 +163,5 @@ public class Utente {
 	public void setVotoM(Double votoM) {
 		this.votoM = votoM;
 	}
-	
-	
 	
 }
