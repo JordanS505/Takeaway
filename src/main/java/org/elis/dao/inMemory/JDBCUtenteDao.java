@@ -24,16 +24,35 @@ public class JDBCUtenteDao implements UtenteDao {
 	@Override
 	public void insert(Utente entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
-			String query = "insert into Utente(nome,cognome,username,password,email,data_nascita,ruolo) values(?,?,?,?,?,?,?)";
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, entity.getNome());
-			ps.setString(2, entity.getCognome());
-			ps.setString(3, entity.getUsername());
-			ps.setString(4, entity.getPassword());
-			ps.setString(5, entity.getEmail());
-			ps.setString(6, entity.getDataDiNascita().toString());
-			ps.setString(7, entity.getRuolo().name());
-			ps.executeUpdate();
+			if(entity.getNomeRistorante()==null) {
+				String query = "insert into Utente(nome,cognome,username,password,email,data_nascita,ruolo) values(?,?,?,?,?,?,?)";
+				PreparedStatement ps = connection.prepareStatement(query);
+				ps.setString(1, entity.getNome());
+				ps.setString(2, entity.getCognome());
+				ps.setString(3, entity.getUsername());
+				ps.setString(4, entity.getPassword());
+				ps.setString(5, entity.getEmail());
+				ps.setString(6, entity.getDataDiNascita().toString());
+				ps.setString(7, entity.getRuolo().name());
+				ps.executeUpdate();
+			}
+			else {
+				String query = "insert into Utente(nome,cognome,username,password,email,data_nascita,ruolo,nome_ristorante,indirizzo,foto,votoM) "
+						+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+				PreparedStatement ps = connection.prepareStatement(query);
+				ps.setString(1, entity.getNome());
+				ps.setString(2, entity.getCognome());
+				ps.setString(3, entity.getUsername());
+				ps.setString(4, entity.getPassword());
+				ps.setString(5, entity.getEmail());
+				ps.setString(6, entity.getDataDiNascita().toString());
+				ps.setString(7, entity.getRuolo().name());
+				ps.setString(8, entity.getNomeRistorante());
+				ps.setString(9, entity.getIndirizzoRistorante());
+				ps.setString(10, entity.getFoto());
+				ps.setDouble(11, 0);
+				ps.executeUpdate();
+			}
 		}
 
 	}
