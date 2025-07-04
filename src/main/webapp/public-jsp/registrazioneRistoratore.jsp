@@ -90,7 +90,7 @@
             <div class="row mb-3">
             	<div class="col text">
             		<div class="mx-auto" style="max-width: 400px;">
-            			<input class="form-control w-100 rounded-4" type="file" name=""></input>
+            			<input class="form-control w-100 rounded-4" type="file" name="fileFoto"></input>
             		</div>
             	</div>
             </div>
