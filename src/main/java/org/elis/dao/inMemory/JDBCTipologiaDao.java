@@ -87,4 +87,25 @@ public class JDBCTipologiaDao implements TipologiaDao {
 		return t;
 	}
 
+	@Override
+	public List<Tipologia> findTipologieByRistoratoreId(long idRistoratore) throws Exception {
+        List<Tipologia> tipologie = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection()) {
+            String query = "SELECT t.id FROM Tipologia t " +
+                           "JOIN Tipologia_Ristorante tr ON t.id = tr.id_tipologia " +
+                           "WHERE tr.id_ristorante = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setLong(1, idRistoratore);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                tipologie.add(new Tipologia(nome));
+            }
+        }
+
+        return tipologie;
+    }
+
 }

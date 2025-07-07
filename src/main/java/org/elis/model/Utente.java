@@ -20,6 +20,8 @@ public class Utente {
 	
 	private String nomeRistorante;
 	
+	private List<Tipologia> tipologie;
+	
 	private String indirizzoRistorante;
 
 	private byte[] foto;
@@ -59,7 +61,7 @@ public class Utente {
 
 
 	public Utente(String username, String password, String nome, String cognome, String email,
-			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, byte[] foto, Double votoM, Ruolo ruolo) {
+			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, List<Tipologia> tipologie, byte[] foto, Double votoM, Ruolo ruolo) {
 	    this.username = username;
 	    this.password = password;
 	    this.nome = nome;
@@ -68,6 +70,7 @@ public class Utente {
 	    this.dataDiNascita = dataNascita;
 	    this.nomeRistorante = nomeRistorante;
 	    this.indirizzoRistorante = indirizzoRistorante;
+	    this.tipologie=tipologie;
 	    this.foto = foto;
 	    this.votoM = votoM;
 	    this.ruolo = Ruolo.ristoratore;
@@ -162,6 +165,15 @@ public class Utente {
 
 	public void setVotoM(Double votoM) {
 		this.votoM = votoM;
+	}
+	
+
+	public List<Tipologia> getTipologie() {
+	    return tipologie;
+	}
+	
+	public void setTipologie(List<Tipologia> tipologie) {
+	    this.tipologie = tipologie;
 	}
 	
 }

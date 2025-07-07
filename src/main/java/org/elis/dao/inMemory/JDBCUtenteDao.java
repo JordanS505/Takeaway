@@ -312,7 +312,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            Double votoM = rs.getDouble("votom");
 
 	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
-	                                  nomeRistorante, indirizzoRistorante, foto, votoM, Ruolo.ristoratore);
+	                      nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 
 	            ristoratori.add(u);
 	        }
