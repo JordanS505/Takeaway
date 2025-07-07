@@ -72,7 +72,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
-				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
@@ -103,7 +103,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
-				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
@@ -152,7 +152,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
-				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
 				String usernameUtente = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
@@ -183,7 +183,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String emailUtente = rs.getString("email");
-				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
@@ -214,7 +214,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				String nomeUtente = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
-				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
@@ -246,7 +246,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				String nome = rs.getString("nome");
 				String cognomeUtente = rs.getString("cognome");
 				String email = rs.getString("email");
-				LocalDate dataDiNascita= rs.getTimestamp("data_di_nascita").toLocalDateTime().toLocalDate();
+				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
