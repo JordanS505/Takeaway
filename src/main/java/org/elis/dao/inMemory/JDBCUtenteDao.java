@@ -324,15 +324,16 @@ public class JDBCUtenteDao implements UtenteDao {
 	@Override
 	public Utente findRistoranteByIndirizzo(String indirizzo) throws Exception {
 		try(Connection connectio = dataSource.getConnection()){
-			String query = "select * from Utente where ruolo='ristoratore'";
+			String query = "select * from Utente where indirizzo=?";
 			PreparedStatement ps = connectio.prepareStatement(query);
+			ps.setString(1, indirizzo);
 			ResultSet rs = ps.executeQuery();
 			Utente ristorante = null;
 			if(rs.next()) {
 				String nomeRistorante = rs.getString("nome_ristorante");
 				String indirizzoRistorante = rs.getString("indirizzo");
 				Double votoM = rs.getDouble("votom");
-				ristorante = new Utente(null, null, null, null, null, null, nomeRistorante, indirizzoRistorante, null, null);
+				ristorante = new Utente(null, null, null, null, null, null, nomeRistorante, indirizzoRistorante, null, Ruolo.ristoratore);
 			}
 			return ristorante;
 		}
