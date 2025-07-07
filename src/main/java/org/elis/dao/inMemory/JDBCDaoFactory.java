@@ -55,7 +55,7 @@ private static MysqlDataSource dataSource;
 	
 	@Override
 	public UtenteDao getUtenteDao() {
-		return new JDBCUtenteDao(getDataSource());
+	    return new JDBCUtenteDao(getDataSource(), new JDBCTipologiaDao(getDataSource()));
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.elis.dao.UtenteDao;
 import org.elis.enumerazioni.Ruolo;
+import org.elis.model.Tipologia;
 import org.elis.model.Utente;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
@@ -16,9 +17,11 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 public class JDBCUtenteDao implements UtenteDao {
 
 	private MysqlDataSource dataSource;
-
-	public JDBCUtenteDao(MysqlDataSource datasource) {
-		this.dataSource = datasource;
+	private JDBCTipologiaDao tipologiaDao;
+	
+	public JDBCUtenteDao(MysqlDataSource dataSource, JDBCTipologiaDao tipologiaDao) {
+		this.dataSource = dataSource;
+		this.tipologiaDao = tipologiaDao;
 	}
 
 	@Override
@@ -311,8 +314,14 @@ public class JDBCUtenteDao implements UtenteDao {
 	            byte[] foto = rs.getBytes("foto");
 	            Double votoM = rs.getDouble("votom");
 
+	            // ✅ recupero ID per join con Tipologia_Ristorante
+	            long idRistoratore = rs.getLong("id");
+
+	            // ✅ prendo le tipologie col DAO
+	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
+
 	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
-	                      nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+	                nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 
 	            ristoratori.add(u);
 	        }
@@ -323,39 +332,72 @@ public class JDBCUtenteDao implements UtenteDao {
 
 	@Override
 	public Utente findRistoranteByIndirizzo(String indirizzo) throws Exception {
-		try(Connection connectio = dataSource.getConnection()){
-			String query = "select * from Utente where indirizzo=?";
-			PreparedStatement ps = connectio.prepareStatement(query);
-			ps.setString(1, indirizzo);
-			ResultSet rs = ps.executeQuery();
-			Utente ristorante = null;
-			if(rs.next()) {
-				String nomeRistorante = rs.getString("nome_ristorante");
-				String indirizzoRistorante = rs.getString("indirizzo");
-				Double votoM = rs.getDouble("votom");
-				ristorante = new Utente(null, null, null, null, null, null, nomeRistorante, indirizzoRistorante, null, Ruolo.ristoratore);
-			}
-			return ristorante;
-		}
+	    Utente ristorante = null;
 
+	    try (Connection connection = dataSource.getConnection()) {
+	        String query = "SELECT * FROM Utente WHERE indirizzo = ? AND ruolo = 'ristoratore'";
+	        PreparedStatement ps = connection.prepareStatement(query);
+	        ps.setString(1, indirizzo);
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            String nomeRistorante = rs.getString("nome_ristorante");
+	            String indirizzoRistorante = rs.getString("indirizzo");
+	            Double votoM = rs.getDouble("votom");
+
+	            String nome = rs.getString("nome");
+	            String cognome = rs.getString("cognome");
+	            String email = rs.getString("email");
+	            String username = rs.getString("username");
+	            String password = rs.getString("password");
+	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
+	            byte[] foto = rs.getBytes("foto");
+
+	            long idRistoratore = rs.getLong("id");
+	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
+
+	            ristorante = new Utente(username, password, nome, cognome, email, dataNascita,
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+	        }
+	    }
+
+	    return ristorante;
 	}
 
 	@Override
-	public List<Utente> findRistoranteByNome(String ristorante) throws Exception {
-		try(Connection connectio = dataSource.getConnection()){
-			String query = "select * from Utente where ruolo='ristoratore'";
-			PreparedStatement ps = connectio.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
-			List<Utente> ristoranti = new ArrayList<>();
-			while(rs.next()) {
-				String nomeRistorante = rs.getString("nome_ristorante");
-				String indirizzoRistorante = rs.getString("indirizzo");
-				Double votoM = rs.getDouble("votom");
-				Utente u = new Utente(null, null, null, null, null, null, nomeRistorante, indirizzoRistorante, null,null);
-				ristoranti.add(u);
-			}
-			return ristoranti;
-		}
+	public List<Utente> findRistoranteByNome(String ristoranteNome) throws Exception {
+	    List<Utente> ristoranti = new ArrayList<>();
+
+	    try (Connection connection = dataSource.getConnection()) {
+	        String query = "SELECT * FROM Utente WHERE ruolo = 'ristoratore' AND nome_ristorante = ?";
+	        PreparedStatement ps = connection.prepareStatement(query);
+	        ps.setString(1, ristoranteNome);
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            String nomeRistorante = rs.getString("nome_ristorante");
+	            String indirizzoRistorante = rs.getString("indirizzo");
+	            Double votoM = rs.getDouble("votom");
+
+	            String nome = rs.getString("nome");
+	            String cognome = rs.getString("cognome");
+	            String email = rs.getString("email");
+	            String username = rs.getString("username");
+	            String password = rs.getString("password");
+	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
+	            byte[] foto = rs.getBytes("foto");
+
+	            long idRistoratore = rs.getLong("id");
+	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
+	            
+	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+
+	            ristoranti.add(u);
+	        }
+	    }
+
+	    return ristoranti;
 	}
 
 }
