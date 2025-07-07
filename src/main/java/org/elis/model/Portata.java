@@ -6,12 +6,36 @@ public class Portata {
 	String descrizione;
 	
 	Double prezzo;
-
+	
+	Long IdCategoria;
 	public Portata(String nome, String descrizione, Double prezzo) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
 	}
+
+	
+	
+	public Portata(String nome, String descrizione, Double prezzo, Long idCategoria) {
+		this.nome = nome;
+		this.descrizione = descrizione;
+		this.prezzo = prezzo;
+		IdCategoria = idCategoria;
+	}
+
+
+
+	public Long getIdCategoria() {
+		return IdCategoria;
+	}
+
+
+
+	public void setIdCategoria(Long idCategoria) {
+		IdCategoria = idCategoria;
+	}
+
+
 
 	public String getNome() {
 		return nome;

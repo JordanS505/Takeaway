@@ -39,7 +39,6 @@ public class JDBCCategoriaDao implements CategoriaDao {
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				String nome = rs.getString("nome");
-			
 				c = new Categoria(nome);
 			}
 		}
@@ -91,5 +90,21 @@ public class JDBCCategoriaDao implements CategoriaDao {
 		}
 		return c;
 	}
-
+	@Override
+	public List<Categoria> findCategorieByIdRistorante(Long id) throws Exception{
+		List<Categoria> idCategorieRistorante = new ArrayList<>();
+		try(Connection connection = dataSource.getConnection()){
+			String query = "select * from Categoria where id_ristorante=?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String nome = rs.getString("nome");
+				Long idCategoria = rs.getLong("id");
+				Categoria c = new Categoria(nome, idCategoria);
+				idCategorieRistorante.add(c);
+			}
+		}
+		return idCategorieRistorante;
+	}
 }

@@ -99,9 +99,24 @@ public class JDBCPortataDao implements PortataDao {
 	}
 
 	@Override
-	public List<Portata> findPortataByCategoria(String categoria) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Portata> findPortataByCategoria(List<Long> id) throws Exception {
+		List<Portata> portate = new ArrayList<Portata>();
+		try (Connection connection = dataSource.getConnection()){
+			String query = "select * from portata where id_categoria=?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			for(Long l : id) {
+				ps.setLong(1, l);
+				ResultSet rs = ps.executeQuery();
+				while(rs.next()) {
+					String nome = rs.getString("nome");
+					String descrizione = rs.getString("descrizione");
+					Double prezzo = rs.getDouble("prezzo");
+					Portata p = new Portata(nome, descrizione, prezzo,l);
+					portate.add(p);
+				}
+			}
+		}
+		return portate;
 	}
 
 }
