@@ -2,16 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="org.elis.model.*"%>
+<%@ page import="java.util.Locale" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <%
 	Utente u = (Utente) request.getAttribute("ristoranteScelto");
 	%>
-	<%
+<%
 	List<Portata> p = (List<Portata>) request.getAttribute("listaPortate");
 	%>
-	<%
+<%
 	List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 	%>
 <meta charset="UTF-8">
@@ -21,7 +22,34 @@
 body {
 	font-family: Arial, sans-serif;
 	margin: 0;
+	display: flex;
 	background-color: #f9f9f9;
+}
+
+/* Sidebar carrello */
+.sidebar {
+	width: 250px;
+	background-color: #fff3e0;
+	padding: 20px;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+	height: 100vh;
+	position: sticky;
+	top: 0;
+}
+
+.sidebar h2 {
+	color: #ff6f00;
+	margin-top: 0;
+}
+
+.cart-item {
+	margin-bottom: 10px;
+	font-size: 0.9em;
+}
+
+/* Contenuto principale */
+.main {
+	flex: 1;
 }
 
 header {
@@ -49,7 +77,7 @@ header h1 {
 
 .menu-section {
 	padding: 20px;
-	max-width: 800px;
+	max-width: 900px;
 	margin: auto;
 }
 
@@ -69,6 +97,9 @@ header h1 {
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dish-top {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -82,89 +113,114 @@ header h1 {
 	color: #ff6f00;
 	font-weight: bold;
 }
+
+.dish button {
+	margin-top: 8px;
+	background-color: #ff6f00;
+	border: none;
+	color: white;
+	padding: 6px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.dish button:hover {
+	background-color: #e65c00;
+}
 </style>
 </head>
 <body>
-	
-	<header>
-		<img
-			src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
-			alt="Ristorante">
-		<h1><%=u.getNomeRistorante()%></h1>
-	</header>
+	<div class="sidebar">
+		<h2>🛒 Il tuo carrello</h2>
+		<div id="cart-items">Nessun elemento nel carrello</div>
+		<hr>
+		<strong>Totale: €<span id="cart-total">0.00</span></strong>
+	</div>
 
-	<div class="menu-section">
-		<%
+	<div class='main'>
+		<header>
+			<img
+				src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
+				alt="Ristorante">
+			<h1><%=u.getNomeRistorante()%></h1>
+		</header>
+
+		<div class="menu-section">
+			<%
 		for (Categoria cat : categorie) {
 		%>
-		<div class="category">
-			<h2><%=cat.getNome()%></h2>
-			<%
+			<div class="category">
+				<h2><%=cat.getNome()%></h2>
+				<%
 			for (Portata portata : p) {
 				if (portata.getIdCategoria() == cat.getId()) {
 					String prezzo = String.format("%.2f", portata.getPrezzo());
 			%>
-			<div class="dish">
-				<span class="dish-name"><%=portata.getNome()%></span>
-				<span class="dish-price">€<%=prezzo%></span>
-			</div>
+				<div class="dish">
+					<div class='dish-top'>
+						<span class="dish-name"><%=portata.getNome()%></span> <span
+							class="dish-price">€<%=prezzo%></span>
+					</div>
+					<button
+						onclick="addToCart('<%=portata.getNome()%>',<%=String.format(Locale.US, "%.2f", portata.getPrezzo())%>)">Aggiungi al carrello</button>
+				</div>
+				<%
+		}
 		
-		<%
 		}
 		%>
-		<%
+			</div>
+			<%
 		}
 		%>
-		</div>
-		<%
-		}
-		%>
-		
-		<div class="category">
-			<h2>Antipasti</h2>
-			<div class="dish">
-				<span class="dish-name">Bruschette miste</span><span
-					class="dish-price">€5,00</span>
-			</div>
-			<div class="dish">
-				<span class="dish-name">Tagliere di salumi</span><span
-					class="dish-price">€8,50</span>
-			</div>
-		</div>
 
-		<div class="category">
-			<h2>Primi</h2>
-			<div class="dish">
-				<span class="dish-name">Spaghetti alla carbonara</span><span
-					class="dish-price">€10,00</span>
+			<div class="category">
+				<h2>Antipasti</h2>
+				<div class="dish">
+					<span class="dish-name">Bruschette miste</span><span
+						class="dish-price">€5,00</span>
+				</div>
+				<div class="dish">
+					<span class="dish-name">Tagliere di salumi</span><span
+						class="dish-price">€8,50</span>
+				</div>
 			</div>
-			<div class="dish">
-				<span class="dish-name">Lasagna tradizionale</span><span
-					class="dish-price">€11,50</span>
-			</div>
-		</div>
 
-		<div class="category">
-			<h2>Secondi</h2>
-			<div class="dish">
-				<span class="dish-name">Pollo arrosto</span><span class="dish-price">€9,00</span>
+			<div class="category">
+				<h2>Primi</h2>
+				<div class="dish">
+					<span class="dish-name">Spaghetti alla carbonara</span><span
+						class="dish-price">€10,00</span>
+				</div>
+				<div class="dish">
+					<span class="dish-name">Lasagna tradizionale</span><span
+						class="dish-price">€11,50</span>
+				</div>
 			</div>
-			<div class="dish">
-				<span class="dish-name">Bistecca alla griglia</span><span
-					class="dish-price">€15,00</span>
-			</div>
-		</div>
 
-		<div class="category">
-			<h2>Dolci</h2>
-			<div class="dish">
-				<span class="dish-name">Tiramisù</span><span class="dish-price">€4,50</span>
+			<div class="category">
+				<h2>Secondi</h2>
+				<div class="dish">
+					<span class="dish-name">Pollo arrosto</span><span
+						class="dish-price">€9,00</span>
+				</div>
+				<div class="dish">
+					<span class="dish-name">Bistecca alla griglia</span><span
+						class="dish-price">€15,00</span>
+				</div>
 			</div>
-			<div class="dish">
-				<span class="dish-name">Panna cotta</span><span class="dish-price">€4,00</span>
+
+			<div class="category">
+				<h2>Dolci</h2>
+				<div class="dish">
+					<span class="dish-name">Tiramisù</span><span class="dish-price">€4,50</span>
+				</div>
+				<div class="dish">
+					<span class="dish-name">Panna cotta</span><span class="dish-price">€4,00</span>
+				</div>
 			</div>
 		</div>
 	</div>
-
+	<script src='<%=request.getContextPath()%>/js/carrello.js'></script>
 </body>
 </html>

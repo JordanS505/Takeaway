@@ -43,7 +43,7 @@ public class LogicaLogin extends HttpServlet {
 				Utente log = uDao.findUtenteByEmail(email);
 				session.setAttribute("UtenteLoggato", log);
 				if(log.getRuolo().equals(Ruolo.user)) {
-					request.getRequestDispatcher("/HomePageUtenteServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/HomePageUtenteServlet");
 				}
 				else {
 					System.out.println("non user");
