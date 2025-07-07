@@ -314,10 +314,8 @@ public class JDBCUtenteDao implements UtenteDao {
 	            byte[] foto = rs.getBytes("foto");
 	            Double votoM = rs.getDouble("votom");
 
-	            // ✅ recupero ID per join con Tipologia_Ristorante
 	            long idRistoratore = rs.getLong("id");
 
-	            // ✅ prendo le tipologie col DAO
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
 	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
@@ -390,6 +388,45 @@ public class JDBCUtenteDao implements UtenteDao {
 	            long idRistoratore = rs.getLong("id");
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 	            
+	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+
+	            ristoranti.add(u);
+	        }
+	    }
+
+	    return ristoranti;
+	}
+	
+	@Override
+	public List<Utente> findRistoranteByTipologia(String tipologiaNome) throws Exception {
+	    List<Utente> ristoranti = new ArrayList<>();
+
+	    try (Connection connection = dataSource.getConnection()) {
+	        String query = "SELECT u.* FROM Utente u "
+	                     + "JOIN Ristoratore_Tipologia rt ON u.id = rt.ristoratore_id "
+	                     + "JOIN Tipologia t ON rt.tipologia_id = t.id "
+	                     + "WHERE u.ruolo = 'ristoratore' AND t.nome = ?";
+	        PreparedStatement ps = connection.prepareStatement(query);
+	        ps.setString(1, tipologiaNome);
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            String nomeRistorante = rs.getString("nome_ristorante");
+	            String indirizzoRistorante = rs.getString("indirizzo");
+	            Double votoM = rs.getDouble("votom");
+
+	            String nome = rs.getString("nome");
+	            String cognome = rs.getString("cognome");
+	            String email = rs.getString("email");
+	            String username = rs.getString("username");
+	            String password = rs.getString("password");
+	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
+	            byte[] foto = rs.getBytes("foto");
+
+	            long idRistoratore = rs.getLong("id");
+	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
+
 	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
 	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 
