@@ -61,7 +61,7 @@
             <!-- Colonna sinistra -->
             <div class="col-12 col-md-3 rounded-5 shadow" id="colonnasinistra">
                 <h2 class="mb-4">Alberto Rossi</h2>
-                
+
                 <p>
                     <i class="fa-solid fa-user me-2"></i><strong>AlbRoss95</strong>
                     <a href="#" class="text-decoration-none ms-2" title="Modifica Nome">
@@ -358,37 +358,33 @@
     </div>
 
     <!-- Popup MOSTRA recensione-->
-    <div id="recensionePopup" class="popup-overlay" style="display:none;">
+    <div id="recensionePopup" class="popup-overlay">
         <div class="popup-content">
-            <p id="contenutoRecensione">Qui apparirà la recensione</p>
+            <div id="ratingVisualizza"></div>
+            <p id="contenutoRecensione"></p>
             <button id="chiudiPopup">Chiudi</button>
         </div>
     </div>
 
+
     <!-- Popup SCRIVI recensione-->
-    <div id="scriviRecensionePopup" class="popup-overlay" style="display: none;">
+    <div id="scriviRecensionePopup" class="popup-overlay">
         <div class="popup-content">
-            <button id="chiudiScriviPopup"
-                style="position: absolute; top: 12px; right: 12px; background-color: #c1280f; color: white; border: none; padding: 6px 14px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: background-color 0.2s ease-in-out;">
-                Chiudi
-            </button>
+            <button id="chiudiScriviPopup">Chiudi</button>
+            <h3>Scrivi la tua recensione</h3>
             <div id="ratingStars" class="rating-stars">
-                <span data-value="1" class="star">&#9733;</span>
-                <span data-value="2" class="star">&#9733;</span>
-                <span data-value="3" class="star">&#9733;</span>
-                <span data-value="4" class="star">&#9733;</span>
-                <span data-value="5" class="star">&#9733;</span>
+                <i class="star fa-solid fa-star" data-value="1"></i>
+                <i class="star fa-solid fa-star" data-value="2"></i>
+                <i class="star fa-solid fa-star" data-value="3"></i>
+                <i class="star fa-solid fa-star" data-value="4"></i>
+                <i class="star fa-solid fa-star" data-value="5"></i>
             </div>
-            <h2>Scrivi la tua recensione</h2>
-            <textarea id="inputRecensione" rows="5"
-                style="width: 100%; border-radius: 8px; border: 1px solid #ccc; padding: 10px; font-family: 'Raleway', sans-serif; font-size: 16px;"
-                placeholder="Scrivi qui la tua recensione..."></textarea>
-            <button id="inviaRecensione"
-                style="background-color: #c1280f; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: 600; margin-top: 10px; transition: background-color 0.2s ease-in-out;">
-                Invia
-            </button>
+            <textarea id="inputRecensione" rows="4" placeholder="Scrivi qui la tua recensione..."
+                class="rounded-3"></textarea>
+            <button id="inviaRecensione">Invia recensione</button>
         </div>
     </div>
+
 
 
 

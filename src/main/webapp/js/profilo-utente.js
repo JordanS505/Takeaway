@@ -37,19 +37,39 @@ document.getElementById('scrollRight2').addEventListener('click', () => {
     carouselPreparing.scrollBy({ left: scrollAmount2, behavior: 'smooth' });
 });
 
-
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Variabile rating globale per popup scrivi recensione
+    let currentRating = 0;
 
     // POPUP VISUALIZZA RECENSIONE
     const popupOverlay = document.getElementById('recensionePopup');
     const closeBtn = document.getElementById('chiudiPopup');
     const recensioneText = document.getElementById('contenutoRecensione');
+    const ratingVisualizza = document.getElementById('ratingVisualizza'); // div per stelle visualizza
     const visualizzaBtns = document.querySelectorAll('.visualizzaRecensioneBtn');
 
     visualizzaBtns.forEach(button => {
         button.addEventListener('click', () => {
             const testoRecensione = button.dataset.recensione || 'Nessuna recensione disponibile.';
+            const rating = parseInt(button.dataset.rating) || 0;
+
             recensioneText.textContent = testoRecensione;
+
+            // Aggiorna stelle nel popup
+            ratingVisualizza.innerHTML = ''; // reset stelle
+
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('i');
+                star.classList.add('star', 'fa-solid', 'fa-star');
+                if (i <= rating) {
+                    star.classList.add('selected');
+                } else {
+                    star.style.color = '#ccc'; // stelle grigie per non selezionate
+                }
+                ratingVisualizza.appendChild(star);
+            }
+
             popupOverlay.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
@@ -72,13 +92,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const chiudiScriviBtn = document.getElementById('chiudiScriviPopup');
     const inviaBtn = document.getElementById('inviaRecensione');
     const inputRecensione = document.getElementById('inputRecensione');
-    const scriviBtns = document.querySelectorAll('.scriviRecensioneBtn');
+
+    scriviBtns = document.querySelectorAll('.scriviRecensioneBtn');
 
     scriviBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             scriviPopup.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             inputRecensione.value = '';
+            currentRating = 0;
+            updateStars(0);
         });
     });
 
@@ -113,11 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStars(0);
         inputRecensione.value = '';
     });
-    
 
-
+    // STELLE RATING POPUP SCRIVI RECENSIONE
     const ratingStars = document.querySelectorAll('#ratingStars .star');
-    let currentRating = 0;
 
     ratingStars.forEach(star => {
         star.addEventListener('click', () => {
@@ -143,8 +164,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-
-
 
 });

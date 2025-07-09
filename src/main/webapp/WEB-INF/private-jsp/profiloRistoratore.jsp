@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="it">
 
 <head>
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profilo Ristoratore</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/profilo-ristoratore.css" />
+    <link rel="stylesheet" href="../css/profilo-ristoratore.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
@@ -101,6 +101,7 @@
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
                         <div class="order-carousel d-flex flex-nowrap overflow-auto gap-3" id="carouselOrders">
+
                             <!-- Card 1 -->
                             <div class="card order-card flex-shrink-0 rounded-5">
                                 <div
@@ -123,12 +124,14 @@
                                 </div>
                                 <!-- Bottone centrato in basso con stella bianca -->
                                 <div class="recensione-footer text-center">
-                                    <button class="badge bg-success text-white border-0 mb-3"
-                                        style="font-size: 0.9rem; cursor: pointer;">
+                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
+                                        style="font-size: 0.9rem; cursor: pointer;"
+                                        data-recensione="Ho scoperto un'app fantastica. Consigliata!" data-rating="5">
                                         <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
                                     </button>
                                 </div>
                             </div>
+
                             <!-- Card 2 -->
                             <div class="card order-card flex-shrink-0 rounded-5">
                                 <div
@@ -150,6 +153,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Card 3 -->
                             <div class="card order-card flex-shrink-0 rounded-5">
                                 <div
@@ -172,12 +176,14 @@
                                 </div>
                                 <!-- Bottone centrato in basso con stella bianca -->
                                 <div class="recensione-footer text-center">
-                                    <button class="badge bg-success text-white border-0 mb-3"
-                                        style="font-size: 0.9rem; cursor: pointer;">
+                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
+                                        style="font-size: 0.9rem; cursor: pointer;"
+                                        data-recensione="Consegna puntuale e personale cortese." data-rating="4">
                                         <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
                                     </button>
                                 </div>
                             </div>
+
                             <!-- Card 4 -->
                             <div class="card order-card flex-shrink-0 rounded-5">
                                 <div
@@ -357,8 +363,23 @@
         <p id="testocopyright">Copyright © 2025 EnjoEat | All rights reserved.</p>
     </div>
 
+    <!-- POPUP MOSTRA RECENSIONE -->
+    <div id="recensioneModal" class="recensione-modal">
+        <div class="recensione-content">
+          <div id="recensioneStars"></div>
+          <p id="recensioneTesto"></p>
+          <button id="closeRecensioneBtn" class="chiudi-btn">Chiudi</button>
+        </div>
+      </div>
+      
+
+
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<%=request.getContextPath() %>/js/profilo-ristoratore.js"></script>
+    <script src="../js/profilo-ristoratore.js"></script>
 </body>
 
 </html>

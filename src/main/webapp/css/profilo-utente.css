@@ -320,7 +320,7 @@ p {
     position: fixed; /* Fisso sulla viewport */
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100vw; 
     height: 100vh;
     background: rgba(0,0,0,0.5); /* Sfondo scuro trasparente */
     display: none; /* Di default nascosto */
@@ -358,11 +358,36 @@ p {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-  }
-  
-  #chiudiPopup:hover {
+}
+
+#chiudiPopup:hover {
     background-color: #ff9b19;
-  }
+}
+
+#ratingVisualizza .star {
+    font-size: 28px;
+}
+
+
+#inviaRecensione {
+    top: 12px;
+    right: 12px;
+    background-color: #c1280f;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#inviaRecensione:hover {
+    background-color: #ff9b19;
+}
+
+
   
   /* Testo recensione */
   #contenutoRecensione {
@@ -378,13 +403,13 @@ p {
 
 
  /* STELLE RECENSIONI */
-.rating-stars {
+ .rating-stars {
     display: flex;
     justify-content: center;
     gap: 8px;
     font-size: 28px;
     cursor: pointer;
-    color: #ccc; /* stelle grigie base */
+    color: #ccc; /* stelle base grigie */
     margin-bottom: 15px;
   }
   
@@ -392,10 +417,6 @@ p {
   .rating-stars .star:hover,
   .rating-stars .star:hover ~ .star {
     color: #c1280f; /* colore arancione/rosso */
-  }
-  
-  .rating-stars .star.selected {
-    color: #c1280f;
   }
   
 
@@ -454,5 +475,7 @@ p {
         justify-content: center !important;
     }
 }
+
+
 
 

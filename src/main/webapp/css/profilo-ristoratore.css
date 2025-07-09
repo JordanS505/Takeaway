@@ -275,7 +275,6 @@ p {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    /* cerchio */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,13 +316,93 @@ p {
     }
 }
 
+/* CSS POPUP MOSTRA RECENSIONE */
+ /* Bottone per aprire popup */
+ .visualizzaRecensioneBtn {
+    margin: 10px 0;
+    padding: 8px 15px;
+    background-color: #c1280f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+  }
 
+  /* Popup Modal */
+  .recensione-modal {
+    position: fixed; /* Fisso sulla viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    background: rgba(0,0,0,0.5); /* Sfondo scuro trasparente */
+    display: none; /* Di default nascosto */
+    align-items: center;  /* Centrare verticalmente */
+    justify-content: center; /* Centrare orizzontalmente */
+    z-index: 2000; /* Sopra tutto */
+  }
 
+  .recensione-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px 25px 40px;
+    border-radius: 12px;
+    width: 90%;
+    padding: 25px 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 400px;
+    color: #333333;
+    position: relative;
+    text-align: center;
+  }
 
+  
 
+  /* Pulsante Chiudi sotto */
+  .chiudi-btn {
+    top: 12px;
+    right: 12px;
+    width:100%;
+    padding: 6px 14px;
+    background-color: #c1280f;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.2s ease-in-out;
+  }
 
+  .chiudi-btn:hover {
+    background-color: #ff9b19;
+  }
 
+  /* Animazione */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
+  /* Stelle */
+  #recensioneStars {
+    margin-bottom: 15px;
+    justify-content: center;
+  }
+
+  .star {
+    color: #ccc;
+    font-size: 30px;
+    margin: 0;
+    transition: color 0.3s ease;
+    user-select: none;
+  }
+
+  .star.selected {
+    color: #ffc107;
+  }
+  
 
 
 
@@ -380,5 +459,8 @@ p {
         justify-content: center !important;
     }
 }
+
+
+
 
 
