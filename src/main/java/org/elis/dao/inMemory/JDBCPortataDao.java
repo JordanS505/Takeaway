@@ -22,11 +22,12 @@ public class JDBCPortataDao implements PortataDao {
 	@Override
 	public void insert(Portata entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
-			String query = "insert into Portata(nome,descrizione,prezzo) values(?,?,?)";
+			String query = "insert into Portata(nome,foto,descrizione,prezzo) values(?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, entity.getNome());
-			ps.setString(2, entity.getDescrizione());
-			ps.setDouble(3, entity.getPrezzo());
+			ps.setBytes(2, entity.getFoto());
+			ps.setString(3, entity.getDescrizione());
+			ps.setDouble(4, entity.getPrezzo());
 			ps.executeUpdate();
 		}
 	}
@@ -41,9 +42,10 @@ public class JDBCPortataDao implements PortataDao {
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				String nome = rs.getString("nome");
-				String descrizione = rs.getString("cognome");
-				Double prezzo = rs.getDouble("email");
-				p = new Portata(nome, descrizione, prezzo);	
+	            byte[] foto = rs.getBytes("foto");
+				String descrizione = rs.getString("descrizione");
+				Double prezzo = rs.getDouble("prezzo");
+				p = new Portata(nome, foto, descrizione, prezzo);	
 			}
 		}
 		return p;
@@ -59,9 +61,10 @@ public class JDBCPortataDao implements PortataDao {
 			Portata p=null;
 			while(rs.next()) {
 				String nome = rs.getString("nome");
+	            byte[] foto = rs.getBytes("foto");
 				String descrizione = rs.getString("descrizione");
 				Double prezzo= rs.getDouble("prezzo");
-				p= new Portata(nome, descrizione, prezzo);
+				p= new Portata(nome, foto, descrizione, prezzo);
 				portate.add(p);
 			}
 		}
@@ -91,8 +94,9 @@ public class JDBCPortataDao implements PortataDao {
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				String descrizione = rs.getString("descrizione");
+	            byte[] foto = rs.getBytes("foto");
 				Double prezzo = rs.getDouble("prezzo");
-				p = new Portata(nome, descrizione, prezzo);
+				p = new Portata(nome, foto, descrizione, prezzo);
 			}
 		}
 		return p;
@@ -111,7 +115,8 @@ public class JDBCPortataDao implements PortataDao {
 					String nome = rs.getString("nome");
 					String descrizione = rs.getString("descrizione");
 					Double prezzo = rs.getDouble("prezzo");
-					Portata p = new Portata(nome, descrizione, prezzo,l);
+		            byte[] foto = rs.getBytes("foto");
+					Portata p = new Portata(nome, foto, descrizione, prezzo,l);
 					portate.add(p);
 				}
 			}

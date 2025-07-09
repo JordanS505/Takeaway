@@ -247,6 +247,13 @@
     .star-on {
     	color: #ff9b19;
 	}
+	
+	@media (max-width: 768px) {
+  .sidebar {
+    position: static !important;
+    top: auto !important;
+  }
+}
     </style>
 </head>
 <body>
@@ -278,7 +285,7 @@
         <div class="row gx-3 gap-4">
 			<div class="col"></div>
             <!-- Sidebar -->
-            <div class="col-12 col-md-3 mb-3 border-0 rounded-5" style="background-color: #f4f4f4; position: sticky; top: 75px; height: fit-content;">
+            <div class="sidebar col-12 col-md-3 mb-3 border-0 rounded-5 p-0 shadow" style="position: sticky; top: 75px; height: fit-content;">
 			  <div>
 			    <h5 class="fw-bold mt-3 mb-3 text-center">Filtro per tipologia</h5>
 			    <div class="row mt-2 ms-2">
@@ -341,7 +348,7 @@
 			</div>
 
             <!-- Contenuto principale -->
-            <div class="col-12 col-md-7">
+            <div class="col-12 p-0 col-md-7">
                 
                 
                 <%
@@ -349,7 +356,7 @@
 				    if (ristoranti != null) {
 				        for (Utente r : ristoranti) {
 				%>
-				    <div class="card w-100 flex-column flex-md-row p-0 border-0 rounded-5 overflow-hidden mb-3<%
+				    <div class="card w-100 flex-column flex-md-row p-0 border-0 rounded-5 overflow-hidden mb-3 shadow<%
 					    List<Tipologia> tipologiec = r.getTipologie();
 					    if (tipologiec != null && !tipologiec.isEmpty()) {
 					        for (Tipologia t : tipologiec) {
@@ -358,8 +365,7 @@
 					        }
 					    }
 					%>"
-					data-rating="<%= r.getVotoM() != null ? (r.getVotoM()) : 0 %>"
-					style="background-color: #f4f4f4;"> <%-- box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);--%> 
+					data-rating="<%= r.getVotoM() != null ? (r.getVotoM()) : 0 %>">
 				        <img src="<%= r.getFoto() %>"
 				             alt="Foto ristorante"
 				             class="img-fluid flex-shrink-0 img-ristorante"
