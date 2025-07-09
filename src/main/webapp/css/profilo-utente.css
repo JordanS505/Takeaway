@@ -1,0 +1,458 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('../res/Raleway-VariableFont_wght.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 20px;
+    background-color: #c1280f;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 32px;
+}
+
+.navmenu {
+    display: flex;
+    gap: 20px;
+}
+
+.navmenu a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navmenu a:hover {
+    color: #ff9b19;
+}
+
+.icone {
+    display: flex;
+    gap: 15px;
+}
+
+.icone i {
+    color: white;
+    font-size: 25px;
+}
+
+.hamburger {
+    display: none;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+
+.container-fluid {
+    padding-top: 75px;
+}
+
+/* Responsive mobile */
+@media screen and (max-width: 768px) {
+    .navmenu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: #c1280f;
+        /* Fisso anche su mobile */
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 20px;
+        display: none;
+        z-index: 999;
+    }
+
+    .navmenu.active {
+        display: flex;
+    }
+
+    .navmenu a {
+        padding: 10px 0;
+    }
+
+    .navmenu a:last-child {
+        padding-bottom: 20px;
+    }
+
+    .icone {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .logo {
+        padding-left: 30px;
+    }
+
+    .icone {
+        padding-right: 30px;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}
+
+
+h1, h2 {
+    font-family: 'Raleway';
+}
+
+#primotitolo {
+    margin-top: 75px;
+    margin-bottom: 50px;
+}
+
+
+h3,
+h4,
+h5,
+p {
+    font-family: 'Quicksand', sans-serif;
+}
+
+h2 {
+    font-size: 26px !important;
+    font-weight: bold !important;
+}
+
+p {
+    font-weight: 500 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#colonnasinistra {
+    padding: 20px;
+    align-self: flex-start; /* <-- chiave per evitare stretching */
+
+
+}
+
+#colonnasinistra p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+#colonnasinistra i {
+    color: #198754;
+}
+
+#iconamodifica {
+    color: #c1280f !important;
+}
+
+
+
+
+
+
+
+
+
+
+.order-carousel-wrapper {
+    position: relative;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.order-carousel {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.order-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.order-card {
+    min-width: 500px;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    align-self: flex-start; /* <-- Ogni card si adatta alla sua altezza */
+
+}
+
+.order-details p,
+.order-meta p {
+    margin-bottom: 0.4rem;
+    font-size: 16px;
+    color: #333;
+}
+
+/* spazio divisiorio dentro le card tra pt dx e pt sx */
+.order-meta {
+    padding-left: 15px;
+}
+
+.order-meta .badge {
+    font-size: 14px;
+    padding: 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.order-card i {
+    color: #c1280f;
+    min-width: 20px;
+}
+
+.order-meta i {
+    color: white;
+}
+
+.carousel-arrow {
+    font-size: 24px;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #c1280f;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* cerchio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.carousel-arrow:hover {
+    background-color: #7f2d07;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.recensione-footer {
+    margin-top: auto;
+}
+
+
+
+
+/* CARD MOBILE */
+@media screen and (max-width: 768px) {
+    .order-card {
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .order-carousel-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .carousel-arrow {
+        display: none; /* Nasconde le frecce su mobile */
+    }
+}
+
+
+
+/* CSS POPUP */
+.popup-overlay {
+    position: fixed; /* Fisso sulla viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5); /* Sfondo scuro trasparente */
+    display: none; /* Di default nascosto */
+    align-items: center;  /* Centrare verticalmente */
+    justify-content: center; /* Centrare orizzontalmente */
+    z-index: 2000; /* Sopra tutto */
+  }
+  
+  .popup-content {
+    background-color: #ffffff;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%; /* Responsivo */
+    padding: 25px 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-family: 'Raleway', sans-serif;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Bottone chiudi */
+  #chiudiPopup {
+    top: 12px;
+    right: 12px;
+    background-color: #c1280f;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  #chiudiPopup:hover {
+    background-color: #ff9b19;
+  }
+  
+  /* Testo recensione */
+  #contenutoRecensione {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #444;
+  }
+
+  #chiudiScriviPopup {
+    display: none;
+}
+
+
+ /* STELLE RECENSIONI */
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #ccc; /* stelle grigie base */
+    margin-bottom: 15px;
+  }
+  
+  .rating-stars .star.selected,
+  .rating-stars .star:hover,
+  .rating-stars .star:hover ~ .star {
+    color: #c1280f; /* colore arancione/rosso */
+  }
+  
+  .rating-stars .star.selected {
+    color: #c1280f;
+  }
+  
+
+  
+
+/* FOOTER */
+
+#logofooter {
+    width: 150px;
+    padding-bottom: 25px;
+}
+
+#sezionefooter {
+    background-color: #c1280f;
+    margin-top:100px;
+    padding-top: 40px;
+    padding-bottom: 10px;
+}
+
+#instagram-icon,
+#facebook-icon,
+#x-icon,
+#linkedin-icon {
+    color: white;
+    font-size: 25px;
+}
+
+#fame {
+    color: white;
+}
+
+#sezionefooter a {
+    color: white !important;
+}
+
+#sezionefooter p {
+    color: white !important;
+}
+
+#sezionefooter h6 {
+    color: #ff9b19;
+}
+
+#sezionecopyright {
+    height: 70px;
+    background-color: #7f2d07;
+}
+
+#testocopyright {
+    color: white;
+}
+
+/* Centrare icone footer su dispositivi mobili */
+@media (max-width: 768px) {
+    .iconefooter {
+        justify-content: center !important;
+    }
+}
+
+
