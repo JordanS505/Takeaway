@@ -282,7 +282,7 @@
 			    <div class="row mt-2 ms-2">
 			      <div class="col d-flex flex-column">
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Pizzeria" id="Pizzeria">
+			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Pizzeria" id="Pizzeria" >
 			          <label class="form-check-label" for="Pizzeria">Pizzeria</label>
 			        </div>
 			        <div class="form-check">
@@ -467,11 +467,24 @@
 	document.addEventListener('DOMContentLoaded', function () {
 	    var filtriTipologia = [];
 	    var filtriVoto = [];
-	
+		
 	    var checkboxTipologia = document.querySelectorAll('.filtroTipologia');
 	    var checkboxVoto = document.querySelectorAll('.filtroVoto');
 	    var cards = document.querySelectorAll('.card');
 	
+	    <% String filtro=null; 
+		if(request.getParameter("filtro")!=null){
+		filtro = request.getParameter("filtro");
+		}%>
+		<% if(filtro!=null){%>
+		var filtro = <%=filtro%>
+		var check = document.getElementById('<%=filtro%>');
+		check.checked = !check.checked;
+		check.dispatchEvent(new Event('change'));
+		aggiornaFiltroArray(filtriTipologia,filtro,check.checked)
+		aggiornaFiltro();
+		<%}%>
+	    
 	    function aggiornaFiltri() {
 	        for (var i = 0; i < cards.length; i++) {
 	            var card = cards[i];

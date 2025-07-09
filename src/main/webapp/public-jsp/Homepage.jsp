@@ -51,7 +51,7 @@
           <h1 id="titolovideo">Il gusto è pronto. Tu quando arrivi?</h1>
           <p class="lead">Ordina online e passa a ritirare senza attese. EnjoEat è il
         tuo punto di riferimento per l’asporto veloce e delizioso.</p>
-          <a href="#altro" id="primobtn" class="btn mt-2 btn-lg rounded-5 p-3">ORDINA SUBITO!</a>
+          <a href="<%=request.getContextPath() %>/ListaRistorantiServlet" id="primobtn" class="btn mt-2 btn-lg rounded-5 p-3">ORDINA SUBITO!</a>
           <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" id="secondobtn" class="btn mt-2 btn-lg rounded-5 p-3">DIVENTA PARTNER</a>
         </div>
   </div>
@@ -73,7 +73,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di pizza? Scopri le migliori pizzerie vicino a te, ordina online e
                   rilassati: al resto pensiamo noi!</p>
-                <a href="#" class="btn w-100 rounded-5">PIZZA</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Pizzeria" class="btn w-100 rounded-5">PIZZA</a>
               </div>
             </div>
             <div class="card text-center rounded-5">
@@ -81,7 +81,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di cucina italiana? Dalle lasagne alla parmigiana, scegli il tuo piatto
                   e ritiralo subito!</p>
-                <a href="#" class="btn w-100 rounded-5">ITALIANO</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Italiana" class="btn w-100 rounded-5">ITALIANO</a>
               </div>
             </div>
             <div class="card text-center rounded-5">
@@ -89,7 +89,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di hamburger? Panini succosi, patatine croccanti e salse irresistibili
                   a un clic da te.</p>
-                <a href="#" class="btn w-100 rounded-5">HAMBURGER</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Hamburger" class="btn w-100 rounded-5">HAMBURGER</a>
               </div>
             </div>
             <div class="card text-center rounded-5">
@@ -97,7 +97,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di cucina orientale? Sushi, ramen e specialità asiatiche arrivano
                   fresche e pronte a sorprenderti.</p>
-                <a href="#" class="btn w-100 rounded-5">ORIENTALE</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Orientale" class="btn w-100 rounded-5">ORIENTALE</a>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di kebab? Scopri i migliori locali della zona e lasciati conquistare dai
                   loro sapori speziati.</p>
-                <a href="#" class="btn w-100 rounded-5">KEBAB</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Kebab" class="btn w-100 rounded-5">KEBAB</a>
               </div>
             </div>
             <div class="card text-center rounded-5">
@@ -117,7 +117,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di dolci? Torte, gelati e tante golosità per addolcire ogni
                   momento della giornata.</p>
-                <a href="#" class="btn w-100 rounded-5">DOLCI</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Dolci" class="btn w-100 rounded-5">DOLCI</a>
               </div>
             </div>
             <div class="card text-center rounded-5">
@@ -125,7 +125,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di mangiare sano? Bowl e piatti bilanciati per restare
                   leggero senza rinunciare al gusto.</p>
-                <a href="#" class="btn w-100 rounded-5">HEALTHY</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Healthy" class="btn w-100 rounded-5">HEALTHY</a>
               </div>
             </div>
             <div class="card text-center rounded-5">
@@ -133,7 +133,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di qualcosa di buono? Scopri le nostre etichette selezionate e ritirale
                   quando vuoi.</p>
-                <a href="#" class="btn w-100 rounded-5">VINO</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Vino" class="btn w-100 rounded-5">VINO</a>
               </div>
             </div>
           </div>
