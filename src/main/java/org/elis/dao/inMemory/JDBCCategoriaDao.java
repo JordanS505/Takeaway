@@ -107,4 +107,25 @@ public class JDBCCategoriaDao implements CategoriaDao {
 		}
 		return idCategorieRistorante;
 	}
+	
+	public List<Categoria> findCategorieByIndirizzoRistorante(String indirizzo) throws Exception {
+	    List<Categoria> categorie = new ArrayList<>();
+	    String sql = "SELECT c.id, c.nome FROM Categoria c "
+	               + "JOIN Utente u ON c.id_ristorante = u.id "
+	               + "WHERE u.indirizzo = ? AND u.ruolo = 'ristoratore'";
+
+	    try (Connection conn = dataSource.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, indirizzo);
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                Categoria cat = new Categoria(rs.getString("nome"), rs.getLong("id"));
+	                categorie.add(cat);
+	            }
+	        }
+	    }
+	    return categorie;
+	}
 }

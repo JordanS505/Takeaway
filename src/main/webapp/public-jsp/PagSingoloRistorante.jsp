@@ -173,52 +173,6 @@ header h1 {
 			<%
 		}
 		%>
-
-			<div class="category">
-				<h2>Antipasti</h2>
-				<div class="dish">
-					<span class="dish-name">Bruschette miste</span><span
-						class="dish-price">€5,00</span>
-				</div>
-				<div class="dish">
-					<span class="dish-name">Tagliere di salumi</span><span
-						class="dish-price">€8,50</span>
-				</div>
-			</div>
-
-			<div class="category">
-				<h2>Primi</h2>
-				<div class="dish">
-					<span class="dish-name">Spaghetti alla carbonara</span><span
-						class="dish-price">€10,00</span>
-				</div>
-				<div class="dish">
-					<span class="dish-name">Lasagna tradizionale</span><span
-						class="dish-price">€11,50</span>
-				</div>
-			</div>
-
-			<div class="category">
-				<h2>Secondi</h2>
-				<div class="dish">
-					<span class="dish-name">Pollo arrosto</span><span
-						class="dish-price">€9,00</span>
-				</div>
-				<div class="dish">
-					<span class="dish-name">Bistecca alla griglia</span><span
-						class="dish-price">€15,00</span>
-				</div>
-			</div>
-
-			<div class="category">
-				<h2>Dolci</h2>
-				<div class="dish">
-					<span class="dish-name">Tiramisù</span><span class="dish-price">€4,50</span>
-				</div>
-				<div class="dish">
-					<span class="dish-name">Panna cotta</span><span class="dish-price">€4,00</span>
-				</div>
-			</div>
 		</div>
 	</div>
 	<script src='<%=request.getContextPath()%>/js/carrello.js'></script>

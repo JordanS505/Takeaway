@@ -28,9 +28,11 @@ public class PaginaRistorante extends HttpServlet {
 		UtenteDao udao = DaoFactory.getDaoFactory().getUtenteDao();
 		CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
 		PortataDao pdao=DaoFactory.getDaoFactory().getPortataDao();
+		String indirizzo = request.getParameter("indirizzo");
+		
 		try {
-			Utente u = udao.findRistoranteByIndirizzo("Via Milano 2");
-			List<Categoria> c = cdao.findCategorieByIdRistorante(7L);
+			Utente u = udao.findRistoranteByIndirizzo(indirizzo);
+			List<Categoria> c = cdao.findCategorieByIndirizzoRistorante(indirizzo);
 			List<Long> idS = new ArrayList<Long>();
 			for(Categoria cat : c) {
 				idS.add(cat.getId());

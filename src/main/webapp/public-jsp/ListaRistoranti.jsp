@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.elis.model.Utente" %>
 <%@ page import="org.elis.model.Tipologia" %>
+<%@ page import="java.net.URLEncoder" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -393,7 +395,7 @@
 				                    <span><%= r.getIndirizzoRistorante() %></span>
 				                </div>
 				                <div class="col-4 d-flex justify-content-end">
-				                    <a href="#" class="btn btn-primary rounded-5 border-0" style="width: 150px; background-color: #c1280f;">Ordina</a>
+				                    <a href="<%=request.getContextPath()%>/PaginaRistorante?indirizzo=<%= URLEncoder.encode(r.getIndirizzoRistorante(), "UTF-8") %>" class="btn btn-primary rounded-5 border-0" style="width: 150px; background-color: #c1280f;">Ordina</a>
 				                </div>
 				            </div>
 				        </div>
