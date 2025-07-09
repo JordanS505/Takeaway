@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profilo Ristoratore</title>
+    <title>Aggiungi Portata</title>
     <!-- CSS -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/profilo-ristoratore.css" />
     <!-- Google Fonts -->
@@ -95,13 +95,14 @@
 
                 <!-- ORDINI PROCESSATI -->
                 <div class="rounded-5 pt-4 pb-5 px-4 shadow" id="colonnaprocessati">
-                    <h2 class="mb-4">ORDINI PROCESSATI</h2>
+                    <h2 class="mb-4">MENU'</h2>
                     <div class="order-carousel-wrapper position-relative">
                         <button class="carousel-arrow left-arrow" id="scrollLeft" aria-label="Scorri a sinistra">
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
                         <div class="order-carousel d-flex flex-nowrap overflow-auto gap-3" id="carouselOrders">
                             <!-- Card 1 -->
+                            
                             <div class="card order-card flex-shrink-0 rounded-5">
                                 <div
                                     class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
@@ -129,6 +130,7 @@
                                     </button>
                                 </div>
                             </div>
+                            
                             <!-- Card 2 -->
                             <div class="card order-card flex-shrink-0 rounded-5">
                                 <div
