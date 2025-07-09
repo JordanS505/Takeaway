@@ -142,7 +142,7 @@
 	}
 	
 	
-	.hamburger {
+	.hamburgerb {
 	   display: none;
 	   font-size: 26px;
 	   color: white;
@@ -247,7 +247,7 @@
 	}
     </style>
 </head>
-<body class="bg-white">
+<body>
 
     <!-- Header -->
     <header id="scroll-header">
@@ -256,7 +256,7 @@
                 <img src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="Logo" />
             </a>
         </div>
-        <div class="hamburger" id="hamburger">
+        <div class="hamburgerb" id="hamburgerb">
             <i class="fa-solid fa-bars"></i>
         </div>
         <nav class="navmenu" id="navmenu">
@@ -282,37 +282,37 @@
 			    <div class="row mt-2 ms-2">
 			      <div class="col d-flex flex-column">
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Pizzeria" id="Pizzeria" >
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Pizzeria" id="Pizzeria">
 			          <label class="form-check-label" for="Pizzeria">Pizzeria</label>
 			        </div>
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Italiana" id="Italiana">
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Italiana" id="Italiana">
 			          <label class="form-check-label" for="Italiana">Italiana</label>
 			        </div>
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Kebab" id="Kebab">
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Kebab" id="Kebab">
 			          <label class="form-check-label" for="Kebab">Kebab</label>
 			        </div>
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Dolci" id="Dolci">
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Dolci" id="Dolci">
 			          <label class="form-check-label" for="Dolci">Dolci</label>
 			        </div>
 			      </div>
 			      <div class="col d-flex flex-column">
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Orientale" id="Orientale">
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Orientale" id="Orientale">
 			          <label class="form-check-label" for="Orientale">Orientale</label>
 			        </div>
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Vino" id="Vino">
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Vino" id="Vino">
 			          <label class="form-check-label" for="Vino">Vino</label>
 			        </div>
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Hamburger" id="Hamburger">
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Hamburger" id="Hamburger">
 			          <label class="form-check-label" for="Hamburger">Hamburger</label>
 			        </div>
 			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia bg-light" type="checkbox" value="Healthy" id="Healthy">
+			          <input class="form-check-input filtroTipologia" type="checkbox" value="Healthy" id="Healthy">
 			          <label class="form-check-label" for="Healthy">Healthy</label>
 			        </div>
 			      </div>
@@ -322,15 +322,15 @@
 			    <div class="row mt-2 ms-2">
 			      <div class="col d-flex flex-column">
 			        <div class="form-check">
-			          <input class="form-check-input filtroVoto bg-light" type="checkbox" value="3" id="voto3">
+			          <input class="form-check-input filtroVoto" type="checkbox" value="3" id="voto3">
 			          <label class="form-check-label" for="voto3">3+ stelle</label>
 			        </div>
 			        <div class="form-check">
-			          <input class="form-check-input filtroVoto bg-light" type="checkbox" value="4" id="voto4">
+			          <input class="form-check-input filtroVoto" type="checkbox" value="4" id="voto4">
 			          <label class="form-check-label" for="voto4">4+ stelle</label>
 			        </div>
 			        <div class="form-check mb-3">
-			          <input class="form-check-input filtroVoto bg-light" type="checkbox" value="5" id="voto5">
+			          <input class="form-check-input filtroVoto" type="checkbox" value="5" id="voto5">
 			          <label class="form-check-label" for="voto5">Solo 5 stelle</label>
 			        </div>
 			      </div>
@@ -464,101 +464,83 @@
     
 
     <script>
-	document.addEventListener('DOMContentLoaded', function () {
-	    var filtriTipologia = [];
-	    var filtriVoto = [];
-		
-	    var checkboxTipologia = document.querySelectorAll('.filtroTipologia');
-	    var checkboxVoto = document.querySelectorAll('.filtroVoto');
-	    var cards = document.querySelectorAll('.card');
-	
-	    <% String filtro=null; 
-		if(request.getParameter("filtro")!=null){
-		filtro = request.getParameter("filtro");
-		}%>
-		<% if(filtro!=null){%>
-		var filtro = <%=filtro%>
-		var check = document.getElementById('<%=filtro%>');
-		check.checked = !check.checked;
-		check.dispatchEvent(new Event('change'));
-		aggiornaFiltroArray(filtriTipologia,filtro,check.checked)
-		aggiornaFiltro();
-		<%}%>
-	    
-	    function aggiornaFiltri() {
-	        for (var i = 0; i < cards.length; i++) {
-	            var card = cards[i];
-	            var classiCard = Array.from(card.classList);
-	            var rating = parseInt(card.dataset.rating) || 0;
-	
-	            var mostraPerTipologia = filtriTipologia.length === 0;
-	            for (var j = 0; j < filtriTipologia.length; j++) {
-	                if (classiCard.includes(filtriTipologia[j])) {
-	                    mostraPerTipologia = true;
-	                    break;
-	                }
-	            }
-	
-	            var mostraPerVoto = filtriVoto.length === 0;
-	            for (var k = 0; k < filtriVoto.length; k++) {
-	                if (rating >= filtriVoto[k]) {
-	                    mostraPerVoto = true;
-	                    break;
-	                }
-	            }
-	
-	            card.style.display = (mostraPerTipologia && mostraPerVoto) ? 'flex' : 'none';
-	        }
-	    }
-	
-	    function aggiornaArrayFiltro(array, valore, checked) {
-	        var index = array.indexOf(valore);
-	        if (checked && index === -1) {
-	            array.push(valore);
-	        } else if (!checked && index !== -1) {
-	            array.splice(index, 1);
-	        }
-	    }
-	
-	    for (var i = 0; i < checkboxTipologia.length; i++) {
-	        checkboxTipologia[i].addEventListener('change', function () {
-	            var valore = this.value.trim().toLowerCase().replace(/\s+/g, '-');
-	            aggiornaArrayFiltro(filtriTipologia, valore, this.checked);
-	            aggiornaFiltri();
-	        });
-	    }
-	
-	    for (var i = 0; i < checkboxVoto.length; i++) {
-	        checkboxVoto[i].addEventListener('change', function () {
-	            var valoreVoto = parseInt(this.value, 10);
-	            if (!isNaN(valoreVoto)) {
-	                aggiornaArrayFiltro(filtriVoto, valoreVoto, this.checked);
-	                aggiornaFiltri();
-	            }
-	        });
-	    }
-	
-	    // Gestione stelle (rating)
-	    for (var i = 0; i < cards.length; i++) {
-	        var ratingValue = parseInt(cards[i].dataset.rating, 10);
-	        if (!isNaN(ratingValue)) {
-	            var stars = cards[i].querySelectorAll('.rating i');
-	            var ratingText = cards[i].querySelector('.rating-value');
-	            for (var j = 0; j < stars.length; j++) {
-	                if (j < ratingValue) {
-	                    stars[j].classList.add('star-on');
-	                    stars[j].classList.remove('text-secondary');
-	                } else {
-	                    stars[j].classList.remove('star-on');
-	                    stars[j].classList.add('text-secondary');
-	                }
-	            }
-	            if (ratingText) {
-	                ratingText.textContent = ratingValue + '/5';
-	            }
-	        }
-	    }
-	});
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tipologiaParam = urlParams.get('filtro');
+
+        const filtriTipologia = [];
+        const filtriVoto = [];
+
+        const checkboxTipologia = document.querySelectorAll('.filtroTipologia');
+        const checkboxVoto = document.querySelectorAll('.filtroVoto');
+        const cards = document.querySelectorAll('.card');
+
+        function aggiornaFiltri() {
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const classiCard = Array.from(card.classList);
+                const rating = parseInt(card.dataset.rating) || 0;
+
+                let mostraPerTipologia = filtriTipologia.length === 0;
+                for (let j = 0; j < filtriTipologia.length; j++) {
+                    if (classiCard.includes(filtriTipologia[j])) {
+                        mostraPerTipologia = true;
+                        break;
+                    }
+                }
+
+                let mostraPerVoto = filtriVoto.length === 0;
+                for (let k = 0; k < filtriVoto.length; k++) {
+                    if (rating >= filtriVoto[k]) {
+                        mostraPerVoto = true;
+                        break;
+                    }
+                }
+
+                card.style.display = (mostraPerTipologia && mostraPerVoto) ? 'flex' : 'none';
+            }
+        }
+
+        function aggiornaArrayFiltro(array, valore, checked) {
+            const index = array.indexOf(valore);
+            if (checked && index === -1) {
+                array.push(valore);
+            } else if (!checked && index !== -1) {
+                array.splice(index, 1);
+            }
+        }
+
+        checkboxTipologia.forEach(cb => {
+            cb.addEventListener('change', function () {
+                const valore = this.value.trim().toLowerCase().replace(/\s+/g, '-');
+                aggiornaArrayFiltro(filtriTipologia, valore, this.checked);
+                aggiornaFiltri();
+            });
+        });
+
+        checkboxVoto.forEach(cb => {
+            cb.addEventListener('change', function () {
+                const valore = parseInt(this.value, 10);
+                if (!isNaN(valore)) {
+                    aggiornaArrayFiltro(filtriVoto, valore, this.checked);
+                    aggiornaFiltri();
+                }
+            });
+        });
+
+        if (tipologiaParam) {
+            const tipologiaUrl = tipologiaParam.trim().toLowerCase();
+            checkboxTipologia.forEach(cb => {
+                if (cb.value.trim().toLowerCase() === tipologiaUrl) {
+                    cb.checked = true;
+                    aggiornaArrayFiltro(filtriTipologia, tipologiaUrl, true);
+                }
+            });
+
+            aggiornaFiltri();
+        }
+
+    });
 	</script>
 </body>
 </html>
