@@ -37,7 +37,7 @@
       <a href="<%=request.getContextPath() %>/Registrazione" class="mobile-only">Iscrizione Utente</a>
     </nav>
     <div class="icone">
-      <a href="<%=request.getContextPath() %>/PaginaProfiloUtente" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
+      <a href="<%=request.getContextPath() %>/ProfiloUtenteServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
       <a href="<%=request.getContextPath() %>/LogoutServlet" title="LogOut"><i class="fa-solid fa-right-from-bracket"></i></a>
 	<%if(u.getRuolo().name().equalsIgnoreCase("Ristoratore")){ %>	
       <a href="<%=request.getContextPath() %>/PaginaProfiloRistoratoreServlet" title="Ristorante"><i class="fa-solid fa-shop" id="cart-icon"></i></a>
