@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@page import="org.elis.model.*" %>
     
    <!DOCTYPE html>
 <html lang="it">
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profilo Utente</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/profilo-utente.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/profilo-utente.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
+<%Utente u = (Utente)session.getAttribute("UtenteLoggato"); %>
 <body>
 
     <!-- Header -->
@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center" id="primotitolo">Benvenuto nella tua area personale, <b>Alberto Rossi</b>.
+                <h1 class="text-center" id="primotitolo">Benvenuto nella tua area personale, <b><%=u.getNome() %></b>.
                 </h1>
             </div>
         </div>
@@ -389,7 +389,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/profilo-utente.js"></script>
+    <script src="<%=request.getContextPath() %>/js/profilo-utente.js"></script>
 </body>
 
 </html>
