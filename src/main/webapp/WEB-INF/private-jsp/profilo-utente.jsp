@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center" id="primotitolo">Benvenuto nella tua area personale, <b><%=u.getNome() %></b>.
+                <h1 class="text-center" id="primotitolo">Benvenuto nella tua area personale, <b><%=u.getNome()%> <%=u.getCognome() %></b>.
                 </h1>
             </div>
         </div>
@@ -60,15 +60,15 @@
 
             <!-- Colonna sinistra -->
             <div class="col-12 col-md-3 rounded-5 shadow" id="colonnasinistra">
-                <h2 class="mb-4">Alberto Rossi</h2>
+                <h2 class="mb-4"><%=u.getNome()%> <%=u.getCognome() %></h2>
 
                 <p>
-                    <i class="fa-solid fa-user me-2"></i><strong>AlbRoss95</strong>
+                    <i class="fa-solid fa-user me-2"></i><strong><%=u.getUsername()%></strong>
                     <a href="#" class="text-decoration-none ms-2" title="Modifica Nome">
                         <i class="fa-solid fa-pen-to-square" id="iconamodifica"></i>
                     </a>
                 </p>
-                <p><i class="fa-solid fa-envelope me-2"></i>albertorossi_95@gmail.com</p>
+                <p><i class="fa-solid fa-envelope me-2"></i><%=u.getEmail() %></p>
                 <p>
                     <i class="fa-solid fa-key me-2"></i>********
                     <a href="#" class="text-decoration-none ms-2" title="Modifica Password">
