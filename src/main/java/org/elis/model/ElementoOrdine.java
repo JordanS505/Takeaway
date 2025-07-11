@@ -1,10 +1,12 @@
 package org.elis.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ElementoOrdine {
 	String nome;
 	
 	Double prezzo;
-	
+	@SerializedName("quantity")
 	int quantita;
 
 	public ElementoOrdine(String nome, Double prezzo, int quantita) {

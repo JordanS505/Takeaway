@@ -71,5 +71,19 @@ document.addEventListener('DOMContentLoaded', function () {
 	        }
 	    });
 	});
+	
+	document.getElementById('ordineForm').addEventListener('submit', function (e) {
+	    e.preventDefault();
 
+	    document.getElementById('carrelloInput').value = 'prova valore';
+
+	    console.log('valore carrelloInput:', document.getElementById('carrelloInput').value);
+
+	    this.submit();
+	});
+
+
+	
 });
+
+

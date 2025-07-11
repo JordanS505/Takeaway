@@ -55,7 +55,7 @@
           <h1 id="titolovideo">Benvenuto <%=u.getUsername()%><br>Il gusto è pronto. Tu quando arrivi?</h1>
           <p class="lead">Ordina online e passa a ritirare senza attese. EnjoEat è il
         tuo punto di riferimento per l’asporto veloce e delizioso.</p>
-          <a href="#altro" id="primobtn" class="btn mt-2 btn-lg rounded-5 p-3">ORDINA SUBITO!</a>
+          <a href="<%=request.getContextPath() %>/ListaRistorantiServlet" id="primobtn" class="btn mt-2 btn-lg rounded-5 p-3">ORDINA SUBITO!</a>
           <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" id="secondobtn" class="btn mt-2 btn-lg rounded-5 p-3">DIVENTA PARTNER</a>
         </div>
   </div>
