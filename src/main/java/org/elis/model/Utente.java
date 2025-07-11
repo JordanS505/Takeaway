@@ -76,7 +76,7 @@ public class Utente {
 	    this.tipologie=tipologie;
 	    this.foto = foto;
 	    this.votoM = votoM;
-	    this.ruolo = Ruolo.ristoratore;
+	    this.ruolo = Ruolo.RISTORATORE;
 
 	}
 

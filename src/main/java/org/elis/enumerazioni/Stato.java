@@ -2,5 +2,5 @@ package org.elis.enumerazioni;
 
 public enum Stato {
 
-	Ricevuto, confermato, Ritirato, Rifiutato, Annullato;
+	RICEVUTO, CONFERMATO, RITIRATO, RIFIUTATO, ANNULLATO;
 }

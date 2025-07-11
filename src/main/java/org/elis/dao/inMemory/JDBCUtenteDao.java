@@ -79,13 +79,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.USER);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.ADMIN);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.RISTORATORE);
 				}
 			}
 		}
@@ -111,13 +111,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.USER);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.ADMIN);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.RISTORATORE);
 				}
 				utenti.add(u);
 			}
@@ -161,13 +161,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.USER);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.ADMIN);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email, dataDiNascita,Ruolo.ristoratore);
+					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email, dataDiNascita,Ruolo.RISTORATORE);
 				}
 			}
 			return u;
@@ -193,10 +193,10 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.USER);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.ADMIN);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
 					String nomeRistorante = rs.getString("nome_ristorante");
@@ -206,7 +206,7 @@ public class JDBCUtenteDao implements UtenteDao {
 		            byte[] foto = rs.getBytes("foto");
 		            Double votoM = rs.getDouble("votom");
 					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,
-							dataDiNascita, nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+							dataDiNascita, nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
 				}
 			}
 		}
@@ -232,13 +232,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.USER);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.ADMIN);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.RISTORATORE);
 				}
 				utenti.add(u);
 			}
@@ -265,13 +265,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.USER);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.ADMIN);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.RISTORATORE);
 				}
 				utenti.add(u);
 			}
@@ -333,7 +333,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
 	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+	                nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
 
 	            ristoratori.add(u);
 	        }
@@ -370,7 +370,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
 	            ristorante = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
 	        }
 	    }
 
@@ -405,7 +405,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 	            
 	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
 
 	            ristoranti.add(u);
 	        }
@@ -445,7 +445,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
 	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
 
 	            ristoranti.add(u);
 	        }
