@@ -8,9 +8,10 @@
     <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
     <title>EnjoEat Accedi | Entra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <style>
     	
-    	h1, #tastoCreaAcc, #tastoEntra {
+    	body {
     		font-family: 'Rubik', sans-serif;
     	}
     	

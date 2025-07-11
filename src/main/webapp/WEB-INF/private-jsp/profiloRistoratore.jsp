@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@page import="org.elis.model.*" %>
    <!DOCTYPE html>
 <html lang="it">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profilo Ristoratore</title>
+    <title>EnjoEat | Ristoratore</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/profilo-ristoratore.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/profilo-ristoratore.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
@@ -20,14 +20,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
+<%Utente u = (Utente)session.getAttribute("UtenteLoggato"); %>
 <body>
 
     <!-- Header -->
     <header id="scroll-header">
         <div class="logo">
             <a href="#">
-                <img src="../res/logo-bianco.png" alt="Logo" />
+                <img src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="Logo">
             </a>
         </div>
         <div class="hamburger" id="hamburger">
@@ -46,20 +46,20 @@
     </header>
 
     <div class="container-fluid">
-
+	
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center" id="primotitolo">Benvenuto nella tua area personale, <b>Nome Ristorante</b>.
+                <h1 class="text-center" id="primotitolo">Benvenuto nella tua area personale, <b><%=u.getNomeRistorante() %></b>.
                 </h1>
             </div>
         </div>
 
         <div class="row gap-3" id="sezione1">
             <div class="col-1 d-none d-md-block"></div>
-
+		
             <!-- Colonna sinistra -->
             <div class="col-12 col-md-3 rounded-5 shadow" id="colonnasinistra">
-                <h2 class="mb-4">Nome Ristorante</h2>
+                <h2 class="mb-4"><%=u.getNomeRistorante() %></h2>
                 <!-- Immagine profilo ristorante con icona modifica -->
                 <div class="ristorante-img-wrapper d-flex align-items-center gap-2 mb-4">
                     <img src="../res/pizzeria1.jpg" alt="Foto Ristorante" class="img-fluid shadow-sm"
@@ -69,21 +69,21 @@
                     </a>
                 </div>
                 <p>
-                    <i class="fa-solid fa-user me-2"></i><strong>MarioRisto</strong>
+                    <i class="fa-solid fa-user me-2"></i><strong><%=u.getNome()%> <%=u.getCognome() %></strong>
                     <a href="#" class="text-decoration-none ms-2" title="Modifica Nome">
                         <i class="fa-solid fa-pen-to-square" id="iconamodifica"></i>
                     </a>
                 </p>
-                <p><i class="fa-solid fa-envelope me-2"></i>mario@example.com</p>
+                <p><i class="fa-solid fa-envelope me-2"></i><%=u.getEmail() %></p>
                 <p>
                     <i class="fa-solid fa-key me-2"></i>********
                     <a href="#" class="text-decoration-none ms-2" title="Modifica Password">
                         <i class="fa-solid fa-pen-to-square" id="iconamodifica"></i>
                     </a>
                 </p>
-                <p><i class="fa-solid fa-location-dot me-2"></i>Via Roma 123, Milano</p>
+                <p><i class="fa-solid fa-location-dot me-2"></i><%= u.getIndirizzoRistorante() %></p>
                 <p><i class="fa-solid fa-clock me-2"></i>10:00 - 22:30</p>
-                <p><i class="fa-solid fa-star me-2 text-warning"></i>4.5 / 5</p>
+                <p><i class="fa-solid fa-star me-2 text-warning"></i><%=u.getVotoM() %> / 5</p>
                 <button type="button" class="btn btn-success align-self-start mt-3 rounded-3">
                     Modifica Menu
                 </button>
@@ -102,14 +102,15 @@
                         </button>
                         <div class="order-carousel d-flex flex-nowrap overflow-auto gap-3" id="carouselOrders">
 
-                            <!-- Card 1 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
+                            <!-- Card -->
+                            <%for(Ordini o : ori) %>
+							<div class="card order-card flex-shrink-0 rounded-5">
                                 <div
                                     class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
                                     <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10234</strong>
+                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>IDDAMETTERE</strong>
                                         </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Mario Rossi</p>
+                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i> NomeCliente</p>
                                         <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Pizza Margherita, Coca
                                             Cola, Supplì</p>
                                         <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>24,90</p>
@@ -129,83 +130,17 @@
                                         data-recensione="Ho scoperto un'app fantastica. Consigliata!" data-rating="5">
                                         <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
                                     </button>
-                                </div>
-                            </div>
-
-                            <!-- Card 2 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10235</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Laura Bianchi</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Insalata Greca, Acqua
-                                            Naturale</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>16,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ricevuto </b>13:05</p>
-                                        <p><b>Preparato </b>13:15</p>
-                                        <p><b>Ritirato </b>13:18</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10236</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Giuseppe Verdi</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Lasagna, Tiramisu, Vino
-                                            Rosso</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>32,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ricevuto </b>20:30</p>
-                                        <p><b>Preparato </b>20:45</p>
-                                        <p><b>Ritirato </b>21:00</p>
-                                    </div>
-                                </div>
-                                <!-- Bottone centrato in basso con stella bianca -->
-                                <div class="recensione-footer text-center">
-                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
-                                        style="font-size: 0.9rem; cursor: pointer;"
-                                        data-recensione="Consegna puntuale e personale cortese." data-rating="4">
-                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Card 4 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10237</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Sara Neri</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Panino Veg, Succo ACE
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>12,50</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ricevuto </b>21:05</p>
-                                        <p><b>Preparato </b>21:20</p>
-                                        <p><b>Ritirato </b>21:30</p>
-                                    </div>
-                                </div>
-                            </div>
+                                </div>    
+                            </div>		
+					
+                                  
+                        
+                        
                         </div>
+                        
+                        
+                        
+                        
                         <button class="carousel-arrow right-arrow" id="scrollRight" aria-label="Scorri a destra">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
@@ -239,69 +174,7 @@
                                         <p><b>Preparato </b>13:30</p>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Card 2 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10239</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Chiara Gallo</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Risotto ai Funghi,
-                                            Acqua Frizzante</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>22,50</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-primary mb-2"><i
-                                                class="fa-solid fa-hourglass-half me-1"></i>In preparazione</span>
-                                        <p><b>Ricevuto </b>12:20</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10240</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Federico Neri</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Tagliatelle al Ragù,
-                                            Vino Bianco</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>27,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-warning mb-2"><i class="fa-solid fa-box-open me-1"></i>Da
-                                            ritirare</span>
-                                        <p><b>Ricevuto </b>20:10</p>
-                                        <p><b>Preparato </b>20:25</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 4 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10241</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Martina Rizzo</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Pollo al Curry, Riso
-                                            Basmati</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>21,90</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-primary mb-2"><i
-                                                class="fa-solid fa-hourglass-half me-1"></i>In preparazione</span>
-                                        <p><b>Ricevuto </b>20:10</p>
-                                    </div>
-                                </div>
-                            </div>
-
+                            </div>                         
                         </div>
                         <button class="carousel-arrow right-arrow" id="scrollRight2" aria-label="Scorri a destra">
                             <i class="fa-solid fa-chevron-right"></i>
@@ -371,15 +244,9 @@
           <button id="closeRecensioneBtn" class="chiudi-btn">Chiudi</button>
         </div>
       </div>
-      
-
-
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/profilo-ristoratore.js"></script>
+    <script src="<%=request.getContextPath() %>/js/profilo-ristoratore.js"></script>
 </body>
 
 </html>

@@ -18,9 +18,11 @@ public class Portata {
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
 	}
+	
+	public Portata(String nome){
+		this.nome=nome;
+	}
 
-	
-	
 	public Portata(String nome, byte[] foto, String descrizione, Double prezzo, Long idCategoria) {
 		this.nome = nome;
 		this.descrizione = descrizione;

@@ -69,6 +69,7 @@ public class JDBCUtenteDao implements UtenteDao {
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
+				long idUtente = rs.getLong("id");
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
@@ -78,13 +79,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
 				}
 			}
 		}
@@ -100,6 +101,7 @@ public class JDBCUtenteDao implements UtenteDao {
 			ResultSet rs = ps.executeQuery();
 			Utente u=null;
 			while(rs.next()) {
+				long idUtente = rs.getLong("id");
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
@@ -109,13 +111,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nome, cognome, email,dataDiNascita, Ruolo.ristoratore);
 				}
 				utenti.add(u);
 			}
@@ -149,6 +151,7 @@ public class JDBCUtenteDao implements UtenteDao {
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
+				long idUtente = rs.getLong("id");
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
@@ -158,13 +161,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email,dataDiNascita, Ruolo.admin);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(usernameUtente, password, nome, cognome, email, dataDiNascita,Ruolo.ristoratore);
+					u = new Utente(idUtente, usernameUtente, password, nome, cognome, email, dataDiNascita,Ruolo.ristoratore);
 				}
 			}
 			return u;
@@ -180,6 +183,7 @@ public class JDBCUtenteDao implements UtenteDao {
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
+				long idUtente = rs.getLong("id");
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String emailUtente = rs.getString("email");
@@ -189,13 +193,20 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.admin);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.ristoratore);
+					String nomeRistorante = rs.getString("nome_ristorante");
+					String indirizzoRistorante = rs.getString("indirizzo");
+					long idRistoratore = rs.getLong("id");
+		            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
+		            byte[] foto = rs.getBytes("foto");
+		            Double votoM = rs.getDouble("votom");
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,
+							dataDiNascita, nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 				}
 			}
 		}
@@ -211,6 +222,7 @@ public class JDBCUtenteDao implements UtenteDao {
 			ResultSet rs = ps.executeQuery();
 			Utente u=null;
 			while(rs.next()) {
+				long idUtente = rs.getLong("id");
 				String nomeUtente = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String email = rs.getString("email");
@@ -220,13 +232,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.admin);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nomeUtente, cognome, email,dataDiNascita, Ruolo.ristoratore);
 				}
 				utenti.add(u);
 			}
@@ -243,6 +255,7 @@ public class JDBCUtenteDao implements UtenteDao {
 			ResultSet rs = ps.executeQuery();
 			Utente u=null;
 			while(rs.next()) {
+				long idUtente = rs.getLong("id");
 				String nome = rs.getString("nome");
 				String cognomeUtente = rs.getString("cognome");
 				String email = rs.getString("email");
@@ -252,13 +265,13 @@ public class JDBCUtenteDao implements UtenteDao {
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
-					u = new Utente(username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.user);
+					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.user);
 				}
 				if(ruolo.equalsIgnoreCase("admin")) {
-					u = new Utente(username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.admin);
+					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.admin);
 				}
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
-					u = new Utente(username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.ristoratore);
+					u = new Utente(idUtente, username, password, nome, cognomeUtente, email,dataDiNascita, Ruolo.ristoratore);
 				}
 				utenti.add(u);
 			}
@@ -303,6 +316,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	        ResultSet rs = ps.executeQuery();
 
 	        while (rs.next()) {
+				long idUtente = rs.getLong("id");
 	            String nome = rs.getString("nome");
 	            String cognome = rs.getString("cognome");
 	            String username = rs.getString("username");
@@ -318,7 +332,7 @@ public class JDBCUtenteDao implements UtenteDao {
 
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
-	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
+	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
 	                nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 
 	            ristoratori.add(u);
@@ -339,6 +353,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	        ResultSet rs = ps.executeQuery();
 
 	        if (rs.next()) {
+				long idUtente = rs.getLong("id");
 	            String nomeRistorante = rs.getString("nome_ristorante");
 	            String indirizzoRistorante = rs.getString("indirizzo");
 	            Double votoM = rs.getDouble("votom");
@@ -354,7 +369,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            long idRistoratore = rs.getLong("id");
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
-	            ristorante = new Utente(username, password, nome, cognome, email, dataNascita,
+	            ristorante = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
 	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 	        }
 	    }
@@ -373,6 +388,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	        ResultSet rs = ps.executeQuery();
 
 	        while (rs.next()) {
+				long idUtente = rs.getLong("id");
 	            String nomeRistorante = rs.getString("nome_ristorante");
 	            String indirizzoRistorante = rs.getString("indirizzo");
 	            Double votoM = rs.getDouble("votom");
@@ -388,7 +404,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            long idRistoratore = rs.getLong("id");
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 	            
-	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
+	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
 	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 
 	            ristoranti.add(u);
@@ -412,6 +428,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	        ResultSet rs = ps.executeQuery();
 
 	        while (rs.next()) {
+				long idUtente = rs.getLong("id");
 	            String nomeRistorante = rs.getString("nome_ristorante");
 	            String indirizzoRistorante = rs.getString("indirizzo");
 	            Double votoM = rs.getDouble("votom");
@@ -427,7 +444,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            long idRistoratore = rs.getLong("id");
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
-	            Utente u = new Utente(username, password, nome, cognome, email, dataNascita,
+	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
 	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.ristoratore);
 
 	            ristoranti.add(u);
@@ -437,4 +454,5 @@ public class JDBCUtenteDao implements UtenteDao {
 	    return ristoranti;
 	}
 
+	
 }

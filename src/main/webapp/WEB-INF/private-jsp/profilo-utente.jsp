@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="org.elis.model.*" %>
+<%@page import="java.util.*" %>
     
    <!DOCTYPE html>
 <html lang="it">
@@ -22,8 +23,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <%Utente u = (Utente)session.getAttribute("UtenteLoggato"); %>
+<%List<Ordine> ordini = (List<Ordine>) request.getAttribute("Ordini"); %>
 <body>
-
     <!-- Header -->
     <header id="scroll-header">
         <div class="logo">
@@ -59,6 +60,7 @@
             <div class="col-1 d-none d-md-block"></div>
 
             <!-- Colonna sinistra -->
+            
             <div class="col-12 col-md-3 rounded-5 shadow" id="colonnasinistra">
                 <h2 class="mb-4"><%=u.getNome()%> <%=u.getCognome() %></h2>
 
@@ -90,84 +92,41 @@
                         <div class="order-carousel d-flex flex-nowrap overflow-auto gap-3" id="carouselOrders">
 
                             <!-- Card 1 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10234</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Mario Rossi</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Pizza Margherita, Coca
-                                            Cola, Supplì</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>24,90</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-primary mb-2"><i
-                                                class="fa-solid fa-hourglass-half me-1"></i>Ordinato</span>
-                                        <p><b>Ora </b>12:30</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 2 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10235</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Laura Bianchi</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Insalata Greca, Acqua
-                                            Naturale</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>16,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-primary mb-2"><i
-                                                class="fa-solid fa-hourglass-half me-1"></i>Ordinato</span>
-                                        <p><b>Ora </b>13:05</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10236</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Giuseppe Verdi</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Lasagna, Tiramisu, Vino
-                                            Rosso</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>32,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-md-0">
-                                        <span class="badge bg-primary mb-2"><i
-                                                class="fa-solid fa-hourglass-half me-1"></i>Ordinato</span>
-                                        <p><b>Ora </b>20:30</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 4 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10237</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Sara Neri</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Panino Veg, Succo ACE
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>12,50</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-primary mb-2"><i
-                                                class="fa-solid fa-hourglass-half me-1"></i>Ordinato</span>
-                                        <p><b>Ora </b>21:05</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <% if (ordini != null){ %>
+	                            <%for(Ordine o : ordini){%>
+	                            	<%if(o.getStato().name().equalsIgnoreCase("Ricevuto")||o.getStato().name().equalsIgnoreCase("Confermato")){ %>
+			                            <div class="card order-card flex-shrink-0 rounded-5">
+			                                <div
+			                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
+			                                    <div class="order-details">
+			                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#<%=o.getId() %></strong>
+			                                        </p>
+			                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i><%=o.getRistoratore().getNomeRistorante() %></p>
+			                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i><%for(ElementoOrdine eo : o.getElementi()){%>
+			                                        	<%=eo.getNome() %>
+			                                        <%}
+			                                        	%></p>
+			                                        
+			                                        <%
+			                                        Double totale=0.0;
+			                                        for(ElementoOrdine eo : o.getElementi()){
+			                                        	totale+=eo.getPrezzo();
+			                                        	}
+			                                        %>
+			                                        
+			                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i><%=totale %></p>
+			                                    </div>
+			                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
+			                                        <span class="badge bg-primary mb-2"><i
+			                                                class="fa-solid fa-hourglass-half me-1"></i><%=o.getStato().name() %></span>
+			                                        <p><b>Ora </b><%=o.getData() %></p>
+			                                    </div>
+			                                </div>
+			                            </div>
+                            		<%} %>
+                            	<%} %>
+                            <%} %>
+                            
                         </div>
                         <button class="carousel-arrow right-arrow" id="scrollRight" aria-label="Scorri a destra">
                             <i class="fa-solid fa-chevron-right"></i>
@@ -184,117 +143,41 @@
                         </button>
                         <div class="order-carousel d-flex flex-nowrap overflow-auto gap-3" id="carouselPreparing">
 
-                            <!-- Card 1 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10235</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Laura Bianchi</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Insalata Greca, Acqua
-                                            Naturale</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>16,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ora </b>13:10</p>
-                                    </div>
-                                </div>
-                                <!-- Bottone centrato in basso con stella bianca -->
-                                <div class="recensione-footer text-center">
-                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
-                                        style="font-size: 0.9rem; cursor: pointer;"
-                                        data-recensione="Ottimo servizio e cibo delizioso!" data-rating="4">
-                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Card 2 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10239</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Chiara Gallo</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Risotto ai Funghi,
-                                            Acqua Frizzante</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>22,50</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ora </b>12:20</p>
-                                    </div>
-                                </div>
-                                <!-- Bottone centrato in basso con stella bianca -->
-                                <div class="recensione-footer text-center">
-                                    <button class="badge bg-warning text-white border-0 mb-3 scriviRecensioneBtn"
-                                        style="font-size: 0.9rem; cursor: pointer;">
-                                        <i class="scriviRecensioneBtn fa-solid fa-star me-1 text-white"></i>Scrivi
-                                        recensione
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10240</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Federico Neri</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Tagliatelle al Ragù,
-                                            Vino Bianco</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>27,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ora </b>20:10</p>
-                                    </div>
-                                </div>
-                                <!-- Bottone centrato in basso con stella bianca -->
-                                <div class="recensione-footer text-center">
-                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
-                                        style="font-size: 0.9rem; cursor: pointer;"
-                                        data-recensione="Consegna puntuale e personale cortese." data-rating="5">
-                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Card 4 -->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10241</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i>Martina Rizzo</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Pollo al Curry, Riso
-                                            Basmati</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>21,90</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ora </b>20:10</p>
-                                    </div>
-                                </div>
-                                <!-- Bottone centrato in basso con stella bianca -->
-                                <div class="recensione-footer text-center">
-                                    <button class="badge bg-warning text-white border-0 mb-3 scriviRecensioneBtn"
-                                        style="font-size: 0.9rem; cursor: pointer;">
-                                        <i class="scriviRecensioneBtn fa-solid fa-star me-1 text-white"></i>Scrivi
-                                        recensione
-                                    </button>
-                                </div>
-                            </div>
+                            <% if (ordini != null){ %>
+	                            <%for(Ordine o : ordini){%>
+	                            	<%if(o.getStato().name().equalsIgnoreCase("Ritirato")||o.getStato().name().equalsIgnoreCase("Rifiutato")||o.getStato().name().equalsIgnoreCase("Annullato")){ %>
+			                            <div class="card order-card flex-shrink-0 rounded-5">
+			                                <div
+			                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
+			                                    <div class="order-details">
+			                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#<%=o.getId() %></strong>
+			                                        </p>
+			                                        <p class="mb-2"><i class="fa-solid fa-shop me-2"></i><%=o.getRistoratore().getNomeRistorante() %></p>
+			                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i><%for(ElementoOrdine eo : o.getElementi()){%>
+			                                        	<%=eo.getNome() %>
+			                                        <%}
+			                                        	%></p>
+			                                        
+			                                        <%
+			                                        Double totale=0.0;
+			                                        for(ElementoOrdine eo : o.getElementi()){
+			                                        	totale+=eo.getPrezzo();
+			                                        	}
+			                                        %>
+			                                        
+			                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i><%=totale %></p>
+			                                    </div>
+			                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
+			                                        <span class="badge bg-primary mb-2"><i
+			                                                class="fa-solid fa-hourglass-half me-1"></i><%=o.getStato().name() %></span>
+			                                        <p><b>Ora </b><%=o.getData() %></p>
+			                                    </div>
+			                                </div>
+			                            </div>
+                            		<%} %>
+                            	<%} %>
+                            <%} %>
+                            
 
                         </div>
                         <button class="carousel-arrow right-arrow" id="scrollRight2" aria-label="Scorri a destra">

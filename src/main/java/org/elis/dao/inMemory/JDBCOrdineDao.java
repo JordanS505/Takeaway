@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.elis.dao.OrdineDao;
 import org.elis.enumerazioni.Stato;
+import org.elis.model.ElementoOrdine;
 import org.elis.model.Ordine;
+import org.elis.model.Utente;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
@@ -39,10 +41,48 @@ public class JDBCOrdineDao implements OrdineDao {
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				return new Ordine(
-	                rs.getTimestamp("data").toLocalDateTime(),
-	                Stato.valueOf(rs.getString("stato"))
-				);
+				 
+				 Long idRistorante = rs.getLong("id_ristorante");
+				 Long idUtente =  rs.getLong("id_utente");
+				 Stato stato = Stato.valueOf(rs.getString("stato"));
+				 LocalDateTime data = rs.getTimestamp("data").toLocalDateTime();
+				 
+			     var psRistorante = connection.prepareStatement("select * from utente where id=?");
+			     psRistorante.setLong(1, idRistorante);
+			     var psUtente = connection.prepareStatement("select * from utente where id=?");
+			     psUtente.setLong(1, idUtente);
+			     var psElementiOrdine = connection.prepareStatement("select * from elemento_ordine join ordine_elemento_ordine on id_ordine=elemento_ordine.id where id_ordine=?");
+			     psElementiOrdine.setLong(1, id);
+			     Utente ristorante = null;
+			     Utente cliente = null;
+			    
+		         ResultSet rsRistorante = psRistorante.executeQuery();
+		         if(rsRistorante.next()) {
+		        	 ristorante = new Utente(
+		        			 idRistorante,
+		        			 rsRistorante.getString("nome_ristorante")
+		        			 );
+		         }
+		         
+		         ResultSet rsUtente = psUtente.executeQuery();
+		         if(rsUtente.next()) {
+		        	 cliente = new Utente(
+		        			 idUtente,
+		        			 rsUtente.getString("nome"),
+		        			 rsUtente.getString("cognome")
+		        			 );
+		         }
+		         ResultSet rsElementiOrdine = psElementiOrdine.executeQuery();
+		         List<ElementoOrdine> portate = new ArrayList<>();
+		         while(rsElementiOrdine.next()) {
+		        	 ElementoOrdine portata = new ElementoOrdine(
+		        			 rsElementiOrdine.getString("nome"),
+		        			 rsElementiOrdine.getDouble("prezzo"),
+		        			 rsElementiOrdine.getInt("quantita")
+		        			 );
+		        	 portate.add(portata);
+		         }
+		         o = new Ordine(id, data, stato, ristorante, cliente, portate);
 			}
 		}
 		return o;
@@ -57,8 +97,8 @@ public class JDBCOrdineDao implements OrdineDao {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return new Ordine(
-                    rs.getTimestamp("data").toLocalDateTime(),
-                    Stato.valueOf(rs.getString("stato"))
+                		rs.getTimestamp("data").toLocalDateTime(),
+    	                Stato.valueOf(rs.getString("stato"))
                 );
             }
         }
@@ -74,8 +114,8 @@ public class JDBCOrdineDao implements OrdineDao {
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 lista.add(new Ordine(
-                    rs.getTimestamp("data").toLocalDateTime(),
-                    Stato.valueOf(rs.getString("stato"))
+                		rs.getTimestamp("data").toLocalDateTime(),
+    	                Stato.valueOf(rs.getString("stato"))
                 ));
             }
         }
@@ -89,6 +129,7 @@ public class JDBCOrdineDao implements OrdineDao {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setTimestamp(1, Timestamp.valueOf(ordine.getData()));
             ps.setString(2, ordine.getStato().name());
+
             ps.executeUpdate();
         }
     }
@@ -103,8 +144,8 @@ public class JDBCOrdineDao implements OrdineDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(new Ordine(
-                    rs.getTimestamp("data").toLocalDateTime(),
-                    Stato.valueOf(rs.getString("stato"))
+                		rs.getTimestamp("data").toLocalDateTime(),
+    	                Stato.valueOf(rs.getString("stato"))
                 ));
             }
         }
@@ -121,9 +162,47 @@ public class JDBCOrdineDao implements OrdineDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(new Ordine(
-                    rs.getTimestamp("data").toLocalDateTime(),
-                    Stato.valueOf(rs.getString("stato"))
+                		rs.getTimestamp("data").toLocalDateTime(),
+    	                Stato.valueOf(rs.getString("stato"))
                 ));
+            }
+        }
+        return lista;
+    }
+    
+    @Override
+    public List<Ordine> findOrdinibyRistoratore(String nomeRist) throws Exception {
+    	List<Ordine> ordini = new ArrayList<>();
+    	String sql = """
+    			select * from ordine
+			    where nome_ristorante = ?;
+    			""";
+    	try(Connection conn = dataSource.getConnection();
+    		PreparedStatement ps = conn.prepareStatement(sql)){
+    		ps.setString(1, nomeRist);
+    		ResultSet rs = ps.executeQuery();
+    		while (rs.next()) {
+    			ordini.add(new Ordine(
+    					rs.getTimestamp("data").toLocalDateTime(),
+    	                Stato.valueOf(rs.getString("stato"))
+    			));
+    		}
+    	}
+    	return ordini;
+    }
+    
+    @Override
+    public List<Long> findAllIdOrdinebyID(long idUtente) throws Exception {
+        List<Long> lista = new ArrayList<>();
+        String sql = "SELECT id FROM Ordine WHERE id_Utente=?";
+        try (Connection conn = dataSource.getConnection()){
+        	 PreparedStatement ps = conn.prepareStatement(sql);
+             ps.setLong(1, idUtente);
+             ResultSet rs = ps.executeQuery();
+             while (rs.next()) {
+                lista.add(
+                		rs.getLong("id")
+                		);
             }
         }
         return lista;

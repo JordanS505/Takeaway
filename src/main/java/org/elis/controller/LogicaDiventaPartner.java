@@ -102,7 +102,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 			return;
 		}
 		
-		Utente u = new Utente(username, password, nomeRistorante, cognome, email, dataDiNascita,nomeRistorante,indirizzoRistorante,null, Ruolo.ristoratore);
+		Utente u = new Utente(null, username, password, nomeRistorante, cognome, email, dataDiNascita,nomeRistorante,indirizzoRistorante,null, Ruolo.ristoratore);
 		UtenteDao accessoUtente = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
 			

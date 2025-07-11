@@ -6,6 +6,8 @@ import java.util.List;
 import org.elis.enumerazioni.Ruolo;
 
 public class Utente {
+	private Long idUtente;
+	
 	private String username;
 	
 	private String password;
@@ -31,7 +33,8 @@ public class Utente {
 	private Ruolo ruolo;
 	
 
-	public Utente(String username, String password, String nome, String cognome, String email,LocalDate dataDiNascita ,Ruolo ruolo) {
+	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email,LocalDate dataDiNascita ,Ruolo ruolo) {
+		this.idUtente=idUtente;
 		this.username = username;
 		this.password = password;
 		this.nome = nome;
@@ -43,7 +46,7 @@ public class Utente {
 
 	
 	
-	public Utente(String username, String password, String nome, String cognome, String email, LocalDate dataDiNascita,
+	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email, LocalDate dataDiNascita,
 			String nomeRistorante, String indirizzoRistorante, byte[] foto, Ruolo ruolo) {
 		super();
 		this.username = username;
@@ -60,7 +63,7 @@ public class Utente {
 
 
 
-	public Utente(String username, String password, String nome, String cognome, String email,
+	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email,
 			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, List<Tipologia> tipologie, byte[] foto, Double votoM, Ruolo ruolo) {
 	    this.username = username;
 	    this.password = password;
@@ -75,6 +78,20 @@ public class Utente {
 	    this.votoM = votoM;
 	    this.ruolo = Ruolo.ristoratore;
 
+	}
+
+
+
+	public Utente(Long idUtente, String nomeRistorante) {
+		this.nomeRistorante=nomeRistorante;
+	}
+
+
+
+	public Utente(Long idUtente, String nome, String cognome) {
+		this.idUtente=idUtente;
+		this.nome=nome;
+		this.cognome=cognome;
 	}
 
 
@@ -174,6 +191,10 @@ public class Utente {
 	
 	public void setTipologie(List<Tipologia> tipologie) {
 	    this.tipologie = tipologie;
+	}
+
+	public long getIdUtente() {
+		return idUtente;
 	}
 	
 }

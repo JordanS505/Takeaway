@@ -123,5 +123,31 @@ public class JDBCPortataDao implements PortataDao {
 		}
 		return portate;
 	}
+	
+	public List<Portata> findPortateByNomeRistoranteOrdine(String nomeRistorante, long idOrdine) throws Exception {
+	    String sql = """
+	    	SELECT p.nome AS nome_portata FROM Ordine o
+			JOIN Utente u ON o.id_ristorante = u.id
+			JOIN Ordine_Elemento_Ordine oe ON o.id = oe.id_ordine
+			JOIN Elemento_Ordine eo ON oe.id_elemento_ordine = eo.id
+			JOIN Portata p ON eo.id_portata = p.id
+			WHERE u.nome_ristorante = ? AND o.id = ?
+	    """;
+
+	    List<Portata> portate = new ArrayList<>();
+
+	    try (Connection conn = dataSource.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setString(1, nomeRistorante);
+	        ps.setLong(2, idOrdine);
+
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            portate.add(new Portata(rs.getString("nome_portata")));
+	        }
+	    }
+
+	    return portate;
+	}
 
 }
