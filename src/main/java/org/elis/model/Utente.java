@@ -48,7 +48,7 @@ public class Utente {
 	
 	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email, LocalDate dataDiNascita,
 			String nomeRistorante, String indirizzoRistorante, byte[] foto, Ruolo ruolo) {
-		super();
+	    this.idUtente = idUtente;
 		this.username = username;
 		this.password = password;
 		this.nome = nome;
@@ -65,7 +65,8 @@ public class Utente {
 
 	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email,
 			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, List<Tipologia> tipologie, byte[] foto, Double votoM, Ruolo ruolo) {
-	    this.username = username;
+	    this.idUtente = idUtente;
+		this.username = username;
 	    this.password = password;
 	    this.nome = nome;
 	    this.cognome = cognome;
@@ -83,6 +84,7 @@ public class Utente {
 
 
 	public Utente(Long idUtente, String nomeRistorante) {
+	    this.idUtente = idUtente;
 		this.nomeRistorante=nomeRistorante;
 	}
 

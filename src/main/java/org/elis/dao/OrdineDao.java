@@ -17,5 +17,7 @@ public interface OrdineDao extends GeneralDao<Ordine> {
 	List<Ordine> findOrdinibyRistoratore(String nomeRist) throws Exception;
 
 	List<Long> findAllIdOrdinebyID(long idUtente) throws Exception;
+
+	List<Long> findAllIdOrdinebyIDRistoratore(long idUtente) throws Exception;
 	
 }

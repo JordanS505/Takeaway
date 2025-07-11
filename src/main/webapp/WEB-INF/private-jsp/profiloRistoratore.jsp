@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="org.elis.model.*" %>
+<%@page import="java.util.*"%>
    <!DOCTYPE html>
 <html lang="it">
 
@@ -21,6 +22,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <%Utente u = (Utente)session.getAttribute("UtenteLoggato"); %>
+<%List<Ordine> ordini = (List<Ordine>) request.getAttribute("Ordini"); %>
 <body>
 
     <!-- Header -->
@@ -103,43 +105,53 @@
                         <div class="order-carousel d-flex flex-nowrap overflow-auto gap-3" id="carouselOrders">
 
                             <!-- Card -->
-                            <%for(Ordini o : ori) %>
-							<div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>IDDAMETTERE</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i> NomeCliente</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Pizza Margherita, Coca
-                                            Cola, Supplì</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>24,90</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
-                                            </i>Ritirato</span>
-                                        <p><b>Ricevuto </b>12:30</p>
-                                        <p><b>Preparato </b>12:45</p>
-                                        <p><b>Ritirato </b>12:50</p>
-                                    </div>
-                                </div>
-                                <!-- Bottone centrato in basso con stella bianca -->
-                                <div class="recensione-footer text-center">
-                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
-                                        style="font-size: 0.9rem; cursor: pointer;"
-                                        data-recensione="Ho scoperto un'app fantastica. Consigliata!" data-rating="5">
-                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
-                                    </button>
-                                </div>    
-                            </div>		
-					
-                                  
+                            <%if(ordini != null){ %>
+                            	<%for(Ordine o : ordini) {%>
+                            		<%if(o.getStato().name().equalsIgnoreCase("Ritirato")||o.getStato().name().equalsIgnoreCase("Rifiutato")||o.getStato().name().equalsIgnoreCase("Annullato")){ %>
+										<div class="card order-card flex-shrink-0 rounded-5">
+			                                <div
+			                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
+			                                    <div class="order-details">
+			                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#<%=o.getId() %></strong>
+			                                        </p>
+			                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i><%=o.getCliente().getNome()%> <%=o.getCliente().getCognome()%></p>
+			                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>
+			                                        
+			                                        <%for(ElementoOrdine eo : o.getElementi()){%>
+			                                        	<%=eo.getNome() %>
+			                                        <%}%>
+			                                        
+			                                        </p>
+			                                        <%
+			                                        Double totale=0.0;
+			                                        for(ElementoOrdine eo : o.getElementi()){
+			                                        	totale+=eo.getPrezzo();
+			                                        	}
+			                                        %>
+			                                        
+			                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i><%=totale %></p>
+			                                    </div>
+			                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
+			                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
+			                                            </i><%=o.getStato().name() %></span>
+			                                        <p><b>Ora </b><%=o.getData() %></p>
+			                                    </div>
+			                                </div>
+			                                <!-- Bottone centrato in basso con stella bianca -->
+			                                <div class="recensione-footer text-center">
+			                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
+			                                        style="font-size: 0.9rem; cursor: pointer;"
+			                                        data-recensione="Ho scoperto un'app fantastica. Consigliata!" data-rating="5">
+			                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
+			                                    </button>
+			                                </div>    
+			                            </div>
+			                        <%} %>
+                            	<%} %>
+                            <%} %>
                         
                         
                         </div>
-                        
-                        
-                        
                         
                         <button class="carousel-arrow right-arrow" id="scrollRight" aria-label="Scorri a destra">
                             <i class="fa-solid fa-chevron-right"></i>
@@ -155,26 +167,54 @@
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
                         <div class="order-carousel d-flex flex-nowrap overflow-auto gap-3" id="carouselPreparing">
-                            <!-- Card 1 - Da ritirare-->
-                            <div class="card order-card flex-shrink-0 rounded-5">
-                                <div
-                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
-                                    <div class="order-details">
-                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#10235</strong>
-                                        </p>
-                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i>Laura Bianchi</p>
-                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>Insalata Greca, Acqua
-                                            Naturale</p>
-                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>16,00</p>
-                                    </div>
-                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-                                        <span class="badge bg-warning mb-2"><i class="fa-solid fa-box-open me-1"></i>Da
-                                            ritirare</span>
-                                        <p><b>Ricevuto </b>13:10</p>
-                                        <p><b>Preparato </b>13:30</p>
-                                    </div>
-                                </div>
-                            </div>                         
+                           
+                            <!-- Card Da ritirare-->
+                            <%if(ordini != null){ %>
+                            	<%for(Ordine o : ordini) {%>
+                            		<%if(o.getStato().name().equalsIgnoreCase("Ricevuto")||o.getStato().name().equalsIgnoreCase("Confermato")){ %>
+										<div class="card order-card flex-shrink-0 rounded-5">
+			                                <div
+			                                    class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start">
+			                                    <div class="order-details">
+			                                        <p class="mb-2"><i class="fa-solid fa-receipt me-2"></i><strong>#<%=o.getId() %></strong>
+			                                        </p>
+			                                        <p class="mb-2"><i class="fa-solid fa-user me-2"></i><%=o.getCliente().getNome()%> <%=o.getCliente().getCognome()%></p>
+			                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>
+			                                        
+			                                        <%for(ElementoOrdine eo : o.getElementi()){%>
+			                                        	<%=eo.getNome() %>
+			                                        <%}%>
+			                                        
+			                                        </p>
+			                                        <%
+			                                        Double totale=0.0;
+			                                        for(ElementoOrdine eo : o.getElementi()){
+			                                        	totale+=eo.getPrezzo();
+			                                        	}
+			                                        %>
+			                                        
+			                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i><%=totale %></p>
+			                                    </div>
+			                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
+			                                        <span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
+			                                            </i><%=o.getStato().name() %></span>
+			                                        <p><b>Ora </b><%=o.getData() %></p>
+			                                    </div>
+			                                </div>
+			                                <!-- Bottone centrato in basso con stella bianca -->
+			                                <div class="recensione-footer text-center">
+			                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
+			                                        style="font-size: 0.9rem; cursor: pointer;"
+			                                        data-recensione="Ho scoperto un'app fantastica. Consigliata!" data-rating="5">
+			                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
+			                                    </button>
+			                                </div>    
+			                            </div>
+			                        <%} %>
+                            	<%} %>
+                            <%} %>
+                            
+                                                     
                         </div>
                         <button class="carousel-arrow right-arrow" id="scrollRight2" aria-label="Scorri a destra">
                             <i class="fa-solid fa-chevron-right"></i>

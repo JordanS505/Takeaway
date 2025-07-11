@@ -207,4 +207,20 @@ public class JDBCOrdineDao implements OrdineDao {
         }
         return lista;
     }
+    @Override
+    public List<Long> findAllIdOrdinebyIDRistoratore(long idUtente) throws Exception {
+        List<Long> lista = new ArrayList<>();
+        String sql = "SELECT id FROM Ordine WHERE id_ristorante=?";
+        try (Connection conn = dataSource.getConnection()){
+        	 PreparedStatement ps = conn.prepareStatement(sql);
+             ps.setLong(1, idUtente);
+             ResultSet rs = ps.executeQuery();
+             while (rs.next()) {
+                lista.add(
+                		rs.getLong("id")
+                		);
+            }
+        }
+        return lista;
+    }
 }
