@@ -12,7 +12,7 @@
     <style>
     	
     	body {
-    		font-family: 'Rubik', sans-serif;
+    		font-family: 'Raleway', sans-serif;
     	}
     	
 	    input[type="submit"] {
@@ -44,7 +44,7 @@
 	   		
 		        <div class="row mt-2 mb-2">
 		            <div class="col">
-		                <h1 class="mx-auto" style="max-width: 400px;">Accedi</h1>
+		                <h1 class="mx-auto fw-bold" style="max-width: 400px;">Accedi</h1>
 		            </div>
 		        </div>
 		

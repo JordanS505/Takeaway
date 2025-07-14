@@ -17,19 +17,22 @@ public class Ordine {
 	private Utente cliente;
 	
 	private List<ElementoOrdine> elementi; 
+	
+	private Recensione recensione;
 
 	public Ordine(LocalDateTime data, Stato stato) {
 		this.data = data;
 		this.stato = stato;
 	}	
 
-	public Ordine(Long id, LocalDateTime data, Stato stato, Utente ristoratore, Utente cliente, List<ElementoOrdine> elementi) {
+	public Ordine(Long id, LocalDateTime data, Stato stato, Utente ristoratore, Utente cliente, List<ElementoOrdine> elementi, Recensione recensione) {
 		this.id=id;
 		this.data = data;
 		this.stato = stato;
 		this.ristoratore = ristoratore;
 		this.cliente = cliente;
 		this.elementi = elementi;
+		this.recensione=recensione;
 	}
 
 	public Utente getRistoratore() {
@@ -78,6 +81,14 @@ public class Ordine {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Recensione getRecensione() {
+		return recensione;
+	}
+
+	public void setRecensione(Recensione recensione) {
+		this.recensione = recensione;
 	}
 	
 	

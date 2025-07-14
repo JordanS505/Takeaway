@@ -82,7 +82,7 @@ public class JDBCOrdineDao implements OrdineDao {
 		        			 );
 		        	 portate.add(portata);
 		         }
-		         o = new Ordine(id, data, stato, ristorante, cliente, portate);
+		         o = new Ordine(id, data, stato, ristorante, cliente, portate, null);
 			}
 		}
 		return o;
