@@ -19,12 +19,13 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
 
     @Override
     public void insert(ElementoOrdine entity) throws Exception {
-        String sql = "INSERT INTO Elemento_Ordine (nome, prezzo, quantita) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Elemento_Ordine (nome, prezzo, quantita,id_portata) VALUES (?, ?, ?,?)";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());
             ps.setDouble(2, entity.getPrezzo());
             ps.setInt(3, entity.getQuantita());
+            ps.setLong(4, entity.getIdPortata());
             ps.executeUpdate();
         }
     }
@@ -90,5 +91,30 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
         }
         return null;
     }
-
+    
+    @Override
+    public Long inserisciElementoOrdine(ElementoOrdine entity) throws Exception {
+        String sql = "INSERT INTO Elemento_Ordine (nome, prezzo, quantita,id_portata) VALUES (?, ?, ?,?)";
+        String query = "select id from Elemento_Ordine where nome=? and prezzo=? and quantita=? and id_portata=?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, entity.getNome());
+            ps.setDouble(2, entity.getPrezzo());
+            ps.setInt(3, entity.getQuantita());
+            ps.setLong(4, entity.getIdPortata());
+            ps.executeUpdate();
+            PreparedStatement ps2=conn.prepareStatement(query);
+            ps2.setString(1, entity.getNome());
+            ps2.setDouble(2, entity.getPrezzo());
+            ps2.setInt(3, entity.getQuantita());
+            ps2.setLong(4, entity.getIdPortata());
+            ResultSet rs = ps2.executeQuery();
+            if(rs.next()) {
+            	Long id = rs.getLong("id");
+            	return id;
+            }
+        }
+        return null;
+    }
+    
 }

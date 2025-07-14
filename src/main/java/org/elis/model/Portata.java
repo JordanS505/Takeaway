@@ -1,6 +1,8 @@
 package org.elis.model;
 
 public class Portata {
+	Long id;
+	
 	private String nome;
 	
 	private byte[] foto;
@@ -11,8 +13,15 @@ public class Portata {
 	
 	private Long IdCategoria;
 	
-	
-	
+	public Portata(Long id, String nome, byte[] foto, String descrizione, Double prezzo, Long idCategoria) {
+		this.id = id;
+		this.nome = nome;
+		this.foto = foto;
+		this.descrizione = descrizione;
+		this.prezzo = prezzo;
+		IdCategoria = idCategoria;
+	}
+
 	public Portata(String nome, byte[] foto, String descrizione, Double prezzo) {
 		this.nome = nome;
 		this.descrizione = descrizione;
@@ -76,4 +85,14 @@ public class Portata {
 		this.foto = foto;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	
+	
 }

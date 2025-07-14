@@ -5,13 +5,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.elis.dao.CategoriaDao;
+import org.elis.dao.DaoFactory;
+import org.elis.dao.ElementoOrdineDao;
+import org.elis.dao.OrdineDao;
+import org.elis.dao.PortataDao;
+import org.elis.dao.UtenteDao;
+import org.elis.enumerazioni.Stato;
 import org.elis.model.ElementoOrdine;
+import org.elis.model.Ordine;
+import org.elis.model.Portata;
+import org.elis.model.Utente;
 
 
 /**
@@ -22,14 +35,29 @@ public class CarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String jsonCarrello = request.getParameter("carrello");
 		System.out.println("✅ Ricevuto: " + jsonCarrello);
-
+		String indirizzo = request.getParameter("ristoranteScelto");
+		HttpSession session = request.getSession();
+		Utente u = (Utente)session.getAttribute("utenteLoggato");
+		Utente ristorante = null;
+		if(u==null) {
+			response.sendRedirect(request.getContextPath()+"/LoginServlet");
+			return;
+		}
+		UtenteDao udao = DaoFactory.getDaoFactory().getUtenteDao();
+		try {
+			ristorante = udao.findRistoranteByIndirizzo(indirizzo);
+			System.out.println(ristorante);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// Gson
 		Gson gson = new Gson();
 		Type listType = new TypeToken<List<ElementoOrdine>>() {}.getType();
@@ -38,7 +66,28 @@ public class CarrelloServlet extends HttpServlet {
 		for(ElementoOrdine i : carrello) {
 			System.out.println(i);
 		}
-		    
+		PortataDao pDao = DaoFactory.getDaoFactory().getPortataDao();
+		OrdineDao oDao = DaoFactory.getDaoFactory().getOrdineDao();
+		ElementoOrdineDao EODao= DaoFactory.getDaoFactory().getElementoOrdineDao();
+		Ordine ordine = new Ordine(LocalDateTime.now(), Stato.RICEVUTO,ristorante,u);
+		
+		try {
+			for(ElementoOrdine i : carrello) {
+				Portata p =pDao.findPortataByNome(i.getNome());
+				i.setIdPortata(p.getId());
+			}
+			
+			Long idOrdine = oDao.inserisciOrdine(ordine);
+			
+			for(ElementoOrdine i : carrello) {
+				Long idElementoOrdine=EODao.inserisciElementoOrdine(i);
+				oDao.inserisciOrdineElementoOrdine(idOrdine, idElementoOrdine);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

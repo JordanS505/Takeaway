@@ -8,11 +8,28 @@ public class ElementoOrdine {
 	Double prezzo;
 	@SerializedName("quantity")
 	int quantita;
+	
+	Long idPortata;
 
 	public ElementoOrdine(String nome, Double prezzo, int quantita) {
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.quantita = quantita;
+	}
+	
+	public ElementoOrdine(String nome, Double prezzo, int quantita, Long idPortata) {
+		this.nome = nome;
+		this.prezzo = prezzo;
+		this.quantita = quantita;
+		this.idPortata = idPortata;
+	}
+
+	public Long getIdPortata() {
+		return idPortata;
+	}
+
+	public void setIdPortata(Long idPortata) {
+		this.idPortata = idPortata;
 	}
 
 	public String getNome() {

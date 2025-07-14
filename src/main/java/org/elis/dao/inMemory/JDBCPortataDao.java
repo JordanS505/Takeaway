@@ -93,10 +93,12 @@ public class JDBCPortataDao implements PortataDao {
 			ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
+				Long id = rs.getLong("id");
 				String descrizione = rs.getString("descrizione");
 	            byte[] foto = rs.getBytes("foto");
 				Double prezzo = rs.getDouble("prezzo");
-				p = new Portata(nome, foto, descrizione, prezzo);
+				Long idCategoria = rs.getLong("id_categoria");
+				p = new Portata(id,nome, foto, descrizione, prezzo,idCategoria);
 			}
 		}
 		return p;

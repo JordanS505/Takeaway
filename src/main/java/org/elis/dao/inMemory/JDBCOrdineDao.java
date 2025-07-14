@@ -23,11 +23,13 @@ public class JDBCOrdineDao implements OrdineDao {
 
     @Override
     public void insert(Ordine ordine) throws Exception {
-        String sql = "INSERT INTO Ordine (data, stato) VALUES (?, ?)";
+        String sql = "INSERT INTO Ordine (data, stato,id_utente,id_ristorante) VALUES (?, ?, ?, ?)";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setTimestamp(1, Timestamp.valueOf(ordine.getData()));
             ps.setString(2, ordine.getStato().name());
+            ps.setLong(3, ordine.getCliente().getIdUtente());
+            ps.setLong(4, ordine.getRistoratore().getIdUtente());
             ps.executeUpdate();
         }
     }
@@ -223,4 +225,41 @@ public class JDBCOrdineDao implements OrdineDao {
         }
         return lista;
     }
+    
+    @Override
+    public Long inserisciOrdine(Ordine ordine) throws Exception {
+        String sql = "INSERT INTO Ordine (data, stato,id_utente,id_ristorante) VALUES (?, ?, ?, ?)";
+        String quey= "select id from ordine where data=? and stato=? and id_utente=? and id_ristorante=?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setTimestamp(1, Timestamp.valueOf(ordine.getData()));
+            ps.setString(2, ordine.getStato().name());
+            ps.setLong(3, ordine.getCliente().getIdUtente());
+            ps.setLong(4, ordine.getRistoratore().getIdUtente());
+            ps.executeUpdate();
+            PreparedStatement ps2 = conn.prepareStatement(quey);
+            ps2.setTimestamp(1, Timestamp.valueOf(ordine.getData()));
+            ps2.setString(2, ordine.getStato().name());
+            ps2.setLong(3, ordine.getCliente().getIdUtente());
+            ps2.setLong(4, ordine.getRistoratore().getIdUtente());
+            ResultSet rs = ps2.executeQuery();
+            if(rs.next()) {
+            	Long id = rs.getLong("id");
+            	return id;
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public void inserisciOrdineElementoOrdine(Long idOrdine,Long idElemento) throws Exception{
+    	String query = "INSERT INTO ordine_elemento_ordine(id_ordine,id_elemento_ordine) VALUES(?,?)";
+    	try(Connection conn = dataSource.getConnection()){
+    		PreparedStatement ps = conn.prepareStatement(query);
+    		ps.setLong(1, idOrdine);
+    		ps.setLong(2, idElemento);
+    		ps.executeQuery();
+    	}
+    }
+
 }

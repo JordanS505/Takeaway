@@ -1,6 +1,7 @@
 package org.elis.model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import org.elis.enumerazioni.Ruolo;
@@ -198,5 +199,17 @@ public class Utente {
 	public long getIdUtente() {
 		return idUtente;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Utente [idUtente=" + idUtente + ", username=" + username + ", password=" + password + ", nome=" + nome
+				+ ", cognome=" + cognome + ", email=" + email + ", dataDiNascita=" + dataDiNascita + ", nomeRistorante="
+				+ nomeRistorante + ", tipologie=" + tipologie + ", indirizzoRistorante=" + indirizzoRistorante
+				+ ", foto=" + Arrays.toString(foto) + ", votoM=" + votoM + ", ruolo=" + ruolo + "]";
+	}
+	
+	
 	
 }

@@ -245,6 +245,7 @@ header {
 				</div>
 				<form id="ordineForm" method="post"
 					action="<%=request.getContextPath()%>/CarrelloServlet">
+					<input type="hidden" name="ristoranteScelto" value="<%=u.getIndirizzoRistorante()%>">
 					<input type="hidden" name="carrello" id="carrelloInput" value="">
 					<button type="submit"
 						class="btn w-100 border-radius border-0 rounded-pill text-white mt-2"

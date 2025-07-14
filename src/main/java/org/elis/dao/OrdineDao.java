@@ -20,4 +20,7 @@ public interface OrdineDao extends GeneralDao<Ordine> {
 
 	List<Long> findAllIdOrdinebyIDRistoratore(long idUtente) throws Exception;
 	
+	public Long inserisciOrdine(Ordine ordine) throws Exception;
+	
+	 public void inserisciOrdineElementoOrdine(Long idOrdine,Long idElemento) throws Exception;
 }

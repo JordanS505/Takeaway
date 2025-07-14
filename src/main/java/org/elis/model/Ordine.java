@@ -25,6 +25,13 @@ public class Ordine {
 		this.stato = stato;
 	}	
 
+	public Ordine(LocalDateTime data, Stato stato, Utente ristoratore, Utente cliente) {
+		this.data = data;
+		this.stato = stato;
+		this.ristoratore = ristoratore;
+		this.cliente = cliente;
+	}
+
 	public Ordine(Long id, LocalDateTime data, Stato stato, Utente ristoratore, Utente cliente, List<ElementoOrdine> elementi, Recensione recensione) {
 		this.id=id;
 		this.data = data;
