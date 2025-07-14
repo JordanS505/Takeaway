@@ -38,5 +38,11 @@ public class ElementoOrdine {
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
 	}
+
+	@Override
+	public String toString() {
+		return "ElementoOrdine [nome=" + nome + ", prezzo=" + prezzo + ", quantita=" + quantita + "]";
+	}
+	
 	
 }

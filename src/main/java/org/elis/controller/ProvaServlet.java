@@ -6,39 +6,38 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.List;
-
-import org.elis.model.ElementoOrdine;
-
 
 /**
- * Servlet implementation class CarrelloServlet
+ * Servlet implementation class ProvaServlet
  */
-@WebServlet("/CarrelloServlet")
-public class CarrelloServlet extends HttpServlet {
+@WebServlet("/ProvaServlet")
+public class ProvaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ProvaServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String jsonCarrello = request.getParameter("carrello");
-		System.out.println("✅ Ricevuto: " + jsonCarrello);
-
-		// Gson
-		Gson gson = new Gson();
-		Type listType = new TypeToken<List<ElementoOrdine>>() {}.getType();
-		List<ElementoOrdine> carrello = gson.fromJson(jsonCarrello, listType);
-		
-		for(ElementoOrdine i : carrello) {
-			System.out.println(i);
-		}
-		    
+		 request.setCharacterEncoding("UTF-8");
+		    String carrello = request.getParameter("carrello");
+		    System.out.println("Parametro carrello ricevuto: " + carrello);
+		    response.getWriter().write("Ricevuto: " + carrello);
 	}
 
 }

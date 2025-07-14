@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cartTotalSpan = document.getElementById('cart-total');
 
     // Mappa per tenere traccia delle quantità per ogni portata
-    const cart = new Map();
+    let cart = new Map();
 
     // Funzione per aggiornare la visualizzazione del carrello e totale
     function updateCartDisplay() {
@@ -72,16 +72,26 @@ document.addEventListener('DOMContentLoaded', function () {
 	    });
 	});
 	
+	
 	document.getElementById('ordineForm').addEventListener('submit', function (e) {
-	    e.preventDefault();
+	   
 
-	    document.getElementById('carrelloInput').value = 'prova valore';
+	    const cartArray = [];
+	    cart.forEach((value, key) => {
+	        cartArray.push({
+	            nome: key,
+	            prezzo: value.prezzo,
+	            quantity: value.quantity
+	        });
+	    });
 
-	    console.log('valore carrelloInput:', document.getElementById('carrelloInput').value);
+	    const json = JSON.stringify(cartArray);
+	    console.log("✅ JSON inviato:", json);
 
-	    this.submit();
+	    document.getElementById('carrelloInput').value = json;
+
+	    
 	});
-
 
 	
 });

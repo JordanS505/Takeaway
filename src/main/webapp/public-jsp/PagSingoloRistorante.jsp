@@ -245,10 +245,10 @@ header {
 				</div>
 				<form id="ordineForm" method="post"
 					action="<%=request.getContextPath()%>/CarrelloServlet">
-					<input type="hidden" name="carrello" id="carrelloInput">
-					<input type="submit"
+					<input type="hidden" name="carrello" id="carrelloInput" value="">
+					<button type="submit"
 						class="btn w-100 border-radius border-0 rounded-pill text-white mt-2"
-						style="background-color: #c1280f">Ordina ora!
+						style="background-color: #c1280f">Ordina ora!</button>
 				</form>
 			</div>
 
@@ -360,7 +360,9 @@ header {
 	</div>
 
 	<script src='<%=request.getContextPath()%>/js/carrello.js'></script>
+	<script >
 	
+	</script>
 
 </body>
 </html>
