@@ -230,11 +230,11 @@
 			                                		<input class="bg-danger" type="submit" name="ModificaStato" value="Rifiutato">
 			                                		<input class="bg-success" type="submit" name="ModificaStato" value="Confermato">
 			                                	</form>     	
-			                                <%}else { %>  
+			                                <%}else if(o.getStato().name().equalsIgnoreCase("confermato")){ %>  
 			                                	<form action="AggiornamentoStatoServlet" method="POST">
 			                                		<input type="hidden" name="idOrdine" value="<%= o.getId()%>">
-			                                		<input class="badge bg-danger" type="submit" name="ModificaStato" value="Annullato">
-			                                		<input class="badge bg-success" type="submit" name="ModificaStato" value="Ritirato">
+			                                		<input class="bg-danger" type="submit" name="ModificaStato" value="Annullato">
+			                                		<input class="bg-success" type="submit" name="ModificaStato" value="Ritirato">
 			                                	</form>
 			                                <%} %>
 			                            </div>
