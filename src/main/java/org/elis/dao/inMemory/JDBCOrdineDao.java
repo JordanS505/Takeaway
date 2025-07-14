@@ -8,6 +8,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.elis.dao.OrdineDao;
+import org.elis.enumerazioni.Ruolo;
 import org.elis.enumerazioni.Stato;
 import org.elis.model.ElementoOrdine;
 import org.elis.model.Ordine;
@@ -263,5 +264,19 @@ public class JDBCOrdineDao implements OrdineDao {
     		ps.executeUpdate();
     	}
     }
+    
+    @Override
+    public void updateStatoOrdine(Long idOrdine, Stato stato) throws Exception {
+    	String query = "UPDATE ordine SET stato =  ?  WHERE id = ?";
+    	try(Connection conn = dataSource.getConnection()){
+    		PreparedStatement ps = conn.prepareStatement(query);
+    		ps.setString(1, stato.toString());
+    		ps.setLong(2, idOrdine);
+    		
+            ps.executeUpdate();
+    	}
+    }
+    
+    
 
 }

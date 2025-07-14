@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.elis.enumerazioni.Stato;
 import org.elis.model.Ordine;
-import org.elis.model.Utente;
 
 public interface OrdineDao extends GeneralDao<Ordine> {
 	Ordine selectByData(LocalDateTime data) throws Exception;
@@ -23,4 +22,6 @@ public interface OrdineDao extends GeneralDao<Ordine> {
 	public Long inserisciOrdine(Ordine ordine) throws Exception;
 	
 	 public void inserisciOrdineElementoOrdine(Long idOrdine,Long idElemento) throws Exception;
+
+	 void updateStatoOrdine(Long idOrdine, Stato stato) throws Exception;
 }

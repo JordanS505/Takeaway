@@ -1,3 +1,4 @@
+<%@page import="org.elis.enumerazioni.Stato"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="org.elis.model.*" %>
@@ -138,13 +139,34 @@
 			                                    </div>
 			                                </div>
 			                                <!-- Bottone centrato in basso con stella bianca -->
+			                                <% if(o.getStato().name().equalsIgnoreCase("ritirato")){ %>
 			                                <div class="recensione-footer text-center">
 			                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
 			                                        style="font-size: 0.9rem; cursor: pointer;"
-			                                        data-recensione="Ho scoperto un'app fantastica. Consigliata!" data-rating="5">
+			                                        data-recensione="
+			                                        <%if(o.getRecensione()!=null){ 
+			                                        	 o.getRecensione().getTesto();
+			                                        }else{%>
+			                                        	Ancora non recensito
+			                                        <%}%>"
+			                                        data-rating="
+			                                        <%if(o.getRecensione()!=null){ 
+			                                        	 o.getRecensione().getVoto();
+			                                        }else{%>
+			                                         /
+			                                        <%}%>">
 			                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
 			                                    </button>
 			                                </div>    
+			                                <%}else { %>
+			                                <div class="recensione-footer text-center">
+			                                	<div class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
+			                                        style="font-size: 0.9rem; cursor: pointer;"
+			                                        data-recensione="Nessuna recensione" data-rating="0">
+			                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
+			                                    </div>
+			                                </div>
+			                                <%} %>
 			                            </div>
 			                        <%} %>
                             	<%} %>
@@ -201,14 +223,20 @@
 			                                        <p><b>Ora </b><%=o.getData() %></p>
 			                                    </div>
 			                                </div>
-			                                <!-- Bottone centrato in basso con stella bianca -->
-			                                <div class="recensione-footer text-center">
-			                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
-			                                        style="font-size: 0.9rem; cursor: pointer;"
-			                                        data-recensione="Ho scoperto un'app fantastica. Consigliata!" data-rating="5">
-			                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
-			                                    </button>
-			                                </div>    
+			                                <!-- Tasti per modifica stato -->
+			                                <%if(o.getStato().name().equalsIgnoreCase("ricevuto")){ %>
+			                            		<form action="AggiornamentoStatoServlet" method="POST">
+			                                		<input type="hidden" name="idOrdine" value="<%=o.getId()%>">
+			                                		<input class="bg-danger" type="submit" name="ModificaStato" value="Rifiutato">
+			                                		<input class="bg-success" type="submit" name="ModificaStato" value="Confermato">
+			                                	</form>     	
+			                                <%}else { %>  
+			                                	<form action="AggiornamentoStatoServlet" method="POST">
+			                                		<input type="hidden" name="idOrdine" value="<%= o.getId()%>">
+			                                		<input class="badge bg-danger" type="submit" name="ModificaStato" value="Annullato">
+			                                		<input class="badge bg-success" type="submit" name="ModificaStato" value="Ritirato">
+			                                	</form>
+			                                <%} %>
 			                            </div>
 			                        <%} %>
                             	<%} %>
