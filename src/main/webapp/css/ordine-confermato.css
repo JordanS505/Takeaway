@@ -1,0 +1,275 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('../res/Raleway-VariableFont_wght.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+
+
+
+
+/* HEADER */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 20px;
+    background-color: #c1280f;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 32px;
+}
+
+.navmenu {
+    display: flex;
+    gap: 20px;
+}
+
+.navmenu a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navmenu a:hover {
+    color: #ff9b19;
+}
+
+.icone {
+    display: flex;
+    gap: 15px;
+}
+
+.icone i {
+    color: white;
+    font-size: 25px;
+}
+
+.hamburger {
+    display: none;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* Responsive mobile */
+@media screen and (max-width: 768px) {
+    .navmenu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: #c1280f;
+        /* Fisso anche su mobile */
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 20px;
+        display: none;
+        z-index: 999;
+    }
+
+    .navmenu.active {
+        display: flex;
+    }
+
+    .navmenu a {
+        padding: 10px 0;
+    }
+
+    .navmenu a:last-child {
+        padding-bottom: 20px;
+    }
+
+    .icone {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .logo {
+        padding-left: 30px;
+    }
+
+    .icone {
+        padding-right: 30px;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}
+
+
+
+
+
+h1,
+h2 {
+    font-family: 'Raleway';
+}
+
+h3,
+h4,
+h5,
+p {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500 !important;
+}
+
+#testopar {
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+
+
+.thank-you-box {
+    background-color:white;
+    color: #c1280f;
+    width: 70%;
+    height: 50%;
+    font-family: 'Raleway', sans-serif;
+}
+
+.thank-you-box h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    letter-spacing: 1.2px;
+}
+
+.thank-you-box p {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    color: black;
+}
+
+.btn-primary {
+    background-color: #c1280f;
+    border-color: #c1280f;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #ff9b19;
+    border-color: #ff9b19;
+    color: #6b0a00;
+}
+
+#contenuto {
+    margin-top:70px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../res/Frame\ 12_3.png');
+    background-size: cover;                     
+    background-position: center;                
+    background-repeat: no-repeat;    
+    position:relative;           
+}
+
+#contenuto::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* semi-trasparente */
+    z-index: 0;
+    
+}
+
+#contenuto > .thank-you-box {
+    position: relative;
+    z-index: 1;
+}
+
+
+  
+
+
+
+
+
+
+
+
+
+
+/* FOOTER */
+#logofooter {
+    width: 150px;
+    padding-bottom: 25px;
+}
+
+#sezionefooter {
+    background-color: #c1280f;
+    padding-top: 40px;
+    padding-bottom: 10px;
+}
+
+#instagram-icon,
+#facebook-icon,
+#x-icon,
+#linkedin-icon {
+    color: white;
+    font-size: 25px;
+}
+
+#fame {
+    color: white;
+}
+
+#sezionefooter a {
+    color: white !important;
+}
+
+#sezionefooter p {
+    color: white !important;
+}
+
+#sezionefooter h6 {
+    color: #ff9b19;
+}
+
+#sezionecopyright {
+    height: 70px;
+    background-color: #7f2d07;
+}
+
+#testocopyright {
+    color: white;
+}
+
+/* Centrare icone footer su dispositivi mobili */
+@media (max-width: 768px) {
+    .iconefooter {
+        justify-content: center !important;
+    }
+}
