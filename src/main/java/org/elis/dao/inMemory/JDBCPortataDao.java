@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.PortataDao;
 import org.elis.model.Portata;
 
@@ -13,9 +15,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCPortataDao implements PortataDao {
 
-	private MysqlDataSource dataSource;
+	private DataSource dataSource;
 
-	public JDBCPortataDao(MysqlDataSource datasource) {
+	public JDBCPortataDao(DataSource datasource) {
 		this.dataSource = datasource;
 	}
 	

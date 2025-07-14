@@ -43,7 +43,7 @@ public class CarrelloServlet extends HttpServlet {
 		System.out.println("✅ Ricevuto: " + jsonCarrello);
 		String indirizzo = request.getParameter("ristoranteScelto");
 		HttpSession session = request.getSession();
-		Utente u = (Utente)session.getAttribute("utenteLoggato");
+		Utente u = (Utente)session.getAttribute("UtenteLoggato");
 		Utente ristorante = null;
 		if(u==null) {
 			response.sendRedirect(request.getContextPath()+"/LoginServlet");
@@ -69,7 +69,7 @@ public class CarrelloServlet extends HttpServlet {
 		PortataDao pDao = DaoFactory.getDaoFactory().getPortataDao();
 		OrdineDao oDao = DaoFactory.getDaoFactory().getOrdineDao();
 		ElementoOrdineDao EODao= DaoFactory.getDaoFactory().getElementoOrdineDao();
-		Ordine ordine = new Ordine(LocalDateTime.now(), Stato.RICEVUTO,ristorante,u);
+		Ordine ordine = new Ordine(LocalDateTime.now(), Stato.RICEVUTO,ristorante,u,carrello);
 		
 		try {
 			for(ElementoOrdine i : carrello) {
@@ -78,7 +78,7 @@ public class CarrelloServlet extends HttpServlet {
 			}
 			
 			Long idOrdine = oDao.inserisciOrdine(ordine);
-			
+			System.out.println(idOrdine);
 			for(ElementoOrdine i : carrello) {
 				Long idElementoOrdine=EODao.inserisciElementoOrdine(i);
 				oDao.inserisciOrdineElementoOrdine(idOrdine, idElementoOrdine);

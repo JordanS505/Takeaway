@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.IngredienteDao;
 import org.elis.model.Ingrediente;
 
@@ -11,9 +13,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCIngredienteDao implements IngredienteDao {
 
-    private MysqlDataSource dataSource;
+    private DataSource dataSource;
 
-    public JDBCIngredienteDao(MysqlDataSource dataSource) {
+    public JDBCIngredienteDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

@@ -2,6 +2,10 @@ package org.elis.dao.inMemory;
 
 import java.io.DataInputStream;
 import java.io.InputStream;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
 
 import org.elis.dao.CategoriaDao;
 import org.elis.dao.DaoFactory;
@@ -25,16 +29,24 @@ public class JDBCDaoFactory extends DaoFactory{
 		return instance;
 	}
 
-private static MysqlDataSource dataSource;
+private static DataSource dataSource;
 	
-	public static MysqlDataSource getDataSource() {
+	public static DataSource getDataSource() {
 		if(dataSource==null) {
-			dataSource = new MysqlDataSource();
-			dataSource.setUser("root");
-			dataSource.setPassword(getPassword());
-			dataSource.setServerName("localhost");
-			dataSource.setDatabaseName("Takeaway");
+			MysqlDataSource md = new MysqlDataSource();
+			md.setUser("root");
+			md.setPassword(getPassword());
+			md.setServerName("localhost");
+			md.setDatabaseName("Takeaway");
+			try {
+				md.setServerTimezone("Europe/Rome");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			dataSource=md;
 		}
+		//DriverManager.getConnection("jdbc:mysql://localhost:3306/Takeaway?user=root&password="+getPassword()+"&serverTimezone=Europe/Rome");
 		
 		return dataSource;
 	}

@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.ElementoOrdineDao;
 import org.elis.model.ElementoOrdine;
 
@@ -11,9 +13,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCElementoOrdineDao implements ElementoOrdineDao {
 
-    private MysqlDataSource dataSource;
+    private DataSource dataSource;
 
-    public JDBCElementoOrdineDao(MysqlDataSource dataSource) {
+    public JDBCElementoOrdineDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -95,7 +97,8 @@ public class JDBCElementoOrdineDao implements ElementoOrdineDao {
     @Override
     public Long inserisciElementoOrdine(ElementoOrdine entity) throws Exception {
         String sql = "INSERT INTO Elemento_Ordine (nome, prezzo, quantita,id_portata) VALUES (?, ?, ?,?)";
-        String query = "select id from Elemento_Ordine where nome=? and prezzo=? and quantita=? and id_portata=?";
+        String query = "select id from Elemento_Ordine where nome=? and prezzo=? and quantita=? and id_portata=? "
+        		+ "ORDER BY id DESC LIMIT 1";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());

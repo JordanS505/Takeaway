@@ -7,19 +7,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.UtenteDao;
 import org.elis.enumerazioni.Ruolo;
 import org.elis.model.Tipologia;
 import org.elis.model.Utente;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCUtenteDao implements UtenteDao {
 
-	private MysqlDataSource dataSource;
+	private DataSource dataSource;
 	private JDBCTipologiaDao tipologiaDao;
 	
-	public JDBCUtenteDao(MysqlDataSource dataSource, JDBCTipologiaDao tipologiaDao) {
+	public JDBCUtenteDao(DataSource dataSource, JDBCTipologiaDao tipologiaDao) {
 		this.dataSource = dataSource;
 		this.tipologiaDao = tipologiaDao;
 	}

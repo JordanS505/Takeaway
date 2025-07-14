@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.TipologiaDao;
 import org.elis.model.Tipologia;
 
@@ -13,9 +15,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCTipologiaDao implements TipologiaDao {
 
-    private MysqlDataSource dataSource;
+    private DataSource dataSource;
 
-    public JDBCTipologiaDao(MysqlDataSource dataSource) {
+    public JDBCTipologiaDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

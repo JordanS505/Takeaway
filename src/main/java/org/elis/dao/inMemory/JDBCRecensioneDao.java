@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.RecensioneDao;
 import org.elis.model.Recensione;
 import org.elis.model.Utente;
@@ -14,9 +16,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCRecensioneDao implements RecensioneDao {
 
-	private MysqlDataSource dataSource;
+	private DataSource dataSource;
 
-	public JDBCRecensioneDao(MysqlDataSource datasource) {
+	public JDBCRecensioneDao(DataSource datasource) {
 		this.dataSource = datasource;
 	}
 	

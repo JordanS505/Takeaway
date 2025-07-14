@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.CategoriaDao;
 import org.elis.model.Categoria;
 
@@ -13,9 +15,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCCategoriaDao implements CategoriaDao {
 	
-	private MysqlDataSource dataSource;
+	private DataSource dataSource;
 	
-	public JDBCCategoriaDao(MysqlDataSource datasource) {
+	public JDBCCategoriaDao(DataSource datasource) {
 		this.dataSource = datasource;
 	}
 

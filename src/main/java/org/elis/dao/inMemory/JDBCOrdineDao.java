@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.elis.dao.OrdineDao;
 import org.elis.enumerazioni.Stato;
 import org.elis.model.ElementoOrdine;
@@ -15,9 +17,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 public class JDBCOrdineDao implements OrdineDao {
 
-    private MysqlDataSource dataSource;
+    private DataSource dataSource;
 
-    public JDBCOrdineDao(MysqlDataSource dataSource) {
+    public JDBCOrdineDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -53,7 +55,7 @@ public class JDBCOrdineDao implements OrdineDao {
 			     psRistorante.setLong(1, idRistorante);
 			     var psUtente = connection.prepareStatement("select * from utente where id=?");
 			     psUtente.setLong(1, idUtente);
-			     var psElementiOrdine = connection.prepareStatement("select * from elemento_ordine join ordine_elemento_ordine on id_ordine=elemento_ordine.id where id_ordine=?");
+			     var psElementiOrdine = connection.prepareStatement("select * from elemento_ordine join ordine_elemento_ordine on id_elemento_ordine=elemento_ordine.id where id_ordine=?");
 			     psElementiOrdine.setLong(1, id);
 			     Utente ristorante = null;
 			     Utente cliente = null;
@@ -229,19 +231,19 @@ public class JDBCOrdineDao implements OrdineDao {
     @Override
     public Long inserisciOrdine(Ordine ordine) throws Exception {
         String sql = "INSERT INTO Ordine (data, stato,id_utente,id_ristorante) VALUES (?, ?, ?, ?)";
-        String quey= "select id from ordine where data=? and stato=? and id_utente=? and id_ristorante=?";
+        String quey= "select id from ordine where stato=? and id_utente=? and id_ristorante=? order by data DESC limit 1";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setTimestamp(1, Timestamp.valueOf(ordine.getData()));
-            ps.setString(2, ordine.getStato().name());
+        	var ts = Timestamp.valueOf(ordine.getData());
+            ps.setTimestamp(1, ts);
+            ps.setString(2, ordine.getStato().toString());
             ps.setLong(3, ordine.getCliente().getIdUtente());
             ps.setLong(4, ordine.getRistoratore().getIdUtente());
             ps.executeUpdate();
             PreparedStatement ps2 = conn.prepareStatement(quey);
-            ps2.setTimestamp(1, Timestamp.valueOf(ordine.getData()));
-            ps2.setString(2, ordine.getStato().name());
-            ps2.setLong(3, ordine.getCliente().getIdUtente());
-            ps2.setLong(4, ordine.getRistoratore().getIdUtente());
+            ps2.setString(1, ordine.getStato().toString());
+            ps2.setLong(2, ordine.getCliente().getIdUtente());
+            ps2.setLong(3, ordine.getRistoratore().getIdUtente());
             ResultSet rs = ps2.executeQuery();
             if(rs.next()) {
             	Long id = rs.getLong("id");
@@ -258,7 +260,7 @@ public class JDBCOrdineDao implements OrdineDao {
     		PreparedStatement ps = conn.prepareStatement(query);
     		ps.setLong(1, idOrdine);
     		ps.setLong(2, idElemento);
-    		ps.executeQuery();
+    		ps.executeUpdate();
     	}
     }
 
