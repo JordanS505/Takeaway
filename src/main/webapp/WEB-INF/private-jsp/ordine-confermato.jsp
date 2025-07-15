@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@page import="org.elis.model.*" %>
     <!DOCTYPE html>
 <html lang="en">
 
 <head>
+	<%Utente u = (Utente)session.getAttribute("UtenteLoggato"); %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ordine Confermato</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/ordine-inviato.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/ordine-inviato.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -24,8 +25,8 @@
     <!-- Header -->
     <header id="scroll-header">
         <div class="logo">
-            <a href="#">
-                <img src="../res/logo-bianco.png" alt="Logo" />
+            <a href="<%=request.getContextPath()%>/HomePageUtenteServlet">
+                <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
             </a>
         </div>
         <div class="hamburger" id="hamburger">
@@ -37,11 +38,13 @@
             <a href="#" class="mobile-only">Iscrizione Utente</a>
         </nav>
         <div class="icone">
-            <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-            <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
+            <a href="<%=request.getContextPath() %>/ProfiloUtenteServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
+            <%if(u!=null){
+            	if(u.getRuolo().name().equalsIgnoreCase("ristoratore")){%>
+            <a href="<%=request.getContextPath() %>/PaginaProfiloRistoratoreServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
         </div>
     </header>
-
+	<%}} %>
     <!-- Contenuto principale -->
     <div class="container-fluid thank-you-container" id="contenuto">
         <div class="thank-you-box text-center p-5 rounded-4 shadow-lg">
@@ -50,7 +53,7 @@
                 Il tuo ordine è stato ricevuto con successo.
                 Ti contatteremo a breve con i dettagli.
             </p>
-            <a href="#" class="btn btn-success btn-lg px-4 py-2 fw-semibold rounded-pill">Torna alla Home</a>
+            <a href="<%=request.getContextPath() %>/HomePageUtenteServlet" class="btn btn-success btn-lg px-4 py-2 fw-semibold rounded-pill">Torna alla Home</a>
         </div>
     </div>
 
@@ -60,7 +63,7 @@
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Logo -->
-                    <img src="../res/logo_giallo.png" alt="" id="logofooter" />
+                    <img src="<%=request.getContextPath() %>/src/res/logo_giallo.png" alt="" id="logofooter" />
                     <p id="fame">
                         Entra in Enjoeat: che tu voglia ordinare o diventare partner,
                         sei nel posto giusto.

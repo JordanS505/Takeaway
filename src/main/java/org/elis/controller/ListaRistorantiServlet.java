@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class ListaRistorantiServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtenteDao uDao = DaoFactory.getDaoFactory().getUtenteDao();
-
+		
 		try {
 			List<Utente> ristoranti = uDao.findRistoratori(); // solo quelli con ruolo ristoratore
 			request.setAttribute("ristoranti", ristoranti);

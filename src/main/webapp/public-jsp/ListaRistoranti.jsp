@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<%Utente u = (Utente)session.getAttribute("UtenteLoggato"); %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
@@ -260,11 +261,19 @@
 
     <!-- Header -->
     <header id="scroll-header">
+    	<%if(u!=null){ %>
         <div class="logo">
-            <a href="#">
+            <a href="<%=request.getContextPath()%>/HomePageUtenteServlet">
                 <img src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="Logo" />
             </a>
         </div>
+        <%} else{%>
+        <div class="logo">
+            <a href="<%=request.getContextPath()%>/HomePageServlet">
+                <img src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="Logo" />
+            </a>
+        </div>
+        <%} %>
         <div class="hamburgerb" id="hamburgerb">
             <i class="fa-solid fa-bars"></i>
         </div>
@@ -274,9 +283,18 @@
             <a href="#" class="mobile-only">Iscrizione Utente</a>
         </nav>
         <div class="icone">
-            <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-            <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
-            <a href="#" title="Carrello"><i class="fa-solid fa-cart-shopping" id="cart-icon"></i></a>
+        	<%if(u!=null){ %>
+            <a href="<%=request.getContextPath() %>/ProfiloUtenteServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
+            <%}else{ %>
+             <a href="<%=request.getContextPath() %>/LoginServlet" title="Login"><i class="fa-solid fa-user" id="user-icon"></i></a>
+             <%} %>
+            <%if(u!=null)
+            if(u.getRuolo().name().equalsIgnoreCase("ristoratore")){ %>
+            <a href="<%=request.getContextPath() %>/PaginaProfiloRistoratoreServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
+            <%} %>
+            <%if(u!=null){ %>
+            <a href="<%=request.getContextPath() %>/LogoutServlet" title="Logout"><i class="fa-solid fa-right-from-bracket" id="cart-icon"></i></a>
+            <%} %>
         </div>
     </header>
 
