@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,21 +19,25 @@ import org.elis.model.Categoria;
 import org.elis.model.Portata;
 import org.elis.model.Utente;
 
-/**
- * Servlet implementation class AggiungiPortataServlet
- */
 @WebServlet("/AggiungiPortataServlet")
 public class AggiungiPortataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("UtenteLoggato")!=null)
+		request.getRequestDispatcher("/WEB-INF/private-jsp/AggiungiPortata.jsp").forward(request, response);
+		else response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		
+		Utente u = (Utente) session.getAttribute("UtenteLoggato");
+		
 		UtenteDao udao = DaoFactory.getDaoFactory().getUtenteDao();
 		CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
 		PortataDao pdao=DaoFactory.getDaoFactory().getPortataDao();
 		
 		try {
-			Utente u = udao.findRistoranteByIndirizzo("Via Roma 1");
-			List<Categoria> c = cdao.findCategorieByIndirizzoRistorante("Via Roma 1");
+			
+			List<Categoria> c = cdao.findCategorieByIndirizzoRistorante(u.getIndirizzoRistorante());
 			List<Long> idS = new ArrayList<Long>();
 			for(Categoria cat : c) {
 				idS.add(cat.getId());
@@ -41,15 +47,13 @@ public class AggiungiPortataServlet extends HttpServlet {
 			request.setAttribute("categorie", c);
 			request.setAttribute("listaPortate", p);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/private-jsp/AggiungiPortata.jsp").forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

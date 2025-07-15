@@ -366,10 +366,17 @@
 					    }
 					%>"
 					data-rating="<%= r.getVotoM() != null ? (r.getVotoM()) : 0 %>">
-				        <img src="<%= r.getFoto() %>"
+					<%if(r.getFoto()!=null){ %>
+				        <img src="data:image/png;base64, <%= r.getBase64ImageString() %>"
 				             alt="Foto ristorante"
 				             class="img-fluid flex-shrink-0 img-ristorante"
 				             style="object-fit: cover; height: 200px;">
+				    <%} else{%>
+				    	<img src=""
+				             alt="Foto ristorante"
+				             class="img-fluid flex-shrink-0 img-ristorante"
+				             style="object-fit: cover; height: 200px;">
+				    <%} %>
 				        <div class="card-body d-flex flex-column justify-content-center flex-grow-1">
 				            <h3 class="card-title fw-bold"><%= r.getNomeRistorante() %></h3>
 				            <%

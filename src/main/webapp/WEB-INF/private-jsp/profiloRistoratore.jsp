@@ -87,9 +87,9 @@
                 <p><i class="fa-solid fa-location-dot me-2"></i><%= u.getIndirizzoRistorante() %></p>
                 <p><i class="fa-solid fa-clock me-2"></i>10:00 - 22:30</p>
                 <p><i class="fa-solid fa-star me-2 text-warning"></i><%=u.getVotoM() %> / 5</p>
-                <button type="button" class="btn btn-success align-self-start mt-3 rounded-3">
+                <a href="<%=request.getContextPath()%>/AggiungiPortataServlet" class="btn btn-success align-self-start mt-3 rounded-3">
                     Modifica Menu
-                </button>
+                </a>
 
             </div>
 

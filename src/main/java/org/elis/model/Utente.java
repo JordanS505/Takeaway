@@ -1,7 +1,11 @@
 package org.elis.model;
 
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 import org.elis.enumerazioni.Ruolo;
@@ -27,7 +31,7 @@ public class Utente {
 	
 	private String indirizzoRistorante;
 
-	private byte[] foto;
+	private Blob foto;
 	
 	private Double votoM;
 	
@@ -48,7 +52,7 @@ public class Utente {
 	
 	
 	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email, LocalDate dataDiNascita,
-			String nomeRistorante, String indirizzoRistorante, byte[] foto, Ruolo ruolo) {
+			String nomeRistorante, String indirizzoRistorante, Blob foto, Ruolo ruolo) {
 	    this.idUtente = idUtente;
 		this.username = username;
 		this.password = password;
@@ -65,7 +69,7 @@ public class Utente {
 
 
 	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email,
-			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, List<Tipologia> tipologie, byte[] foto, Double votoM, Ruolo ruolo) {
+			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, List<Tipologia> tipologie, Blob foto, Double votoM) {
 	    this.idUtente = idUtente;
 		this.username = username;
 	    this.password = password;
@@ -171,14 +175,25 @@ public class Utente {
 		this.indirizzoRistorante = indirizzoRistorante;
 	}
 
-	public byte[] getFoto() {
+	public Blob getFoto() {
 		return foto;
 	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
+	
+	public String getBase64ImageString() {
+		byte[] bytes = null;
+		try {
+			bytes = foto.getBinaryStream().readAllBytes();
+		} catch (IOException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Base64.getEncoder().encodeToString(bytes);
 	}
 
+	public void setFoto(Blob foto) {
+		this.foto = foto;
+	}
+	
 	public Double getVotoM() {
 		return votoM;
 	}
@@ -207,7 +222,7 @@ public class Utente {
 		return "Utente [idUtente=" + idUtente + ", username=" + username + ", password=" + password + ", nome=" + nome
 				+ ", cognome=" + cognome + ", email=" + email + ", dataDiNascita=" + dataDiNascita + ", nomeRistorante="
 				+ nomeRistorante + ", tipologie=" + tipologie + ", indirizzoRistorante=" + indirizzoRistorante
-				+ ", foto=" + Arrays.toString(foto) + ", votoM=" + votoM + ", ruolo=" + ruolo + "]";
+				+ ", votoM=" + votoM + ", ruolo=" + ruolo + "]";
 	}
 	
 	

@@ -1,5 +1,6 @@
 package org.elis.dao.inMemory;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,7 +54,7 @@ public class JDBCUtenteDao implements UtenteDao {
 				ps.setString(7, entity.getRuolo().name());
 				ps.setString(8, entity.getNomeRistorante());
 				ps.setString(9, entity.getIndirizzoRistorante());
-				ps.setBytes(10, entity.getFoto());
+				ps.setBlob(10, entity.getFoto());
 				ps.setDouble(11, 0);
 				ps.executeUpdate();
 			}
@@ -204,10 +205,10 @@ public class JDBCUtenteDao implements UtenteDao {
 					String indirizzoRistorante = rs.getString("indirizzo");
 					long idRistoratore = rs.getLong("id");
 		            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
-		            byte[] foto = rs.getBytes("foto");
+		            Blob foto = rs.getBlob("foto");
 		            Double votoM = rs.getDouble("votom");
 					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,
-							dataDiNascita, nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
+							dataDiNascita, nomeRistorante, indirizzoRistorante, tipologie, foto, votoM);
 				}
 			}
 		}
@@ -326,7 +327,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
 	            String nomeRistorante = rs.getString("nome_ristorante");
 	            String indirizzoRistorante = rs.getString("indirizzo");
-	            byte[] foto = rs.getBytes("foto");
+	            Blob foto = rs.getBlob("foto");
 	            Double votoM = rs.getDouble("votom");
 
 	            long idRistoratore = rs.getLong("id");
@@ -334,7 +335,7 @@ public class JDBCUtenteDao implements UtenteDao {
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
 	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
+	                nomeRistorante, indirizzoRistorante, tipologie, foto, votoM);
 
 	            ristoratori.add(u);
 	        }
@@ -365,13 +366,13 @@ public class JDBCUtenteDao implements UtenteDao {
 	            String username = rs.getString("username");
 	            String password = rs.getString("password");
 	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
-	            byte[] foto = rs.getBytes("foto");
+	            Blob foto = rs.getBlob("foto");
 
 	            long idRistoratore = rs.getLong("id");
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
 	            ristorante = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM);
 	        }
 	    }
 
@@ -400,13 +401,13 @@ public class JDBCUtenteDao implements UtenteDao {
 	            String username = rs.getString("username");
 	            String password = rs.getString("password");
 	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
-	            byte[] foto = rs.getBytes("foto");
+	            Blob foto = rs.getBlob("foto");
 
 	            long idRistoratore = rs.getLong("id");
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 	            
 	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM);
 
 	            ristoranti.add(u);
 	        }
@@ -440,13 +441,13 @@ public class JDBCUtenteDao implements UtenteDao {
 	            String username = rs.getString("username");
 	            String password = rs.getString("password");
 	            LocalDate dataNascita = rs.getDate("data_nascita").toLocalDate();
-	            byte[] foto = rs.getBytes("foto");
+	            Blob foto = rs.getBlob("foto");
 
 	            long idRistoratore = rs.getLong("id");
 	            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
 
 	            Utente u = new Utente(idUtente, username, password, nome, cognome, email, dataNascita,
-	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM, Ruolo.RISTORATORE);
+	                    nomeRistorante, indirizzoRistorante, tipologie, foto, votoM);
 
 	            ristoranti.add(u);
 	        }

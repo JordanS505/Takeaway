@@ -19,10 +19,12 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.elis.dao.DaoFactory;
 import org.elis.dao.UtenteDao;
 import org.elis.enumerazioni.Ruolo;
+import org.elis.model.Tipologia;
 import org.elis.model.Utente;
 
 @WebServlet("/LogicaDiventaPartner")
@@ -44,40 +46,30 @@ public class LogicaDiventaPartner extends HttpServlet {
 		String nascita = request.getParameter("Nascita");
 		String nomeRistorante = request.getParameter("Nomeristorante");
 		String indirizzoRistorante = request.getParameter("Indirizzoristorante");
-		List<String> categorie = new ArrayList<>();
+//		List<String> categorie = new ArrayList<>();
 		String[] a = request.getParameterValues("Categorie");
 		Part file= request.getPart("fileFoto");
+		List<Tipologia> tipi= new ArrayList<>();
 		
+		
+		
+	//	PreparedStatement ps = null;
+	//	ps.setBlob(0, file.getInputStream());
 		byte[] arrayFile= file.getInputStream().readAllBytes();
-		
-		String imageString = Base64.getEncoder().encodeToString(arrayFile);
-		
-		PreparedStatement ps = null;
-		
-		try {
-			ps.setBlob(1, file.getInputStream());
-			
-			Blob blob = new SerialBlob(arrayFile);
-			
-			ps.setBlob(0, blob);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Blob b=null;
 		
 		if(a==null) {
 			response.sendRedirect(request.getContextPath()+"/DiventaPartnerServlet?error=categorieMancanti");
 			return;
 		}
 		for(String c : a) {
-			categorie.add(c);
+			Tipologia tipo = new Tipologia(c);
+			tipi.add(tipo);
 		}
 		
 		UtenteDao accessoRistorante = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
+			b = new SerialBlob(arrayFile);
 			if(accessoRistorante.findRistoranteByIndirizzo(indirizzoRistorante)!=null) {
 				response.sendRedirect(request.getContextPath()+ "/DiventaPartnerServlet?error=indirizzoEsistente");
 				return;
@@ -102,7 +94,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 			return;
 		}
 		
-		Utente u = new Utente(null, username, password, nomeRistorante, cognome, email, dataDiNascita,nomeRistorante,indirizzoRistorante,null, Ruolo.RISTORATORE);
+		Utente u = new Utente(null, username, password, nome, cognome, email, dataDiNascita, nomeRistorante,indirizzoRistorante, tipi, b, null);
 		UtenteDao accessoUtente = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
 			
