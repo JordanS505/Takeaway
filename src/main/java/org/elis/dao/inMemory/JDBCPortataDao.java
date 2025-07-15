@@ -1,5 +1,6 @@
 package org.elis.dao.inMemory;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ public class JDBCPortataDao implements PortataDao {
 			String query = "insert into Portata(nome,foto,descrizione,prezzo) values(?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, entity.getNome());
-			ps.setBytes(2, entity.getFoto());
+			ps.setBlob(2, entity.getFoto());
 			ps.setString(3, entity.getDescrizione());
 			ps.setDouble(4, entity.getPrezzo());
 			ps.executeUpdate();
@@ -44,7 +45,7 @@ public class JDBCPortataDao implements PortataDao {
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				String nome = rs.getString("nome");
-	            byte[] foto = rs.getBytes("foto");
+	            Blob foto = rs.getBlob("foto");
 				String descrizione = rs.getString("descrizione");
 				Double prezzo = rs.getDouble("prezzo");
 				p = new Portata(nome, foto, descrizione, prezzo);	
@@ -63,7 +64,7 @@ public class JDBCPortataDao implements PortataDao {
 			Portata p=null;
 			while(rs.next()) {
 				String nome = rs.getString("nome");
-	            byte[] foto = rs.getBytes("foto");
+	            Blob foto = rs.getBlob("foto");
 				String descrizione = rs.getString("descrizione");
 				Double prezzo= rs.getDouble("prezzo");
 				p= new Portata(nome, foto, descrizione, prezzo);
@@ -97,7 +98,7 @@ public class JDBCPortataDao implements PortataDao {
 			if(rs.next()) {
 				Long id = rs.getLong("id");
 				String descrizione = rs.getString("descrizione");
-	            byte[] foto = rs.getBytes("foto");
+	            Blob foto = rs.getBlob("foto");
 				Double prezzo = rs.getDouble("prezzo");
 				Long idCategoria = rs.getLong("id_categoria");
 				p = new Portata(id,nome, foto, descrizione, prezzo,idCategoria);
@@ -119,7 +120,7 @@ public class JDBCPortataDao implements PortataDao {
 					String nome = rs.getString("nome");
 					String descrizione = rs.getString("descrizione");
 					Double prezzo = rs.getDouble("prezzo");
-		            byte[] foto = rs.getBytes("foto");
+		            Blob foto = rs.getBlob("foto");
 					Portata p = new Portata(nome, foto, descrizione, prezzo,l);
 					portate.add(p);
 				}

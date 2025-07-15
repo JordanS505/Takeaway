@@ -7,6 +7,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EnjoEat</title>
+  <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/Homepage.css" />
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">

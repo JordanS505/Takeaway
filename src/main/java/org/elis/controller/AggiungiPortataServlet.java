@@ -25,31 +25,32 @@ public class AggiungiPortataServlet extends HttpServlet {
      
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("UtenteLoggato")!=null)
-		request.getRequestDispatcher("/WEB-INF/private-jsp/AggiungiPortata.jsp").forward(request, response);
-		else response.sendRedirect(request.getContextPath() + "/LoginServlet");
-		
-		Utente u = (Utente) session.getAttribute("UtenteLoggato");
-		
-		UtenteDao udao = DaoFactory.getDaoFactory().getUtenteDao();
-		CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
-		PortataDao pdao=DaoFactory.getDaoFactory().getPortataDao();
-		
-		try {
+		if(session.getAttribute("UtenteLoggato")!=null) {
 			
-			List<Categoria> c = cdao.findCategorieByIndirizzoRistorante(u.getIndirizzoRistorante());
-			List<Long> idS = new ArrayList<Long>();
-			for(Categoria cat : c) {
-				idS.add(cat.getId());
+			
+			Utente u = (Utente) session.getAttribute("UtenteLoggato");
+			
+			CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
+			PortataDao pdao=DaoFactory.getDaoFactory().getPortataDao();
+			
+			try {
+				
+				List<Categoria> c = cdao.findCategorieByIndirizzoRistorante(u.getIndirizzoRistorante());
+				List<Long> idS = new ArrayList<Long>();
+				for(Categoria cat : c) {
+					idS.add(cat.getId());
+				}
+				List<Portata> p = pdao.findPortataByCategoria(idS);
+				request.setAttribute("ristoranteScelto", u);
+				request.setAttribute("categorie", c);
+				request.setAttribute("listaPortate", p);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			List<Portata> p = pdao.findPortataByCategoria(idS);
-			request.setAttribute("ristoranteScelto", u);
-			request.setAttribute("categorie", c);
-			request.setAttribute("listaPortate", p);
-		} catch (Exception e) {
-			e.printStackTrace();
+			request.getRequestDispatcher("/WEB-INF/private-jsp/AggiungiPortata.jsp").forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 		}
-		
 		
 	}
 

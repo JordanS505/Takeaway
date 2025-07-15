@@ -1,11 +1,16 @@
 package org.elis.model;
 
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
+
 public class Portata {
 	Long id;
 	
 	private String nome;
 	
-	private byte[] foto;
+	private Blob foto;
 	
 	private String descrizione;
 	
@@ -13,7 +18,7 @@ public class Portata {
 	
 	private Long IdCategoria;
 	
-	public Portata(Long id, String nome, byte[] foto, String descrizione, Double prezzo, Long idCategoria) {
+	public Portata(Long id, String nome, Blob foto, String descrizione, Double prezzo, Long idCategoria) {
 		this.id = id;
 		this.nome = nome;
 		this.foto = foto;
@@ -22,7 +27,7 @@ public class Portata {
 		IdCategoria = idCategoria;
 	}
 
-	public Portata(String nome, byte[] foto, String descrizione, Double prezzo) {
+	public Portata(String nome, Blob foto, String descrizione, Double prezzo) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
@@ -32,7 +37,7 @@ public class Portata {
 		this.nome=nome;
 	}
 
-	public Portata(String nome, byte[] foto, String descrizione, Double prezzo, Long idCategoria) {
+	public Portata(String nome, Blob foto, String descrizione, Double prezzo, Long idCategoria) {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
@@ -77,11 +82,22 @@ public class Portata {
 		this.prezzo = prezzo;
 	}
 
-	public byte[] getFoto() {
+	public Blob getFoto() {
 		return foto;
 	}
-
-	public void setFoto(byte[] foto) {
+	
+	public String getBase64ImageString() {
+		byte[] bytes = null;
+		try {
+			bytes = foto.getBinaryStream().readAllBytes();
+		} catch (IOException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Base64.getEncoder().encodeToString(bytes);
+	}
+	
+	public void setFoto(Blob foto) {
 		this.foto = foto;
 	}
 
