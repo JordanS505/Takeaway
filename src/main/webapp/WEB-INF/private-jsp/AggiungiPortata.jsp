@@ -16,12 +16,13 @@ List<Portata> p = (List<Portata>) request.getAttribute("listaPortate");
 List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 %>
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aggiungi portata</title>
+    <title>Aggiungi portata 2</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/aggiungi-portata.css" />
+    <link rel="stylesheet" href="../css/aggiungi-portata-2.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
@@ -53,7 +54,6 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
         <div class="icone">
             <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
             <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
-            <a href="#" title="Carrello"><i class="fa-solid fa-cart-shopping" id="cart-icon"></i></a>
         </div>
     </header>
 
@@ -128,11 +128,11 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 
                 <!-- PIZZE CLASSICHE -->
 
-                <div class="card order-card flex-shrink-0 rounded-0">
+                <div class="card order-card flex-shrink-0 rounded-5">
                     <!-- PRIMA CARD -->
                     <div class="card-body vertical-align-fix">
-                        <div class="immagine-card">
-                            <img src="../res//cardpizza.jpg" alt="Foto Margherita">
+                        <div class="immagine-card rounded-start-5">
+                            <img src="../res//cardpizza.jpg" alt="Foto Margherita" class="rounded-start-5">
                         </div>
                         <div class="order-details">
                             <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i><strong>Margherita</strong></p>
@@ -140,16 +140,17 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                             <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>6,0</p>
                         </div>
                         <div class="order-meta">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger me-md-3">
                                 <i class="fa-solid fa-trash me-2"></i> Rimuovi
                             </button>
                         </div>
                     </div>
+                </div>
 
-                    <hr>
+                <div class="card order-card flex-shrink-0 rounded-5">
                     <div class="card-body vertical-align-fix">
                         <div class="immagine-card">
-                            <img src="../res//cardpizza.jpg" alt="Foto Margherita">
+                            <img src="../res//cardpizza.jpg" alt="Foto Margherita" class="rounded-start-5">
                         </div>
                         <div class="order-details">
                             <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i><strong>Marinara</strong></p>
@@ -157,7 +158,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                             <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>5,5</p>
                         </div>
                         <div class="order-meta">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger me-md-3">
                                 <i class="fa-solid fa-trash me-2"></i> Rimuovi
                             </button>
                         </div>
@@ -171,10 +172,10 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                     <i class="fa-solid fa-plus me-1"></i> Aggiungi Portata
                 </button>
 
-                <div class="card order-card flex-shrink-0 rounded-0">
+                <div class="card order-card flex-shrink-0 rounded-5">
                     <div class="card-body vertical-align-fix">
                         <div class="immagine-card">
-                            <img src="../res//cardpizza.jpg" alt="Foto Margherita">
+                            <img src="../res//cardpizza.jpg" alt="Foto Margherita" class="rounded-start-5">
                         </div>
                         <div class="order-details">
                             <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i><strong>Bufalina</strong></p>
@@ -183,15 +184,17 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                             <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>8,5</p>
                         </div>
                         <div class="order-meta">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger me-md-3">
                                 <i class="fa-solid fa-trash me-2"></i> Rimuovi
                             </button>
                         </div>
                     </div>
-                    <hr>
+                </div>
+
+                <div class="card order-card flex-shrink-0 rounded-5">
                     <div class="card-body vertical-align-fix">
                         <div class="immagine-card">
-                            <img src="../res//cardpizza.jpg" alt="Foto Margherita">
+                            <img src="../res//cardpizza.jpg" alt="Foto Margherita" class="rounded-start-5">
                         </div>
                         <div class="order-details">
                             <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i><strong>Tartufo</strong></p>
@@ -200,7 +203,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                             <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>9,0</p>
                         </div>
                         <div class="order-meta">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger me-md-3">
                                 <i class="fa-solid fa-trash me-2"></i> Rimuovi
                             </button>
                         </div>
@@ -214,10 +217,10 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                     <i class="fa-solid fa-plus me-1"></i> Aggiungi Bibita
                 </button>
 
-                <div class="card order-card flex-shrink-0 rounded-0">
+                <div class="card order-card flex-shrink-0 rounded-5">
                     <div class="card-body vertical-align-fix">
                         <div class="immagine-card">
-                            <img src="../res//cardpizza.jpg" alt="Foto Margherita">
+                            <img src="../res//cardpizza.jpg" alt="Foto Margherita" class="rounded-start-5">
                         </div>
                         <div class="order-details">
                             <p class="mb-2"><i class="fa-solid fa-bottle-droplet me-2"></i></i><strong>Acqua</strong>
@@ -225,15 +228,17 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                             <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>1,5</p>
                         </div>
                         <div class="order-meta">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger me-md-3">
                                 <i class="fa-solid fa-trash me-2"></i> Rimuovi
                             </button>
                         </div>
                     </div>
-                    <hr>
+                </div>
+
+                <div class="card order-card flex-shrink-0 rounded-5">
                     <div class="card-body vertical-align-fix">
                         <div class="immagine-card">
-                            <img src="../res//cardpizza.jpg" alt="Foto Margherita">
+                            <img src="../res//cardpizza.jpg" alt="Foto Margherita" class="rounded-start-5">
                         </div>
                         <div class="order-details">
                             <p class="mb-2"><i class="fa-solid fa-bottle-droplet me-2"></i></i><strong>Coca
@@ -242,7 +247,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                             <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i>2,5</p>
                         </div>
                         <div class="order-meta">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger me-md-3">
                                 <i class="fa-solid fa-trash me-2"></i> Rimuovi
                             </button>
                         </div>
@@ -333,7 +338,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/aggiungi-portata.js"></script>
+    <script src="../js/aggiungi-portata-2.js"></script>
 </body>
 
 </html>
