@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 @font-face {
     font-family: 'Raleway';
     src: url('../res/Raleway-VariableFont_wght.ttf') format('truetype');
@@ -185,7 +184,7 @@ h2 {
 
 #contenuto {
     margin-top:70px;
-    min-height: 100vh;
+    min-height: 55vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -210,13 +209,12 @@ h2 {
     z-index: 1;
 }
 
-
-  
-
-
-
-
-
+@media (max-width: 768px) {
+    .thank-you-box {
+        margin-top: 50px !important;
+        margin-bottom: 50px !important;
+    }
+}
 
 
 
