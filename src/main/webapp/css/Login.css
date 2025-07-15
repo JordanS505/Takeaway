@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('../res/Raleway-VariableFont_wght.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 20px;
+    background-color: #c1280f;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 32px;
+}
+
+.navmenu {
+    display: flex;
+    gap: 20px;
+}
+
+.navmenu a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navmenu a:hover {
+    color: #ff9b19;
+}
+
+.icone {
+    display: flex;
+    gap: 15px;
+}
+
+.icone i {
+    color: white;
+    font-size: 25px;
+}
+
+.hamburger {
+    display: none;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+
+.container-fluid {
+    padding-top: 75px;
+}
+
+/* Responsive mobile */
+@media screen and (max-width: 768px) {
+    .navmenu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: #c1280f;
+        /* Fisso anche su mobile */
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 20px;
+        display: none;
+        z-index: 999;
+    }
+
+    .navmenu.active {
+        display: flex;
+    }
+
+    .navmenu a {
+        padding: 10px 0;
+    }
+
+    .navmenu a:last-child {
+        padding-bottom: 20px;
+    }
+
+    .icone {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .logo {
+        padding-left: 30px;
+    }
+
+    .icone {
+        padding-right: 30px;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}
+
+
+#contenuto {
+	margin-top: 180px;
+	margin-bottom: 25px;
+}
+
+
+
+
+/* FOOTER */
+#logofooter {
+	width: 150px;
+	padding-bottom: 25px;
+}
+
+#sezionefooter {
+	background-color: #c1280f;
+	padding-top: 40px;
+	margin-top: 100px;
+	padding-bottom: 10px;
+}
+
+#instagram-icon, #facebook-icon, #x-icon, #linkedin-icon {
+	color: white;
+	font-size: 25px;
+}
+
+#fame {
+	color: white;
+}
+
+#sezionefooter a {
+	color: white !important;
+}
+
+#sezionefooter p {
+	color: white !important;
+}
+
+#sezionefooter h6 {
+	color: #ff9b19;
+}
+
+#sezionecopyright {
+	height: 70px;
+	background-color: #7f2d07;
+}
+
+#testocopyright {
+	color: white;
+}
+
+/* Centrare icone footer su dispositivi mobili */
+@media ( max-width : 768px) {
+	.iconefooter {
+		justify-content: center !important;
+	}
+}
