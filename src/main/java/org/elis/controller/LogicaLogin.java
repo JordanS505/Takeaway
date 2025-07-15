@@ -38,7 +38,7 @@ public class LogicaLogin extends HttpServlet {
 			if(uDao.login(email, password)) {
 				System.out.println("Autenticazione riuscita");
 				HttpSession session = request.getSession();
-				Utente log = uDao.findUtenteByEmail(email);
+				Utente log = uDao.findUtenteByLogin(email, password);
 				session.setAttribute("UtenteLoggato", log);
 				response.sendRedirect(request.getContextPath() + "/HomePageUtenteServlet");
 				

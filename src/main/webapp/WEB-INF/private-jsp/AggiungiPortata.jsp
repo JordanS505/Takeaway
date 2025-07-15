@@ -9,7 +9,7 @@
 <html lang="it">
 
 <%
-Utente u = (Utente) request.getAttribute("ristoranteScelto");
+Utente u = (Utente) session.getAttribute("UtenteLoggato");
 
 List<Portata> portate = (List<Portata>) request.getAttribute("listaPortate");
 
@@ -81,7 +81,17 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
             </form>
         </div>
 
-
+		<div id="popupCategoria">
+			<form id="formCategoria" action="<%=request.getContextPath() %>/LogicaAggiungiCategoria" method="POST">
+				<h3>Aggiungi Categoria</h3>
+				<input type="text" name="nomeCat" placeholder="Nome Categoria" required>
+				<input type="hidden" name="idRist" value="<%=u.getIdUtente()%>">
+				<div class="buttons">
+        			<button type="button" id="btnChiudiCategoria">Annulla</button>
+        			<input type="submit" value="Invia">
+        		</div>
+			</form>
+		</div>
 
 
         <div class="row gap-3 mt-5" id="sezione1">
@@ -89,7 +99,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 
             <!-- Colonna sinistra -->
             <div class="col-12 col-md-3 rounded-5 shadow" id="colonnasinistra">
-                <h2 class="mb-4"><%=u.getNomeRistorante() %></h2>
+                <h2 class="mb-4"><%=u.getNomeRistorante()%></h2>
                 <!-- Immagine profilo ristorante con icona modifica -->
                 <div class="ristorante-img-wrapper d-flex align-items-center gap-2 mb-4">
                     <img src="<%=u.getFoto() %>" alt="Foto Ristorante" class="img-fluid shadow-sm"
@@ -153,9 +163,8 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		        </div>
 		    <% } %>
 		    
-		    <button type="button" class="btn btn-success mb-3 mt-4 rounded-3">
-		    	<i class="fa-solid fa-plus me-1"></i>Aggiungi Categoria
-		    </button>
+		<button type="button" id="btnApriCategoria">Aggiungi Categoria</button>
+
 		</div>
 		</div>
 	</div>
@@ -217,6 +226,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/aggiungiPortata.js"></script>
+    
 </body>
 
 </html>

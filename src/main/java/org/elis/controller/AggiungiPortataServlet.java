@@ -41,7 +41,6 @@ public class AggiungiPortataServlet extends HttpServlet {
 					idS.add(cat.getId());
 				}
 				List<Portata> p = pdao.findPortataByCategoria(idS);
-				request.setAttribute("ristoranteScelto", u);
 				request.setAttribute("categorie", c);
 				request.setAttribute("listaPortate", p);
 			} catch (Exception e) {

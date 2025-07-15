@@ -8,9 +8,7 @@ public interface UtenteDao extends GeneralDao<Utente> {
 	public boolean login(String email,String password) throws Exception;
 	
 	public Utente findUtenteByUsername(String username) throws Exception;
-	
-	public Utente findUtenteByEmail(String Email) throws Exception;
-	
+		
 	public List<Utente> findUtentiByNome(String nome) throws Exception;
 	
 	public List<Utente> findUtentiByCognome(String cognome) throws Exception;
@@ -24,4 +22,8 @@ public interface UtenteDao extends GeneralDao<Utente> {
 	public void updatePasswordByEmail(String email,String password) throws Exception;
 
 	List<Utente> findRistoranteByTipologia(String ristoranteNome) throws Exception;
+
+	Utente findUtenteByLogin(String email, String password) throws Exception;
+
+	public Object findUtenteByEmail(String email) throws Exception;
 }

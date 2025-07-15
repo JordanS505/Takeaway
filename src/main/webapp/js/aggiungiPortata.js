@@ -12,6 +12,7 @@ document.querySelectorAll('.navmenu a').forEach(link => {
     });
 });
 
+
 // Popup Aggiungi Portata
 const popup = document.getElementById('popup');
 const btnChiudi = document.getElementById('closeBtn');
@@ -39,7 +40,6 @@ btnChiudi.addEventListener('click', () => {
 popup.addEventListener('click', (e) => {
     if (e.target === popup) {
         popup.style.display = 'none';
-		form.reset();
     }
 	
 
@@ -58,3 +58,29 @@ form.addEventListener('submit', (e) => {
 });
 
 
+// Popup aggiungi categoria (duplicato)
+const popupCategoria = document.getElementById('popupCategoria');
+const btnChiudiCategoria = document.getElementById('btnChiudiCategoria');
+const formCategoria = document.getElementById('formCategoria');
+
+btnChiudiCategoria.addEventListener('click', () => {
+    popupCategoria.style.display = 'none';
+});
+
+popupCategoria.addEventListener('click', (e) => {
+    if (e.target === popupCategoria) {
+        popupCategoria.style.display = 'none';
+        formCategoria.reset();
+    }
+});
+
+formCategoria.addEventListener('submit', (e) => {
+    // Azioni categoria
+    popupCategoria.style.display = 'none';
+    formCategoria.reset();
+});
+
+const btnApriCategoria = document.getElementById('btnApriCategoria');
+btnApriCategoria.addEventListener('click', () => {
+    popupCategoria.style.display = 'flex';
+});

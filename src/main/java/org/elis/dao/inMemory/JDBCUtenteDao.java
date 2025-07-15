@@ -177,21 +177,21 @@ public class JDBCUtenteDao implements UtenteDao {
 	}
 
 	@Override
-	public Utente findUtenteByEmail(String email) throws Exception {
+	public Utente findUtenteByLogin(String email, String password) throws Exception {
 		Utente u = null;
 		try(Connection connection = dataSource.getConnection()){
-			String query = "select * from Utente where email=?";
+			String query = "select * from Utente where email=? AND password=?";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, email);
+			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				long idUtente = rs.getLong("id");
+				Long idUtente = rs.getLong("id");
 				String nome = rs.getString("nome");
 				String cognome = rs.getString("cognome");
 				String emailUtente = rs.getString("email");
 				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
 				String username = rs.getString("username");
-				String password = rs.getString("password");
 				String ruolo = rs.getString("ruolo");
 
 				if(ruolo.equalsIgnoreCase("user")) {
@@ -203,8 +203,45 @@ public class JDBCUtenteDao implements UtenteDao {
 				if(ruolo.equalsIgnoreCase("ristoratore")) {
 					String nomeRistorante = rs.getString("nome_ristorante");
 					String indirizzoRistorante = rs.getString("indirizzo");
-					long idRistoratore = rs.getLong("id");
-		            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idRistoratore);
+		            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idUtente);
+		            Blob foto = rs.getBlob("foto");
+		            Double votoM = rs.getDouble("votom");
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,
+							dataDiNascita, nomeRistorante, indirizzoRistorante, tipologie, foto, votoM);
+				}
+			}
+		}
+		return u;
+	}
+	
+	@Override
+	public Utente findUtenteByEmail(String email) throws Exception {
+		Utente u = null;
+		try(Connection connection = dataSource.getConnection()){
+			String query = "select * from Utente where email=? AND password=?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				Long idUtente = rs.getLong("id");
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				String emailUtente = rs.getString("email");
+				String password = rs.getString("password");
+				LocalDate dataDiNascita= rs.getTimestamp("data_nascita").toLocalDateTime().toLocalDate();
+				String username = rs.getString("username");
+				String ruolo = rs.getString("ruolo");
+
+				if(ruolo.equalsIgnoreCase("user")) {
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.USER);
+				}
+				if(ruolo.equalsIgnoreCase("admin")) {
+					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,dataDiNascita, Ruolo.ADMIN);
+				}
+				if(ruolo.equalsIgnoreCase("ristoratore")) {
+					String nomeRistorante = rs.getString("nome_ristorante");
+					String indirizzoRistorante = rs.getString("indirizzo");
+		            List<Tipologia> tipologie = tipologiaDao.findTipologieByRistoratoreId(idUtente);
 		            Blob foto = rs.getBlob("foto");
 		            Double votoM = rs.getDouble("votom");
 					u = new Utente(idUtente, username, password, nome, cognome, emailUtente,

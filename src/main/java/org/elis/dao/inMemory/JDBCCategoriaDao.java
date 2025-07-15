@@ -11,8 +11,6 @@ import javax.sql.DataSource;
 import org.elis.dao.CategoriaDao;
 import org.elis.model.Categoria;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
-
 public class JDBCCategoriaDao implements CategoriaDao {
 	
 	private DataSource dataSource;
@@ -24,9 +22,10 @@ public class JDBCCategoriaDao implements CategoriaDao {
 	@Override
 	public void insert(Categoria entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
-			String query = "insert into Categoria(nome) values(?)";
+			String query = "insert into Categoria(nome, id_ristorante) values (?, ?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, entity.getNome());
+			ps.setLong(2,entity.getId_Ristorante());
 			ps.executeUpdate();
 		}
 	}
@@ -41,7 +40,8 @@ public class JDBCCategoriaDao implements CategoriaDao {
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				String nome = rs.getString("nome");
-				c = new Categoria(nome);
+				Long idRist = rs.getLong("id_ristorante");
+				c = new Categoria(id, nome, idRist);
 			}
 		}
 		return c;
@@ -54,10 +54,12 @@ public class JDBCCategoriaDao implements CategoriaDao {
 	        String query = "SELECT * FROM Categoria";
 	        PreparedStatement ps = connection.prepareStatement(query);
 	        ResultSet rs = ps.executeQuery();
-
+	        Categoria c = null;
 	        while (rs.next()) {
-				String nome = rs.getString("nome");
-	            Categoria c = new Categoria(nome);
+	        	Long id = rs.getLong("id");
+	        	String nome = rs.getString("nome");
+				Long idRist = rs.getLong("id_ristorante");
+				c = new Categoria(id, nome, idRist);
 	            categorie.add(c);
 	        }
 	    }
@@ -67,9 +69,9 @@ public class JDBCCategoriaDao implements CategoriaDao {
 	@Override
 	public void delete(Categoria entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
-			String query = "delete from Utente where nome=?";
+			String query = "delete from Utente where id=?";
 			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, entity.getNome());
+			ps.setLong(1, entity.getId());
 			ps.executeUpdate();
 		}
 
@@ -84,26 +86,26 @@ public class JDBCCategoriaDao implements CategoriaDao {
 			ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
-				nome = rs.getString("nome");
-				
-				c = new Categoria(nome);
+				Long id = rs.getLong("id");
+				Long idRist = rs.getLong("id_ristorante");
+				c = new Categoria(id, nome, idRist);
 			}
 			
 		}
 		return c;
 	}
 	@Override
-	public List<Categoria> findCategorieByIdRistorante(Long id) throws Exception{
+	public List<Categoria> findCategorieByIdRistorante(Long idRist) throws Exception{
 		List<Categoria> idCategorieRistorante = new ArrayList<>();
 		try(Connection connection = dataSource.getConnection()){
 			String query = "select * from Categoria where id_ristorante=?";
 			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setLong(1, id);
+			ps.setLong(1, idRist);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				String nome = rs.getString("nome");
-				Long idCategoria = rs.getLong("id");
-				Categoria c = new Categoria(nome, idCategoria);
+				Long id = rs.getLong("id");
+	        	String nome = rs.getString("nome");
+				Categoria c = new Categoria(id, nome, idRist);
 				idCategorieRistorante.add(c);
 			}
 		}
@@ -112,9 +114,9 @@ public class JDBCCategoriaDao implements CategoriaDao {
 	
 	public List<Categoria> findCategorieByIndirizzoRistorante(String indirizzo) throws Exception {
 	    List<Categoria> categorie = new ArrayList<>();
-	    String sql = "SELECT c.id, c.nome FROM Categoria c "
+	    String sql = "SELECT * FROM Categoria c "
 	               + "JOIN Utente u ON c.id_ristorante = u.id "
-	               + "WHERE u.indirizzo = ? AND u.ruolo = 'ristoratore'";
+	               + "WHERE u.indirizzo = ? AND u.ruolo = 'RISTORATORE'";
 
 	    try (Connection conn = dataSource.getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -123,7 +125,10 @@ public class JDBCCategoriaDao implements CategoriaDao {
 
 	        try (ResultSet rs = ps.executeQuery()) {
 	            while (rs.next()) {
-	                Categoria cat = new Categoria(rs.getString("nome"), rs.getLong("id"));
+	            	Long id = rs.getLong("id");
+		        	String nome = rs.getString("nome");
+					Long idRist = rs.getLong("id_ristorante");
+					Categoria cat = new Categoria(id, nome, idRist);
 	                categorie.add(cat);
 	            }
 	        }
