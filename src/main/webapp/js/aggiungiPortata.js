@@ -70,14 +70,12 @@ btnChiudiCategoria.addEventListener('click', () => {
 popupCategoria.addEventListener('click', (e) => {
     if (e.target === popupCategoria) {
         popupCategoria.style.display = 'none';
-        formCategoria.reset();
     }
 });
 
 formCategoria.addEventListener('submit', (e) => {
     // Azioni categoria
     popupCategoria.style.display = 'none';
-    formCategoria.reset();
 });
 
 const btnApriCategoria = document.getElementById('btnApriCategoria');

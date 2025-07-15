@@ -22,12 +22,13 @@ public class LogicaAggiungiCategoria extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
+	
+
+		String nome = request.getParameter("nomeCat");
+		Long idRist = Long.parseLong(request.getParameter("idRist"));
+		Categoria c = new Categoria(null, nome, idRist);
 		
 		try {
-			String nome = request.getParameter("nomeCat");
-			Long idRist = Long.parseLong(request.getParameter("idRist"));
-			Categoria c = new Categoria(null, nome, idRist);
-
 			cdao.insert(c);
 			
 		} catch (Exception e) {
