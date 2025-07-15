@@ -47,7 +47,7 @@ public class LogicaAggiungiPortata extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("/AggiungiPortataServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/AggiungiPortataServlet");
 	}
 
 }

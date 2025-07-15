@@ -3,6 +3,8 @@
 <%@ page import="java.util.List"%>
 <%@ page import="org.elis.model.*"%>
 <%@ page import="java.util.Locale"%>
+<%@ page import="java.util.Base64"%>
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -126,11 +128,12 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		
 		            <% for(Portata p : portate) { 
 		                if(p.getIdCategoria() == c.getId()) { %>
+		                
 		                <div class="card order-card flex-shrink-0 rounded-5 mb-3">
 		                    <div class="card-body vertical-align-fix d-flex">
 		                        <div class="immagine-card rounded-start-5 me-3">
 		                            <% if(p.getFoto()!=null) { %>
-		                                <img src="data:image/png;base64,<%= p.getBase64ImageString() %>" alt="Foto portata" class="rounded-start-5">
+		                                <img src="data:image/png;base64, <%= p.getBase64ImageString() %>" alt="Foto portata" class="rounded-start-5">
 		                            <% } else { %>
 		                                <img src="" alt="Foto portata" class="rounded-start-5">
 		                            <% } %>
@@ -139,9 +142,10 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		                            <p class="mb-2"><strong><%=p.getNome() %></strong></p>
 		                            <p class="mb-2"><%=p.getDescrizione() %></p>
 		                            <p class="mb-2">€ <%=p.getPrezzo() %></p>
-		                            <button type="button" class="btn btn-danger">
-		                                <i class="fa-solid fa-trash me-2"></i> Rimuovi
-		                            </button>
+									<form id="rimozione_<%=p.getId()%>" action="<%=request.getContextPath() %>/RimuoviPortata" method="post">
+										<input name="idPortata" type="hidden" value="<%=p.getId() %>">
+										<input type="submit" value="Rimuovi">
+									</form>
 		                        </div>
 		                    </div>
 		                </div>
@@ -209,21 +213,6 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
     <div class="d-flex align-items-center justify-content-center pt-3" id="sezionecopyright">
         <p id="testocopyright">Copyright © 2025 EnjoEat | All rights reserved.</p>
     </div>
-
-
-    <!-- Popup Conferma Elimina Portata-->
-    <div id="popupElimina">
-        <div class="popup-box">
-            <p>Sei sicuro di rimuovere la portata selezionata?</p>
-            <div class="popup-buttons">
-                <button id="cancelDelete" class="btn btn-secondary">Annulla</button>
-                <button id="confirmDelete" class="btn btn-danger">Elimina</button>
-            </div>
-        </div>
-    </div>
-    <!-- Messaggio conferma eliminazione -->
-    <div id="notificaEliminata">La tua portata è stata eliminata!</div>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -49,7 +49,9 @@ public class JDBCPortataDao implements PortataDao {
 	            Blob foto = rs.getBlob("foto");
 				String descrizione = rs.getString("descrizione");
 				Double prezzo = rs.getDouble("prezzo");
-				p = new Portata(nome, foto, descrizione, prezzo);	
+				Long l = rs.getLong("id_categoria");
+				p = new Portata(id, nome, foto, descrizione, prezzo, l);
+
 			}
 		}
 		return p;
@@ -78,11 +80,9 @@ public class JDBCPortataDao implements PortataDao {
 	@Override
 	public void delete(Portata entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
-			String query = "delete from Portata where nome=? AND descrizione=? AND prezzo=?";
+			String query = "delete from Portata where id=?";
 			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, entity.getNome());
-			ps.setString(2, entity.getDescrizione());
-			ps.setDouble(3, entity.getPrezzo());
+			ps.setLong(1, entity.getId());
 			ps.executeUpdate();
 		}
 
@@ -118,11 +118,12 @@ public class JDBCPortataDao implements PortataDao {
 				ps.setLong(1, l);
 				ResultSet rs = ps.executeQuery();
 				while(rs.next()) {
+					Long idPortata = rs.getLong("id");
 					String nome = rs.getString("nome");
 					String descrizione = rs.getString("descrizione");
 					Double prezzo = rs.getDouble("prezzo");
 		            Blob foto = rs.getBlob("foto");
-					Portata p = new Portata(nome, foto, descrizione, prezzo,l);
+					Portata p = new Portata(idPortata, nome, foto, descrizione, prezzo,l);
 					portate.add(p);
 				}
 			}

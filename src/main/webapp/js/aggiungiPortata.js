@@ -39,7 +39,10 @@ btnChiudi.addEventListener('click', () => {
 popup.addEventListener('click', (e) => {
     if (e.target === popup) {
         popup.style.display = 'none';
+		form.reset();
     }
+	
+
 });
 
 form.addEventListener('submit', (e) => {
@@ -54,30 +57,4 @@ form.addEventListener('submit', (e) => {
     
 });
 
-// Gestione popup di eliminazione portata
-const popupElimina = document.getElementById('popupElimina');
-const cancelDelete = document.getElementById('cancelDelete');
-const confirmDelete = document.getElementById('confirmDelete');
-const notifica = document.getElementById('notificaEliminata');
-let targetToDelete = null;
 
-document.querySelectorAll('.btn-danger').forEach(button => {
-    button.addEventListener('click', () => {
-        targetToDelete = button.closest('.card-body');
-        popupElimina.style.display = 'flex';
-    });
-});
-
-cancelDelete.onclick = () => {
-    popupElimina.style.display = 'none';
-};
-
-confirmDelete.onclick = () => {
-    if (targetToDelete) targetToDelete.remove();
-    popupElimina.style.display = 'none';
-    
-    notifica.style.display = 'block';
-    setTimeout(() => {
-        notifica.style.display = 'none';
-    }, 2000);
-};
