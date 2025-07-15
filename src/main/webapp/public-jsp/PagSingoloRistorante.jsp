@@ -265,9 +265,15 @@ header {
 
 						<div class="row d-flex">
 							<div class="col-3">
-								<img src="<%= portata.getFoto() %>" alt="Foto Portata"
+								<% if(portata.getFoto()!=null) { %>
+		                                <img src="data:image/png;base64,<%= portata.getBase64ImageString() %>" alt="Foto"
 									class="img-fluid flex-shrink-0 img-ristorante"
 									style="object-fit: cover; height: 200px;">
+		                            <% } else { %>
+		                                <img src="" alt="Foto Portata"
+									class="img-fluid flex-shrink-0 img-ristorante"
+									style="object-fit: cover; height: 200px;">
+		                            <% } %>
 							</div>
 							<div class="col-5">
 								<h5 class="mb-1"><%= portata.getNome() %></h5>

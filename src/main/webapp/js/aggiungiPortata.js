@@ -16,6 +16,8 @@ document.querySelectorAll('.navmenu a').forEach(link => {
 const popup = document.getElementById('popup');
 const btnChiudi = document.getElementById('closeBtn');
 const form = document.getElementById('form');
+const inputSezione = document.getElementById('inputSezione');
+
 
 // Aggiungo evento ai bottoni "Aggiungi Portata"
 document.querySelectorAll('.aggiungi-portata-btn').forEach(btn => {
@@ -25,6 +27,8 @@ document.querySelectorAll('.aggiungi-portata-btn').forEach(btn => {
         // (Facoltativo) salva la sezione in un dataset
         const sezione = btn.dataset.sezione;
         popup.dataset.sezione = sezione;
+		
+		if (inputSezione) inputSezione.value = sezione;
     });
 });
 
@@ -39,7 +43,7 @@ popup.addEventListener('click', (e) => {
 });
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    
 
     // (Facoltativo) Usa la sezione selezionata
     const sezione = popup.dataset.sezione || '';
@@ -47,7 +51,7 @@ form.addEventListener('submit', (e) => {
 
     // Nasconde popup e resetta il form
     popup.style.display = 'none';
-    form.reset();
+    
 });
 
 // Gestione popup di eliminazione portata

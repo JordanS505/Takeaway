@@ -65,15 +65,16 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
         </div>
         <!-- Popup Form -->
         <div id="popup">
-            <form id="form">
+            <form id="form" action="<%=request.getContextPath() %>/LogicaAggiungiPortata" enctype="multipart/form-data" method="POST">
                 <h3>Aggiungi portata</h3>
                 <input type="text" name="nome" placeholder="Nome" required>
                 <textarea name="descrizione" placeholder="Descrizione (ingredienti)" required></textarea>
                 <input type="number" name="prezzo" step="0.01" min="0" placeholder="Prezzo (€)" required>
-                <input type="file" name="foto" accept="image/*" required>
+                <input type="file" name="foto">
+                <input type="hidden" name="sezione" id="inputSezione">
                 <div class="buttons">
                     <button type="button" id="closeBtn">Annulla</button>
-                    <button type="submit">Salva</button>
+                    <input type="submit" value="Invia">
                 </div>
             </form>
         </div>
@@ -119,7 +120,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		        <div class="mb-5">
 		            <h2 class="mb-4"><%=c.getNome() %></h2>
 		            <button type="button" class="btn btn-success btn-sm aggiungi-portata-btn mb-3 rounded-3"
-		                data-sezione="categoria-<%=c.getId()%>">
+		                data-sezione="<%=c.getId()%>">
 		                <i class="fa-solid fa-plus me-1"></i> Aggiungi Portata
 		            </button>
 		
@@ -131,7 +132,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		                            <% if(p.getFoto()!=null) { %>
 		                                <img src="data:image/png;base64,<%= p.getBase64ImageString() %>" alt="Foto portata" class="rounded-start-5">
 		                            <% } else { %>
-		                                <img src="<%=request.getContextPath()%>/res/default-food.png" alt="Foto portata" class="tounded-start-5">
+		                                <img src="" alt="Foto portata" class="rounded-start-5">
 		                            <% } %>
 		                        </div>
 		                        <div class="order-details">

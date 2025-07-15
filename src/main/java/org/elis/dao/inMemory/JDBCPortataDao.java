@@ -25,12 +25,13 @@ public class JDBCPortataDao implements PortataDao {
 	@Override
 	public void insert(Portata entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
-			String query = "insert into Portata(nome,foto,descrizione,prezzo) values(?,?,?)";
+			String query = "insert into Portata(nome,foto,descrizione,prezzo,id_categoria) values(?,?,?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, entity.getNome());
 			ps.setBlob(2, entity.getFoto());
 			ps.setString(3, entity.getDescrizione());
 			ps.setDouble(4, entity.getPrezzo());
+			ps.setLong(5, entity.getIdCategoria());;
 			ps.executeUpdate();
 		}
 	}
