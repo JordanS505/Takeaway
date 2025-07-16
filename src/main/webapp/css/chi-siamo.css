@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-    font-family: 'Raleway';
-    src: url('../res/Raleway-VariableFont_wght.ttf') format('truetype');
-}
 
 body {
     margin: 0;
@@ -166,7 +162,6 @@ h2 {
     position: relative;
     /* necessario per posizionare il titolo */
     height: 50vh;
-    background-image: url('../res/pizzapexels.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

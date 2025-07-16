@@ -200,6 +200,43 @@ header {
 		top: auto !important;
 	}
 }
+.immChiSiamo {
+    position: relative;
+    /* necessario per posizionare il titolo */
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.immChiSiamo::before {
+    content: '';
+    position: absolute;
+    /* aggiungi posizione assoluta */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+/* Titolo centrato */
+.hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    z-index: 2;
+    /* sopra overlay */
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    margin: 0;
+    padding-top:25px;
+
+}
 </style>
 </head>
 <body>
@@ -210,6 +247,7 @@ header {
 				src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="Logo" />
 			</a>
 		</div>
+		
 		<div class="hamburger" id="hamburger">
 			<i class="fa-solid fa-bars"></i>
 		</div>
@@ -227,6 +265,15 @@ header {
 		</div>
 	</header>
 
+	<%if(u.getFoto()!=null){ %>
+		<div class="immChiSiamo" style="background-image: url('data:image/png;base64, <%= u.getBase64ImageString()%>');">
+        <h1 class="hero-title"><%=u.getNomeRistorante() %></h1>
+    </div>
+    	<%} else{%>
+    	<div class="immChiSiamo" style="background-image: url('');">
+        <h1 class="hero-title"><%=u.getNomeRistorante() %></h1>
+    </div>
+    <%} %>
 
 	<div class="container-fluid">
 		<div class="row gx-3 gap-4">

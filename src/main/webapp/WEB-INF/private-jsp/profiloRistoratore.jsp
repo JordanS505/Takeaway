@@ -225,16 +225,16 @@
 			                                </div>
 			                                <!-- Tasti per modifica stato -->
 			                                <%if(o.getStato().name().equalsIgnoreCase("ricevuto")){ %>
-			                            		<form action="AggiornamentoStatoServlet" method="POST">
+			                            		<form class="align-self-center mb-2" action="AggiornamentoStatoServlet" method="POST">
 			                                		<input type="hidden" name="idOrdine" value="<%=o.getId()%>">
-			                                		<input class="bg-danger" type="submit" name="ModificaStato" value="Rifiutato">
-			                                		<input class="bg-success" type="submit" name="ModificaStato" value="Confermato">
+			                                		<input class="btn btn-danger align-self-start mt-3 rounded-3" type="submit" name="ModificaStato" value="Rifiutato">
+			                                		<input class="btn btn-success align-self-start mt-3 rounded-3" type="submit" name="ModificaStato" value="Confermato">
 			                                	</form>     	
 			                                <%}else if(o.getStato().name().equalsIgnoreCase("confermato")){ %>  
-			                                	<form action="AggiornamentoStatoServlet" method="POST">
+			                                	<form class="align-self-center mb-2" action="AggiornamentoStatoServlet" method="POST">
 			                                		<input type="hidden" name="idOrdine" value="<%= o.getId()%>">
-			                                		<input class="bg-danger" type="submit" name="ModificaStato" value="Annullato">
-			                                		<input class="bg-success" type="submit" name="ModificaStato" value="Ritirato">
+			                                		<input class="btn btn-danger align-self-start mt-3 rounded-3" type="submit" name="ModificaStato" value="Annullato">
+			                                		<input class="btn btn-success align-self-start mt-3 rounded-3" type="submit" name="ModificaStato" value="Ritirato">
 			                                	</form>
 			                                <%} %>
 			                            </div>

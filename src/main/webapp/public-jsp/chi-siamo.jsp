@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi siamo</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/chi-siamo.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/chi-siamo.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
@@ -45,7 +45,7 @@
     </header>
 
     <!-- Immagine hero -->
-    <div class="immChiSiamo">
+    <div class="immChiSiamo" style="background-image: url('<%=request.getContextPath()%>/src/res/pizzapexels.jpg');">
         <h1 class="hero-title">Chi siamo</h1>
     </div>
 
@@ -54,7 +54,7 @@
         <div class="row align-items-center" id="contenuto">
             <!-- Imm -->
             <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                <img src="../res/team.jpg" alt="Team EnjoEat" class="img-fluid rounded shadow">
+                <img src="<%=request.getContextPath() %>/src/res/team.jpg" alt="Team EnjoEat" class="img-fluid rounded shadow">
             </div>
 
             <!-- Testo -->
@@ -134,7 +134,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/chi-siamo.js"></script>
+    <script src="<%=request.getContextPath() %>/js/chi-siamo.js"></script>
 </body>
 
 </html>
