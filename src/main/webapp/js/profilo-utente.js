@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const recensioneText = document.getElementById('contenutoRecensione');
     const ratingVisualizza = document.getElementById('ratingVisualizza'); // div per stelle visualizza
     const visualizzaBtns = document.querySelectorAll('.visualizzaRecensioneBtn');
-
+	const form = document.getElementById('form');
+	const inputSezione = document.getElementById('inputSezione');
     visualizzaBtns.forEach(button => {
         button.addEventListener('click', () => {
             const testoRecensione = button.dataset.recensione || 'Nessuna recensione disponibile.';
@@ -92,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const chiudiScriviBtn = document.getElementById('chiudiScriviPopup');
     const inviaBtn = document.getElementById('inviaRecensione');
     const inputRecensione = document.getElementById('inputRecensione');
-
+	
+	
     scriviBtns = document.querySelectorAll('.scriviRecensioneBtn');
 
     scriviBtns.forEach(btn => {
@@ -102,10 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
             inputRecensione.value = '';
             currentRating = 0;
             updateStars(0);
+					const sezione = btn.dataset.sezione;
+			        
+					
+					if (inputSezione) inputSezione.value = sezione;
         });
     });
 
-    chiudiScriviBtn.addEventListener('click', () => {
+    chiudiScriviBtn.addEventListener('click', (e) => {
+		e.preventDefault()
         scriviPopup.style.display = 'none';
         document.body.style.overflow = '';
     });
@@ -130,11 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         alert(`Recensione inviata:\nRating: ${currentRating} stelle\nTesto: ${recensione}`);
         scriviPopup.style.display = 'none';
-        document.body.style.overflow = '';
-        // resettare rating e testo per prossima recensione
-        currentRating = 0;
-        updateStars(0);
-        inputRecensione.value = '';
+        
     });
 
     // STELLE RATING POPUP SCRIVI RECENSIONE
@@ -154,6 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStars(currentRating);
         });
     });
+	
+	form.addEventListener('submit', (e) => {
+	    
+
+	    // (Facoltativo) Usa la sezione selezionata
+	    const sezione = popup.dataset.sezione || '';
+	    console.log("Nuova portata da aggiungere nella sezione:", sezione);
+	    
+	    
+	});
 
     function updateStars(rating) {
         ratingStars.forEach(star => {

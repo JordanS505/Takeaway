@@ -25,10 +25,12 @@ public class JDBCRecensioneDao implements RecensioneDao {
 	@Override
 	public void insert(Recensione entity) throws Exception {
 		try(Connection connection = dataSource.getConnection()){
-			String query = "insert into Recensione(voto,testo) values(?,?)";
+			String query = "insert into Recensione(voto,testo,id_ordine,id_utente) values(?,?,?,?)";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setDouble(1, entity.getVoto());
 			ps.setString(2, entity.getTesto());
+			ps.setLong(3, entity.getIdOrdine());
+			ps.setLong(4, entity.getIdUtente());
 			ps.executeUpdate();
 		}
 

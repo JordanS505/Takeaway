@@ -173,6 +173,7 @@
 			                                        <p><b>Ora </b><%=o.getData() %></p>
 			                                    </div>
 			                                </div>
+			                                <button class="scriviRecensioneBtn" data-sezione="<%=o.getId()%>">Scrivi recensione</button>
 			                            </div>
                             		<%} %>
                             	<%} %>
@@ -253,18 +254,30 @@
     <!-- Popup SCRIVI recensione-->
     <div id="scriviRecensionePopup" class="popup-overlay">
         <div class="popup-content">
+        <form id="form" method="POST" action="<%=request.getContextPath()%>/LogicaRecensione">
             <button id="chiudiScriviPopup">Chiudi</button>
             <h3>Scrivi la tua recensione</h3>
             <div id="ratingStars" class="rating-stars">
-                <i class="star fa-solid fa-star" data-value="1"></i>
-                <i class="star fa-solid fa-star" data-value="2"></i>
-                <i class="star fa-solid fa-star" data-value="3"></i>
-                <i class="star fa-solid fa-star" data-value="4"></i>
-                <i class="star fa-solid fa-star" data-value="5"></i>
+            	<input class="radioStella" type="radio" id="stella1" name="stella" value="1">
+                <label for="stella1"><i class="star fa-solid fa-star" data-value="1"></i></label>
+                
+                <input class="radioStella" type="radio"  id="stella2" name="stella" value="2">
+                <label for="stella2"><i class="star fa-solid fa-star" data-value="2"></i></label>
+                
+                <input class="radioStella" type="radio" id="stella3" name="stella" value="3">
+               <label for="stella3"><i class="star fa-solid fa-star" data-value="3"></i></label>
+                
+                <input class="radioStella" type="radio" id="stella4" name="stella" value="4">
+                <label for="stella4"><i class="star fa-solid fa-star" data-value="4"></i></label>
+                
+                <input class="radioStella" type="radio" id="stella5" name="stella" value="5">
+                <label for="stella5"><i class="star fa-solid fa-star" data-value="5"></i></label>
             </div>
-            <textarea id="inputRecensione" rows="4" placeholder="Scrivi qui la tua recensione..."
+            <textarea id="inputRecensione" name="Testo" rows="4" placeholder="Scrivi qui la tua recensione..."
                 class="rounded-3"></textarea>
-            <button id="inviaRecensione">Invia recensione</button>
+                <input type="hidden" name="sezione" id="inputSezione">
+            <button type="submit" id="inviaRecensione">Invia recensione</button>
+            </form>
         </div>
     </div>
 
