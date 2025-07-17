@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Base64;
 
 public class Portata {
-	Long id;
+	private Long id;
 	
 	private String nome;
 	

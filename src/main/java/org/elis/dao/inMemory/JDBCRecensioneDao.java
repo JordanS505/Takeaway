@@ -45,9 +45,10 @@ public class JDBCRecensioneDao implements RecensioneDao {
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
+				Long idUtente = rs.getLong("id_utente");
 				Double voto= rs.getDouble("voto");
 				String testo = rs.getString("testo");
-				r= new Recensione(voto,testo);
+				r= new Recensione(voto,testo, id, idUtente);
 			}
 		}
 		return r;
@@ -61,9 +62,11 @@ public class JDBCRecensioneDao implements RecensioneDao {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ResultSet rs =  ps.executeQuery();
 			while(rs.next()) {
+				Long id =rs.getLong("id");
+				Long idUtente = rs.getLong("id_utente");
 				Double voto= rs.getDouble("voto");
 				String testo = rs.getString("testo");
-				Recensione r= new Recensione(voto,testo);
+				Recensione r= new Recensione(voto,testo, id, idUtente);
 				recensioni.add(r);
 			}
 		}
@@ -91,8 +94,10 @@ public class JDBCRecensioneDao implements RecensioneDao {
 			ps.setDouble(1, voto);
 			ResultSet rs =  ps.executeQuery();
 			while(rs.next()) {
+				Long id =rs.getLong("id");
+				Long idUtente = rs.getLong("id_utente");
 				String testo = rs.getString("testo");
-				Recensione r= new Recensione(voto,testo);
+				Recensione r= new Recensione(voto,testo, id, idUtente);
 				recensioni.add(r);
 			}
 		}
