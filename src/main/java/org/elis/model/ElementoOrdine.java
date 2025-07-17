@@ -2,34 +2,48 @@ package org.elis.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class ElementoOrdine {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(nullable=false)
 	String nome;
-	
+	@Column(nullable=false)
 	Double prezzo;
+	@Column(nullable=false)
 	@SerializedName("quantity")
 	int quantita;
-	
-	Long idPortata;
+	@ManyToOne
+	private Portata portata;
 
 	public ElementoOrdine(String nome, Double prezzo, int quantita) {
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.quantita = quantita;
 	}
-	
-	public ElementoOrdine(String nome, Double prezzo, int quantita, Long idPortata) {
-		this.nome = nome;
-		this.prezzo = prezzo;
-		this.quantita = quantita;
-		this.idPortata = idPortata;
+
+	public Long getId() {
+		return id;
 	}
 
-	public Long getIdPortata() {
-		return idPortata;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setIdPortata(Long idPortata) {
-		this.idPortata = idPortata;
+	public Portata getPortata() {
+		return portata;
+	}
+
+	public void setPortata(Portata portata) {
+		this.portata = portata;
 	}
 
 	public String getNome() {

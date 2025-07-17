@@ -17,7 +17,7 @@ public class JPAUtenteDao implements UtenteDao{
 
 	@Override
 	public void insert(Utente entity) throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

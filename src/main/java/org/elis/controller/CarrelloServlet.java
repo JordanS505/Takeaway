@@ -74,7 +74,7 @@ public class CarrelloServlet extends HttpServlet {
 		try {
 			for(ElementoOrdine i : carrello) {
 				Portata p =pDao.findPortataByNome(i.getNome());
-				i.setIdPortata(p.getId());
+				i.setPortata(p);
 			}
 			
 			Long idOrdine = oDao.inserisciOrdine(ordine);
