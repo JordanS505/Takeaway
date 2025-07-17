@@ -52,11 +52,6 @@ public class JPADaoFactory extends DaoFactory{
 		return null;
 	}
 
-	@Override
-	public IngredienteDao getIngredienteDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public RecensioneDao getRecensioneDao() {

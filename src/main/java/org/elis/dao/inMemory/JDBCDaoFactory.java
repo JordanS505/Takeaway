@@ -10,7 +10,6 @@ import javax.sql.DataSource;
 import org.elis.dao.CategoriaDao;
 import org.elis.dao.DaoFactory;
 import org.elis.dao.ElementoOrdineDao;
-import org.elis.dao.IngredienteDao;
 import org.elis.dao.OrdineDao;
 import org.elis.dao.PortataDao;
 import org.elis.dao.RecensioneDao;
@@ -83,11 +82,6 @@ private static DataSource dataSource;
 	@Override
 	public ElementoOrdineDao getElementoOrdineDao() {
 		return new JDBCElementoOrdineDao(getDataSource());
-	}
-
-	@Override
-	public IngredienteDao getIngredienteDao() {
-		return new JDBCIngredienteDao(getDataSource());
 	}
 
 	@Override

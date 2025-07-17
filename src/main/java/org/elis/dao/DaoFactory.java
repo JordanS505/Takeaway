@@ -22,7 +22,6 @@ public abstract class DaoFactory {
 	public abstract PortataDao getPortataDao();
 	public abstract CategoriaDao getCategoriaDao();
 	public abstract ElementoOrdineDao getElementoOrdineDao();
-	public abstract IngredienteDao getIngredienteDao();
 	public abstract RecensioneDao getRecensioneDao();
 	public abstract TipologiaDao getTipologiaDao();
 	public abstract OrdineDao getOrdineDao();
