@@ -15,6 +15,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 @Entity
 public class Utente {
 	@Id
@@ -35,16 +39,33 @@ public class Utente {
 	
 	private String nomeRistorante;
 	
+	@ManyToMany
+	@JoinTable(
+			name = "Utente_Tipologia",
+			joinColumns = @JoinColumn(name="idUtente"),
+			inverseJoinColumns = @JoinColumn(name="id")
+			)
 	private List<Tipologia> tipologie;
 	@Column(unique=true)
 	private String indirizzoRistorante;
-
+	
 	private Blob foto;
 	
 	private Double votoM;
 	@Column(nullable=false)
 	private Ruolo ruolo;
 	
+	@OneToMany(mappedBy = "ristorante")
+	private List<Categoria> categorie;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Ordine> ordini;
+	
+	@OneToMany(mappedBy = "ristoratore")
+	private List<Ordine> ordiniRist;
+	
+	public Utente() {
+	}
 
 	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email,LocalDate dataDiNascita ,Ruolo ruolo) {
 		this.idUtente=idUtente;
@@ -109,7 +130,13 @@ public class Utente {
 		this.cognome=cognome;
 	}
 
+	public List<Categoria> getCategorie() {
+		return categorie;
+	}
 
+	public void setCategorie(List<Categoria> categorie) {
+		this.categorie = categorie;
+	}
 
 	public String getUsername() {
 		return username;
@@ -231,6 +258,28 @@ public class Utente {
 				+ ", cognome=" + cognome + ", email=" + email + ", dataDiNascita=" + dataDiNascita + ", nomeRistorante="
 				+ nomeRistorante + ", tipologie=" + tipologie + ", indirizzoRistorante=" + indirizzoRistorante
 				+ ", votoM=" + votoM + ", ruolo=" + ruolo + "]";
+	}
+
+
+
+	public void setIdUtente(Long idUtente) {
+		this.idUtente = idUtente;
+	}
+
+	public List<Ordine> getOrdini() {
+		return ordini;
+	}
+
+	public void setOrdini(List<Ordine> ordini) {
+		this.ordini = ordini;
+	}
+
+	public List<Ordine> getOrdiniRist() {
+		return ordiniRist;
+	}
+
+	public void setOrdiniRist(List<Ordine> ordiniRist) {
+		this.ordiniRist = ordiniRist;
 	}
 	
 	

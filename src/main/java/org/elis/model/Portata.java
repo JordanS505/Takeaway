@@ -4,27 +4,36 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+@Entity
 public class Portata {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	@Column(nullable = false)
 	private String nome;
 	
 	private Blob foto;
 	
+	@Column(nullable = false)
 	private String descrizione;
-	
+	@Column(nullable = false)
 	private Double prezzo;
+	@ManyToOne
+	private Categoria categoria;
 	
-	private Long IdCategoria;
+	@OneToMany(mappedBy = "portata")
+	private List<ElementoOrdine> elementiOrdine;
 	
-	public Portata(Long id, String nome, Blob foto, String descrizione, Double prezzo, Long idCategoria) {
-		this.id = id;
-		this.nome = nome;
-		this.foto = foto;
-		this.descrizione = descrizione;
-		this.prezzo = prezzo;
-		IdCategoria = idCategoria;
+	public Portata() {
 	}
 
 	public Portata(String nome, Blob foto, String descrizione, Double prezzo) {
@@ -37,26 +46,13 @@ public class Portata {
 		this.nome=nome;
 	}
 
-	public Portata(String nome, Blob foto, String descrizione, Double prezzo, Long idCategoria) {
-		this.nome = nome;
-		this.descrizione = descrizione;
-		this.prezzo = prezzo;
-		IdCategoria = idCategoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-
-
-	public Long getIdCategoria() {
-		return IdCategoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
-
-
-
-	public void setIdCategoria(Long idCategoria) {
-		IdCategoria = idCategoria;
-	}
-
-
 
 	public String getNome() {
 		return nome;

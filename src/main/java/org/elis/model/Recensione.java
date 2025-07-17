@@ -1,19 +1,28 @@
 package org.elis.model;
 
-public class Recensione {
-	private Double voto;
-	
-	private String testo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
-	private Long idOrdine;
+@Entity
+public class Recensione {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(nullable=false)
+	private Double voto;
+	private String testo;
 	
-	private Long idUtente;
+	@ManyToOne
+	private Utente utente;
+	@OneToOne(mappedBy = "recensione")
+	private Ordine ordine;
 	
-	public Recensione(Double voto, String testo,Long idOrdine,Long idUtente) {
-		this.voto = voto;
-		this.testo = testo;
-		this.idOrdine=idOrdine;
-		this.idUtente=idUtente;
+	public Recensione() {
 	}
 
 	public Double getVoto() {
@@ -32,21 +41,28 @@ public class Recensione {
 		this.testo = testo;
 	}
 
-	public Long getIdOrdine() {
-		return idOrdine;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdOrdine(Long idOrdine) {
-		this.idOrdine = idOrdine;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Long getIdUtente() {
-		return idUtente;
+	public Utente getUtente() {
+		return utente;
 	}
 
-	public void setIdUtente(Long idUtente) {
-		this.idUtente = idUtente;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
-	
-	
+
+	public Ordine getOrdine() {
+		return ordine;
+	}
+
+	public void setOrdine(Ordine ordine) {
+		this.ordine = ordine;
+	}
+
 }

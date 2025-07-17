@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 	<persistence-unit name="Takeaway">
+	<class>org.elis.model.Utente</class>
+	<class>org.elis.model.Tipologia</class>
+	<class>org.elis.model.Categoria</class>
+	<class>org.elis.model.ElementoOrdine</class>
+	<class>org.elis.model.Ordine</class>
+	<class>org.elis.model.Portata</class>
+	<class>org.elis.model.Recensione</class>
 	<properties>
-			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdb.Driver"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="hibernate.connection.user" value="root"/>
 			<property name="hibernate.connection.password" value="root"/>
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/takeaway"/>
-			<property name="jakarta.persistence.schema-generation.database.action" value="update"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/takeaway2"/>
+			<property name="jakarta.persistence.schema-generation.database.action" value="create-drop"/>
 		</properties>
 	</persistence-unit>
 </persistence>

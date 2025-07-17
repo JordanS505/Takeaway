@@ -12,8 +12,6 @@ public class FintoDB {
 
 	private List<ElementoOrdine> elementiOrdini = new ArrayList<>();
 
-	private List<Ingrediente> ingredienti = new ArrayList<>();
-
 	private List<Portata> portate= new ArrayList<>();
 
 	private List<Categoria> categorie= new ArrayList<>();

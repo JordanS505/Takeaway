@@ -5,20 +5,32 @@ import java.util.List;
 
 import org.elis.enumerazioni.Stato;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Ordine {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(nullable=false)
 	private LocalDateTime data;
-	
+	@Column(nullable=false)
 	private Stato stato;
 	
+	@ManyToOne
 	private Utente ristoratore;
-	
+	@ManyToOne
 	private Utente cliente;
-	
+	@ManyToMany
 	private List<ElementoOrdine> elementi; 
-	
+	@OneToOne
 	private Recensione recensione;
+
+	
+	
+	public Ordine() {
+	}
 
 	public Ordine(LocalDateTime data, Stato stato) {
 		this.data = data;

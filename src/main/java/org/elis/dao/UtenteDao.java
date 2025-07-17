@@ -21,9 +21,11 @@ public interface UtenteDao extends GeneralDao<Utente> {
 	
 	public void updatePasswordByEmail(String email,String password) throws Exception;
 
-	List<Utente> findRistoranteByTipologia(String ristoranteNome) throws Exception;
+	List<Utente> findRistorantiByTipologia(String tipologiaNome) throws Exception;
 
 	Utente findUtenteByLogin(String email, String password) throws Exception;
 
-	public Object findUtenteByEmail(String email) throws Exception;
+	public Utente findUtenteByEmail(String email) throws Exception;
+	
+	
 }

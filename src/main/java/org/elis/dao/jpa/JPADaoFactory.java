@@ -3,7 +3,6 @@ package org.elis.dao.jpa;
 import org.elis.dao.CategoriaDao;
 import org.elis.dao.DaoFactory;
 import org.elis.dao.ElementoOrdineDao;
-import org.elis.dao.IngredienteDao;
 import org.elis.dao.OrdineDao;
 import org.elis.dao.PortataDao;
 import org.elis.dao.RecensioneDao;
@@ -37,37 +36,37 @@ public class JPADaoFactory extends DaoFactory{
 	@Override
 	public PortataDao getPortataDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return new JPAPortataDao(emf);
 	}
 
 	@Override
 	public CategoriaDao getCategoriaDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return new JPACategoriaDao(emf);
 	}
 
 	@Override
 	public ElementoOrdineDao getElementoOrdineDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return new JPAElementoOrdineDao(emf);
 	}
 
 
 	@Override
 	public RecensioneDao getRecensioneDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return new JPARecensioneDao(emf);
 	}
 
 	@Override
 	public TipologiaDao getTipologiaDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return new JPATipologiaDao(emf);
 	}
 
 	@Override
 	public OrdineDao getOrdineDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return new JPAOrdineDao(emf);
 	}
 }

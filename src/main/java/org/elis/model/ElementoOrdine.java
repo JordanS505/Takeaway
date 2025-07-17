@@ -23,6 +23,9 @@ public class ElementoOrdine {
 	int quantita;
 	@ManyToOne
 	private Portata portata;
+	
+	public ElementoOrdine() {
+	}
 
 	public ElementoOrdine(String nome, Double prezzo, int quantita) {
 		this.nome = nome;

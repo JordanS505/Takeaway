@@ -1,18 +1,43 @@
 package org.elis.model;
 
+import java.util.List;
+
+import jakarta.persistence.*;
+
+@Entity
 public class Categoria {
-	private String nome;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Long id_Ristorante;
+	@Column(nullable = false)
+	private String nome;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_ristorante", nullable = false)
+	private Utente ristorante;
+	@OneToMany(mappedBy = "categoria")
+	private List<Portata> portate;
 	
 	
-	
-	public Categoria(Long id, String nome, Long id_Ristorante) {
-		this.nome = nome;
-		this.id = id;
-		this.id_Ristorante = id_Ristorante;
+	public Categoria() {
 	}
-	
+
+	public Utente getRistorante() {
+		return ristorante;
+	}
+
+	public void setRistorante(Utente ristorante) {
+		this.ristorante = ristorante;
+	}
+
+	public List<Portata> getPortate() {
+		return portate;
+	}
+
+	public void setPortate(List<Portata> portate) {
+		this.portate = portate;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -29,12 +54,6 @@ public class Categoria {
 		this.id = id;
 	}
 	
-	public Long getId_Ristorante() {
-		return id_Ristorante;
-	}
-	
-	public void setId_Ristorante(Long id_Ristorante) {
-		this.id_Ristorante = id_Ristorante;
-	}
+
 	
 }
