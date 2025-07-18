@@ -24,8 +24,8 @@ public class RimuoviPortata extends HttpServlet {
 		PortataDao pdao =DaoFactory.getDaoFactory().getPortataDao();
 		
 		try {
-			Portata p = pdao.selectById(id);
-			pdao.delete(p);
+			
+			pdao.delete(id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -45,12 +45,15 @@ public class JPAPortataDao implements PortataDao {
 	}
 
 	@Override
-	public void delete(Portata entity) throws Exception {
+	public void delete(Long id) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
-		et.begin();
-		em.remove(entity);
+		Query q = em.createQuery("DELETE FROM Portata p WHERE p.id = :id");
+	    q.setParameter("id", id);
+	    et.begin();
+        q.executeUpdate();
 		et.commit();
+
 	}
 
 	@Override
@@ -81,6 +84,12 @@ public class JPAPortataDao implements PortataDao {
 	public List<Portata> findPortateByNomeRistoranteOrdine(String nomeRistorante, long idOrdine) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void delete(Portata entity) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

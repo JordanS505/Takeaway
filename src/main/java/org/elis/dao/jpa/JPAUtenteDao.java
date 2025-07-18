@@ -110,7 +110,7 @@ public class JPAUtenteDao implements UtenteDao{
 	public List<Utente> findRistoratori() throws Exception {
 		EntityManager em = emf.createEntityManager();
 		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.ruolo = :ruolo");
-        q.setParameter("ruolo", Ruolo.RISTORATORE.toString());
+        q.setParameter("ruolo", Ruolo.RISTORATORE);
         
 		List<Utente> u = (List<Utente>) q.getResultList();
 		

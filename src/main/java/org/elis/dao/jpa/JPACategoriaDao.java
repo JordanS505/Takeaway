@@ -66,8 +66,8 @@ public class JPACategoriaDao implements CategoriaDao {
 	@Override
 	public List<Categoria> findCategorieByIndirizzoRistorante(String indirizzo) throws Exception {
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.indirizzo = :indirizzo");
-        q.setParameter("indirizo", indirizzo);
+		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.indirizzoRistorante = :indirizzo");
+        q.setParameter("indirizzo", indirizzo);
         
         Utente u = (Utente) q.getSingleResult();
         return u.getCategorie();

@@ -36,7 +36,7 @@ public class AggiungiPortataServlet extends HttpServlet {
 			
 			List<Portata> portate = new ArrayList<>();
 			try {
-				List<Categoria> categorie = u.getCategorie();
+				List<Categoria> categorie = cdao.findCategorieByIndirizzoRistorante(u.getIndirizzoRistorante());
 				request.setAttribute("categorie", categorie);			
 				List<Long> idCat = new ArrayList<>();
 				for(Categoria c: categorie) {
