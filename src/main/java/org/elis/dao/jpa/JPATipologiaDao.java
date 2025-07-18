@@ -64,7 +64,11 @@ private EntityManagerFactory emf;
 
 	@Override
 	public List<Tipologia> findTipologieByRistoratoreId(long idRistoratore) throws Exception {
-		return null;
+	    EntityManager em = emf.createEntityManager();
+	    Query q = em.createQuery("SELECT t FROM Tipologia t JOIN t.ristoranti r WHERE r.idUtente = :idRistoratore");
+	    q.setParameter("idRistoratore", idRistoratore);
+	    return q.getResultList();
+	   
 	}
 
 }

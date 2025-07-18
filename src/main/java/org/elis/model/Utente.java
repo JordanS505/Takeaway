@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.elis.enumerazioni.Ruolo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,13 +40,14 @@ public class Utente {
 	
 	private String nomeRistorante;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
-			name = "Utente_Tipologia",
-			joinColumns = @JoinColumn(name="idUtente"),
-			inverseJoinColumns = @JoinColumn(name="id")
-			)
+		    name = "Utente_Tipologia",
+		    joinColumns = @JoinColumn(name="idUtente"),
+		    inverseJoinColumns = @JoinColumn(name="id")
+		)
 	private List<Tipologia> tipologie;
+	
 	@Column(unique=true)
 	private String indirizzoRistorante;
 	
@@ -98,7 +100,7 @@ public class Utente {
 
 
 	public Utente(Long idUtente, String username, String password, String nome, String cognome, String email,
-			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, List<Tipologia> tipologie, Blob foto, Double votoM) {
+			LocalDate dataNascita, String nomeRistorante, String indirizzoRistorante, List<Tipologia> tipologie, List<Ordine> ordiniRist, Blob foto, Double votoM) {
 	    this.idUtente = idUtente;
 		this.username = username;
 	    this.password = password;
@@ -112,7 +114,7 @@ public class Utente {
 	    this.foto = foto;
 	    this.votoM = votoM;
 	    this.ruolo = Ruolo.RISTORATORE;
-
+	    this.ordiniRist=ordiniRist;
 	}
 
 

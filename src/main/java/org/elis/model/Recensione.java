@@ -24,6 +24,18 @@ public class Recensione {
 	
 	public Recensione() {
 	}
+	
+	
+	
+	public Recensione(Long id, Double voto, String testo, Utente utente, Ordine ordine) {
+		this.id = id;
+		this.voto = voto;
+		this.testo = testo;
+		this.utente = utente;
+		this.ordine = ordine;
+	}
+
+
 
 	public Double getVoto() {
 		return voto;

@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transaction;
 
 public class JPAUtenteDao implements UtenteDao{
@@ -116,21 +117,23 @@ public class JPAUtenteDao implements UtenteDao{
 		return u;
 	}
 
-	@Override
 	public Utente findRistoranteByIndirizzo(String indirizzo) throws Exception {
-		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.indirizzo = :indirizzo");
-        q.setParameter("indirizzo", indirizzo);
-        
-		Utente u = (Utente) q.getSingleResult();
-		
-		return u;
+	    EntityManager em = emf.createEntityManager();
+	    try {
+	        TypedQuery<Utente> q = em.createQuery(
+	            "SELECT u FROM Utente u WHERE u.indirizzoRistorante = :indirizzo", 
+	            Utente.class);
+	        q.setParameter("indirizzo", indirizzo);
+	        return q.getResultStream().findFirst().orElse(null); // Restituisce null se non trovato
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
 	public List<Utente> findRistoranteByNome(String ristorante) throws Exception {
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.nome_ristorante = :nome_ristorante");
+		Query q = em.createQuery("SELECT u FROM Utente u WHERE u.nomeRistorante = :nome_ristorante");
         q.setParameter("nome_ristorante", ristorante);
         
 		List<Utente> u = (List<Utente>) q.getResultList();

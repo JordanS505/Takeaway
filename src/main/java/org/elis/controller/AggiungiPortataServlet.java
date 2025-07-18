@@ -29,23 +29,28 @@ public class AggiungiPortataServlet extends HttpServlet {
 			
 			
 			Utente u = (Utente) session.getAttribute("UtenteLoggato");
-			
 			CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
 			PortataDao pdao=DaoFactory.getDaoFactory().getPortataDao();
+			UtenteDao udao = DaoFactory.getDaoFactory().getUtenteDao();
 			
+			
+			List<Portata> portate = new ArrayList<>();
 			try {
-				
-				List<Categoria> c = cdao.findCategorieByIndirizzoRistorante(u.getIndirizzoRistorante());
-				List<Long> idS = new ArrayList<Long>();
-				for(Categoria cat : c) {
-					idS.add(cat.getId());
+				List<Categoria> categorie = u.getCategorie();
+				request.setAttribute("categorie", categorie);			
+				List<Long> idCat = new ArrayList<>();
+				for(Categoria c: categorie) {
+					idCat.add(c.getId());
 				}
-				List<Portata> p = pdao.findPortataByCategoria(idS);
-				request.setAttribute("categorie", c);
-				request.setAttribute("listaPortate", p);
+				portate = pdao.findPortataByCategoria(idCat);
+				request.setAttribute("listaPortate", portate);
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			
+			
 			request.getRequestDispatcher("/WEB-INF/private-jsp/AggiungiPortata.jsp").forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");

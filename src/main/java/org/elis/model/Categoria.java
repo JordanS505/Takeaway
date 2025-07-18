@@ -21,6 +21,17 @@ public class Categoria {
 	
 	public Categoria() {
 	}
+	
+	
+
+	public Categoria(Long id, String nome, Utente ristorante, List<Portata> portate) {
+		this.id=id;
+		this.nome = nome;
+		this.ristorante = ristorante;
+		this.portate = portate;
+	}
+
+
 
 	public Utente getRistorante() {
 		return ristorante;

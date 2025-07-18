@@ -10,20 +10,16 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.sql.Blob;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 
 import org.elis.dao.DaoFactory;
 import org.elis.dao.UtenteDao;
-import org.elis.enumerazioni.Ruolo;
+import org.elis.model.Ordine;
 import org.elis.model.Tipologia;
 import org.elis.model.Utente;
 
@@ -50,7 +46,8 @@ public class LogicaDiventaPartner extends HttpServlet {
 		String[] a = request.getParameterValues("Categorie");
 		Part file= request.getPart("fileFoto");
 		List<Tipologia> tipi= new ArrayList<>();
-		
+		List<Ordine> ordini = new ArrayList<>();
+		List<Ordine> ordiniRist = new ArrayList<>();
 		
 		
 	//	PreparedStatement ps = null;
@@ -94,7 +91,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 			return;
 		}
 		
-		Utente u = new Utente(null, username, password, nome, cognome, email, dataDiNascita, nomeRistorante,indirizzoRistorante, tipi, b, null);
+		Utente u = new Utente(null, username, password, nome, cognome, email, dataDiNascita, nomeRistorante,indirizzoRistorante, tipi, ordiniRist, b, null);
 		UtenteDao accessoUtente = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
 			
@@ -105,6 +102,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
 	}
 	
 	private boolean controllaVuoto(String nome,String cognome,String username,String password,

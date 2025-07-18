@@ -76,6 +76,8 @@ public class LogicaRegistrazione extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
 	}
 	
 	private boolean controllaVuoto(String nome,String cognome,String username,String password, String confirmPassword,

@@ -128,6 +128,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
             </div>
 			
 			<div class="col-12 col-md-7 rounded-5 shadow" id="colonnadestra">
+			<%if (categorie!=null){ %>
 		    <% for(Categoria c : categorie){ %>
 		        <div class="mb-5">
 		            <h2 class="mb-4"><%=c.getNome() %></h2>
@@ -137,7 +138,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		            </button>
 		
 		            <% for(Portata p : portate) { 
-		                if(p.getIdCategoria() == c.getId()) { %>
+		                if(p.getCategoria().getId() == c.getId()) { %>
 		                
 		                <div class="card order-card flex-shrink-0 rounded-5 mb-3">
 		                    <div class="card-body vertical-align-fix d-flex">
@@ -161,7 +162,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		                </div>
 		            <% } } %>
 		        </div>
-		    <% } %>
+		    <% }} %>
 		    
 		<button type="button" id="btnApriCategoria">Aggiungi Categoria</button>
 

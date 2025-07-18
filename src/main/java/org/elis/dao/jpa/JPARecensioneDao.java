@@ -3,6 +3,7 @@ package org.elis.dao.jpa;
 import java.util.List;
 
 import org.elis.dao.RecensioneDao;
+import org.elis.model.Ordine;
 import org.elis.model.Recensione;
 import org.elis.model.Utente;
 
@@ -36,7 +37,7 @@ import jakarta.persistence.Query;
 	@Override
 	public List<Recensione> findAll() throws Exception {
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("select r from recensioni r");
+		Query q = em.createQuery("select r from Recensione r");
 		List<Recensione> recensioni = (List<Recensione>) q.getResultList();
 		return recensioni;
 	}
@@ -52,20 +53,20 @@ import jakarta.persistence.Query;
 
 	@Override
 	public List<Recensione> findRecensioniByVoto(Double voto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = emf.createEntityManager();
+	    Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.voto = :voto");
+	    q.setParameter("voto", voto);
+	    return (List<Recensione>) q.getResultList();
+	    
 	}
 
 	@Override
 	public List<Recensione> findRecensioniByUtente(Utente u) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = emf.createEntityManager();
+	    Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.utente = :utente");
+	    q.setParameter("utente", u);
+	    return (List<Recensione>) q.getResultList();
 	}
 
-	@Override
-	public List<Recensione> findRecensioniByOrdine() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -47,8 +47,7 @@ public class LogicaLogin extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/LoginServlet?error=autenticazione fallita");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response.sendRedirect(request.getContextPath() + "/LoginServlet?error=autenticazione fallita");
 		}
 	}
 

@@ -14,8 +14,10 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.elis.dao.CategoriaDao;
 import org.elis.dao.DaoFactory;
 import org.elis.dao.PortataDao;
+import org.elis.model.Categoria;
 import org.elis.model.Portata;
 
 @WebServlet("/LogicaAggiungiPortata")
@@ -29,18 +31,20 @@ public class LogicaAggiungiPortata extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PortataDao pdao = DaoFactory.getDaoFactory().getPortataDao();
+		CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
 		
 		String nome = request.getParameter("nome");
 		String desc = request.getParameter("descrizione");
 		Double prezzo = Double.parseDouble(request.getParameter("prezzo"));
-		Long id = Long.parseLong(request.getParameter("sezione"));
+		Long idCat = Long.parseLong(request.getParameter("sezione"));
 		Part file= request.getPart("foto");
 		byte[] arrayFile= file.getInputStream().readAllBytes();
 		Blob b=null;
 		
 		try {
 			b = new SerialBlob(arrayFile);
-			Portata portata = new Portata(null, nome, b, desc, prezzo, id);
+			Categoria categoria = cdao.selectById(idCat); 
+			Portata portata = new Portata(null, nome, b, desc, prezzo, categoria);
 			pdao.insert(portata);
 			
 		} catch (Exception e) {

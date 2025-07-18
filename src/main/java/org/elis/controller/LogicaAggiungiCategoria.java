@@ -5,12 +5,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.elis.dao.CategoriaDao;
 import org.elis.dao.DaoFactory;
+import org.elis.dao.UtenteDao;
+import org.elis.model.Portata;
 import org.elis.model.Categoria;
+import org.elis.model.Utente;
 
 @WebServlet("/LogicaAggiungiCategoria")
 public class LogicaAggiungiCategoria extends HttpServlet {
@@ -21,18 +27,20 @@ public class LogicaAggiungiCategoria extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
-	
-
-		String nome = request.getParameter("nomeCat");
-		Long idRist = Long.parseLong(request.getParameter("idRist"));
-		Categoria c = new Categoria(null, nome, idRist);
-		
-		try {
-			cdao.insert(c);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("UtenteLoggato")!=null) {
+			CategoriaDao cdao = DaoFactory.getDaoFactory().getCategoriaDao();
+			Utente u = (Utente)session.getAttribute("UtenteLoggato");
+			List<Portata> portate = new ArrayList<>();
+			String nome = request.getParameter("nomeCat");
+			try {
+				cdao.insert(new Categoria(null, nome, u, portate));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/AggiungiPortataServlet");

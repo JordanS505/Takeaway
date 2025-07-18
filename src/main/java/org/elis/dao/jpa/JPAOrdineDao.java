@@ -55,22 +55,40 @@ public class JPAOrdineDao implements OrdineDao{
 
 	@Override
 	public Ordine selectByData(LocalDateTime data) throws Exception {
-		return null;
+	    EntityManager em = emf.createEntityManager();
+	    Query q = em.createQuery("SELECT o FROM Ordine o WHERE o.data = :data");
+	    q.setParameter("data", data);
+	    List<Ordine> risultati = q.getResultList();
+	    return risultati.isEmpty() ? null : risultati.get(0);
 	}
 
 	@Override
 	public List<Ordine> findByStato(Stato stato) throws Exception {
-		return null;
+	    EntityManager em = emf.createEntityManager();
+	    Query q = em.createQuery("SELECT o FROM Ordine o WHERE o.stato = :stato");
+	    q.setParameter("stato", stato);
+	    return q.getResultList();
 	}
 
 	@Override
 	public List<Ordine> findByData(LocalDateTime data) throws Exception {
-		return null;
+	    EntityManager em = emf.createEntityManager();
+	    Query q = em.createQuery("SELECT o FROM Ordine o WHERE o.data = :data");
+	    q.setParameter("data", data);
+	    return q.getResultList();
 	}
+
 
 	@Override
 	public List<Ordine> findOrdinibyRistoratore(String nomeRist) throws Exception {
-		return null;
+	    EntityManager em = emf.createEntityManager();
+	    Query q = em.createQuery("""
+	        SELECT o FROM Ordine o 
+	        JOIN o.ristoratore r 
+	        WHERE r.nomeRistorante = :nomeRist
+	    """);
+	    q.setParameter("nomeRist", nomeRist);
+	    return q.getResultList();
 	}
 
 	@Override

@@ -10,7 +10,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import org.elis.dao.DaoFactory;
+import org.elis.dao.OrdineDao;
 import org.elis.dao.RecensioneDao;
+import org.elis.dao.UtenteDao;
+import org.elis.model.Ordine;
 import org.elis.model.Recensione;
 import org.elis.model.Utente;
 
@@ -30,14 +33,18 @@ public class LogicaRecensione extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RecensioneDao rDao = DaoFactory.getDaoFactory().getRecensioneDao();
+		OrdineDao odao = DaoFactory.getDaoFactory().getOrdineDao();
 		HttpSession session = request.getSession();
 		Utente u = (Utente)session.getAttribute("UtenteLoggato");
 		String testo = request.getParameter("Testo");
 		Double voto = Double.parseDouble(request.getParameter("stella"));
 		Long idOrdine = Long.parseLong(request.getParameter("sezione"));
-		Recensione recensione = new Recensione(voto, testo, idOrdine, u.getIdUtente());
 		
 		try {
+		Ordine ordine = odao.selectById(idOrdine);
+		Recensione recensione = new Recensione(null ,voto, testo, u, ordine);
+		
+		
 			rDao.insert(recensione);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
