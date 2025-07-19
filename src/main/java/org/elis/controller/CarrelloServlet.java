@@ -85,11 +85,11 @@ public class CarrelloServlet extends HttpServlet {
 			    elementoOrdineIds.add(idElementoOrdine);
 			}
 			
-			// Then save the Ordine
+			// salva Ordine
 			Ordine ordine = new Ordine(LocalDateTime.now(), Stato.RICEVUTO, ristorante, u, carrello);
 			Long idOrdine = oDao.inserisciOrdine(ordine);
 
-			// Then associate them
+			// associa
 			for(Long idElementoOrdine : elementoOrdineIds) {
 			    oDao.inserisciOrdineElementoOrdine(idOrdine, idElementoOrdine);
 			}
@@ -98,6 +98,9 @@ public class CarrelloServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		response.sendRedirect(request.getContextPath() + "/ConfermaOrdineServlet");	
+		
 	}
 
 }
