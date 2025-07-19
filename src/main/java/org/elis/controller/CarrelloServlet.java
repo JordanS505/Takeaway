@@ -9,12 +9,14 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.elis.dao.CategoriaDao;
 import org.elis.dao.DaoFactory;
 import org.elis.dao.ElementoOrdineDao;
 import org.elis.dao.OrdineDao;
@@ -52,36 +54,44 @@ public class CarrelloServlet extends HttpServlet {
 		UtenteDao udao = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
 			ristorante = udao.findRistoranteByIndirizzo(indirizzo);
-			System.out.println(ristorante);
+			System.out.println(ristorante.getIdUtente());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		// Gson
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+		        .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+		        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
+		        .create();
 		Type listType = new TypeToken<List<ElementoOrdine>>() {}.getType();
 		List<ElementoOrdine> carrello = gson.fromJson(jsonCarrello, listType);
 		
 		for(ElementoOrdine i : carrello) {
 			System.out.println(i);
+			
 		}
 		PortataDao pDao = DaoFactory.getDaoFactory().getPortataDao();
 		OrdineDao oDao = DaoFactory.getDaoFactory().getOrdineDao();
 		ElementoOrdineDao EODao= DaoFactory.getDaoFactory().getElementoOrdineDao();
-		Ordine ordine = new Ordine(LocalDateTime.now(), Stato.RICEVUTO,ristorante,u,carrello);
 		
 		try {
+			List<Long> elementoOrdineIds = new ArrayList<>();
 			for(ElementoOrdine i : carrello) {
 				Portata p =pDao.findPortataByNome(i.getNome());
 				i.setPortata(p);
+				Long idElementoOrdine = EODao.inserisciElementoOrdine(i);
+			    elementoOrdineIds.add(idElementoOrdine);
 			}
 			
+			// Then save the Ordine
+			Ordine ordine = new Ordine(LocalDateTime.now(), Stato.RICEVUTO, ristorante, u, carrello);
 			Long idOrdine = oDao.inserisciOrdine(ordine);
-			System.out.println(idOrdine);
-			for(ElementoOrdine i : carrello) {
-				Long idElementoOrdine=EODao.inserisciElementoOrdine(i);
-				oDao.inserisciOrdineElementoOrdine(idOrdine, idElementoOrdine);
+
+			// Then associate them
+			for(Long idElementoOrdine : elementoOrdineIds) {
+			    oDao.inserisciOrdineElementoOrdine(idOrdine, idElementoOrdine);
 			}
 			
 		} catch (Exception e) {

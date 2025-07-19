@@ -1,5 +1,7 @@
 package org.elis.model;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 import jakarta.persistence.Column;
@@ -7,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -23,6 +26,8 @@ public class ElementoOrdine {
 	int quantita;
 	@ManyToOne
 	private Portata portata;
+	@ManyToMany(mappedBy = "elementi")
+	private List<Ordine> ordini;
 	
 	public ElementoOrdine() {
 	}

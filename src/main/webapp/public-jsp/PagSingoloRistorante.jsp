@@ -305,7 +305,7 @@ header {
 					<% for (Categoria cat : categorie) { %>
 					<h3 class="fw-bold mt-4 mb-3"><%= cat.getNome() %></h3>
 					<% for (Portata portata : p) {
-			                if (portata.getIdCategoria().equals(cat.getId())) {
+			                if (portata.getCategoria().getId()==cat.getId()) {
 			                    String prezzo = String.format("%.2f", portata.getPrezzo());
 			            %>
 					<div class="card mb-3 p-3 border-0 shadow rounded-5">

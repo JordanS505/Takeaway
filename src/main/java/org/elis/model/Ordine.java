@@ -23,8 +23,13 @@ public class Ordine {
 	@ManyToOne
 	private Utente cliente;
 	@ManyToMany
+	@JoinTable(
+			name = "Ordine_elementoOrdine",
+	        joinColumns = @JoinColumn(name = "ordine_id"), // FK a Ordine
+	        inverseJoinColumns = @JoinColumn(name = "elemento_id") // FK a ElementoOrdine
+	    )
 	private List<ElementoOrdine> elementi; 
-	@OneToOne
+	@OneToOne(mappedBy = "ordine")
 	private Recensione recensione;
 
 	
@@ -107,9 +112,11 @@ public class Ordine {
 		return recensione;
 	}
 
-	public void setRecensione(Recensione recensione) {
-		this.recensione = recensione;
+	public void setRecensioni(Recensione recensioni) {
+		this.recensione = recensioni;
 	}
+
+	
 	
 	
 }

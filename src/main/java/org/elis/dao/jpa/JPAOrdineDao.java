@@ -143,7 +143,7 @@ public class JPAOrdineDao implements OrdineDao{
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		Query q = em.createQuery("UPDATE Ordine o SET o.stato =:stato WHERE o.id =:id");
-		q.setParameter("stato", stato.toString());
+		q.setParameter("stato", stato);
 		q.setParameter("id", idOrdine);
 		et.begin();
 		q.executeUpdate();
