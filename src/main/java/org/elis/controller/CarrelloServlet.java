@@ -77,22 +77,22 @@ public class CarrelloServlet extends HttpServlet {
 		ElementoOrdineDao EODao= DaoFactory.getDaoFactory().getElementoOrdineDao();
 		
 		try {
-			List<Long> elementoOrdineIds = new ArrayList<>();
-			for(ElementoOrdine i : carrello) {
-				Portata p =pDao.findPortataByNome(i.getNome());
-				i.setPortata(p);
-				Long idElementoOrdine = EODao.inserisciElementoOrdine(i);
-			    elementoOrdineIds.add(idElementoOrdine);
-			}
+			
 			
 			// salva Ordine
 			Ordine ordine = new Ordine(LocalDateTime.now(), Stato.RICEVUTO, ristorante, u, carrello);
 			Long idOrdine = oDao.inserisciOrdine(ordine);
-
-			// associa
-			for(Long idElementoOrdine : elementoOrdineIds) {
-			    oDao.inserisciOrdineElementoOrdine(idOrdine, idElementoOrdine);
+			
+			//List<Long> elementoOrdineIds = new ArrayList<>();
+			for(ElementoOrdine i : carrello) {
+				Portata p =pDao.findPortataByNome(i.getNome());
+				Ordine o = oDao.selectById(idOrdine);
+				i.setPortata(p);
+				i.setOrdine(o);
+				
+			    EODao.insert(i);
 			}
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

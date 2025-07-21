@@ -21,11 +21,13 @@ public class RimuoviPortata extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("idPortata"));
+		System.out.println(id);
 		PortataDao pdao =DaoFactory.getDaoFactory().getPortataDao();
-		
 		try {
-			
-			pdao.delete(id);
+			Portata p = pdao.selectById(id);
+			System.out.println(p);
+
+			pdao.delete(p);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

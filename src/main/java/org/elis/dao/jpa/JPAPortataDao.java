@@ -3,8 +3,11 @@ package org.elis.dao.jpa;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.elis.dao.DaoFactory;
+import org.elis.dao.ElementoOrdineDao;
 import org.elis.dao.PortataDao;
 import org.elis.model.Categoria;
+import org.elis.model.ElementoOrdine;
 import org.elis.model.Portata;
 import org.elis.model.Utente;
 
@@ -53,9 +56,29 @@ public class JPAPortataDao implements PortataDao {
 	    et.begin();
         q.executeUpdate();
 		et.commit();
-
 	}
-
+	
+	@Override
+	public void delete(Portata p) throws Exception {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		Portata p1= em.find(Portata.class, p.getId());
+		detachIdPortata(p1);
+		et.begin();
+		em.remove(p1);
+		et.commit();
+	}
+	
+	public void detachIdPortata(Portata p) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		Query q = em.createQuery("UPDATE ElementoOrdine eo SET eo.portata.id = null WHERE eo.portata.id = :id");
+		q.setParameter("id", p.getId());
+		et.begin();
+		q.executeUpdate();
+		et.commit();
+	}
+	
 	@Override
 	public Portata findPortataByNome(String nome) throws Exception {
 		EntityManager em = emf.createEntityManager();
@@ -86,10 +109,5 @@ public class JPAPortataDao implements PortataDao {
 		return null;
 	}
 
-	@Override
-	public void delete(Portata entity) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

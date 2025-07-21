@@ -119,14 +119,14 @@
 			                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>
 			                                        
 			                                        <%for(ElementoOrdine eo : o.getElementi()){%>
-			                                        	<%=eo.getNome() %>
+			                                        	<%=eo.getNome() %> x<%=eo.getQuantita()%>
 			                                        <%}%>
 			                                        
 			                                        </p>
 			                                        <%
 			                                        Double totale=0.0;
 			                                        for(ElementoOrdine eo : o.getElementi()){
-			                                        	totale+=eo.getPrezzo();
+			                                        	totale+=eo.getPrezzo()*eo.getQuantita();
 			                                        	}
 			                                        %>
 			                                        
@@ -204,14 +204,14 @@
 			                                        <p class="mb-2"><i class="fa-solid fa-utensils me-2"></i>
 			                                        
 			                                        <%for(ElementoOrdine eo : o.getElementi()){%>
-			                                        	<%=eo.getNome() %>
+			                                        	<%=eo.getNome() %> x<%=eo.getQuantita()%>
 			                                        <%}%>
 			                                        
 			                                        </p>
 			                                        <%
 			                                        Double totale=0.0;
 			                                        for(ElementoOrdine eo : o.getElementi()){
-			                                        	totale+=eo.getPrezzo();
+			                                        	totale+=eo.getPrezzo()*eo.getQuantita();
 			                                        	}
 			                                        %>
 			                                        

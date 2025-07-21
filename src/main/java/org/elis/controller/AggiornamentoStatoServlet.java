@@ -31,7 +31,7 @@ public class AggiornamentoStatoServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(stato.equalsIgnoreCase("Conferma")) {
+		}else if(stato.equalsIgnoreCase("Confermato")) {
 			try {
 				odao.updateStatoOrdine(idOrdine, Stato.CONFERMATO);
 			} catch (Exception e) {

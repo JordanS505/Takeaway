@@ -22,12 +22,12 @@ public class Ordine {
 	private Utente ristoratore;
 	@ManyToOne
 	private Utente cliente;
-	@ManyToMany
-	@JoinTable(
-			name = "Ordine_elementoOrdine",
-	        joinColumns = @JoinColumn(name = "ordine_id"), // FK a Ordine
-	        inverseJoinColumns = @JoinColumn(name = "elemento_id") // FK a ElementoOrdine
-	    )
+	
+	public void setRecensione(Recensione recensione) {
+		this.recensione = recensione;
+	}
+
+	@OneToMany(mappedBy = "ordine", fetch = FetchType.EAGER)
 	private List<ElementoOrdine> elementi; 
 	@OneToOne(mappedBy = "ordine")
 	private Recensione recensione;

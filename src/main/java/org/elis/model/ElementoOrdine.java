@@ -26,9 +26,17 @@ public class ElementoOrdine {
 	int quantita;
 	@ManyToOne
 	private Portata portata;
-	@ManyToMany(mappedBy = "elementi")
-	private List<Ordine> ordini;
+	@ManyToOne
+	private Ordine ordine;
 	
+	public Ordine getOrdine() {
+		return ordine;
+	}
+
+	public void setOrdine(Ordine ordine) {
+		this.ordine = ordine;
+	}
+
 	public ElementoOrdine() {
 	}
 

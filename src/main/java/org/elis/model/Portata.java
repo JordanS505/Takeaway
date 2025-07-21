@@ -109,6 +109,14 @@ public class Portata {
 		this.id = id;
 	}
 
+	public List<ElementoOrdine> getElementiOrdine() {
+		return elementiOrdine;
+	}
+
+	public void setElementiOrdine(List<ElementoOrdine> elementiOrdine) {
+		this.elementiOrdine = elementiOrdine;
+	}
+
 	
 	
 }

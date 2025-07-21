@@ -33,7 +33,10 @@ public class JPAOrdineDao implements OrdineDao{
 	@Override
 	public Ordine selectById(Long id) throws Exception {
 		EntityManager em = emf.createEntityManager();
-		return em.find(Ordine.class, id);
+		
+		Ordine o =  em.find(Ordine.class, id);
+		
+		return o;
 	}
 
 	@Override
