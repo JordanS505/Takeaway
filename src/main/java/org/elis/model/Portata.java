@@ -41,6 +41,7 @@ public class Portata {
 	public Portata(Long id, String nome, Blob foto, String descrizione, Double prezzo, Categoria categoria) {
 		this.id=id;
 		this.nome = nome;
+		this.foto=foto;		
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
 		this.categoria=categoria;

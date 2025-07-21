@@ -66,7 +66,7 @@ public class LogicaDiventaPartner extends HttpServlet {
 		
 		UtenteDao accessoRistorante = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
-			b = new SerialBlob(arrayFile);
+			
 			if(accessoRistorante.findRistoranteByIndirizzo(indirizzoRistorante)!=null) {
 				response.sendRedirect(request.getContextPath()+ "/DiventaPartnerServlet?error=indirizzoEsistente");
 				return;
@@ -91,10 +91,11 @@ public class LogicaDiventaPartner extends HttpServlet {
 			return;
 		}
 		
-		Utente u = new Utente(null, username, password, nome, cognome, email, dataDiNascita, nomeRistorante,indirizzoRistorante, tipi, ordiniRist, b, null);
+		
 		UtenteDao accessoUtente = DaoFactory.getDaoFactory().getUtenteDao();
 		try {
-			
+			b = new SerialBlob(arrayFile);
+			Utente u = new Utente(null, username, password, nome, cognome, email, dataDiNascita, nomeRistorante,indirizzoRistorante, tipi, ordiniRist, b, null);
 			accessoUtente.insert(u);
 			
 		} catch (Exception e) {
