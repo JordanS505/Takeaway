@@ -191,7 +191,23 @@
 			reserved.</p>
 	</div>
 
+	<script>
+	let input=document.getElementById('password')
+	let toggleBtn = document.getElementById("togglePassword");
+	let eyeIcon = document.getElementById("eyeIcon");
+	let passwordInput = document.getElementById("password");
 
+
+	toggleBtn.addEventListener("click", function () {
+	    if (passwordInput.type === "password") {
+	        passwordInput.type = "text";
+	        eyeIcon.src = "<%=request.getContextPath()%>/src/eyeoff.png";
+	    } else {
+	        passwordInput.type = "password";
+	        eyeIcon.src = "<%=request.getContextPath()%>/src/eye.png";
+	    }
+	});
+	</script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
