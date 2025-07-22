@@ -82,12 +82,12 @@ public class JPAPortataDao implements PortataDao {
 	@Override
 	public Portata findPortataByNome(String nome) throws Exception {
 		EntityManager em = emf.createEntityManager();
-		Query q = em.createQuery("SELECT p FROM Portata p WHERE p.nome = :nome");
-        q.setParameter("nome", nome);
-        
-		Portata p = (Portata) q.getSingleResult();
-		
-		return p;
+		return em.createQuery("SELECT p FROM Portata p WHERE p.nome = :nome", Portata.class)
+                .setParameter("nome", nome)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
 	}
 
 	@Override

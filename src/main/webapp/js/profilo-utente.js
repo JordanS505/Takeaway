@@ -52,27 +52,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	const inputSezione = document.getElementById('inputSezione');
     visualizzaBtns.forEach(button => {
         button.addEventListener('click', () => {
-            const testoRecensione = button.dataset.recensione || 'Nessuna recensione disponibile.';
-            const rating = parseInt(button.dataset.rating) || 0;
+			const testoRecensione = button.dataset.recensione || 'Nessuna recensione disponibile.';
+	        const rating = parseInt(button.dataset.rating) || 0;
 
-            recensioneText.textContent = testoRecensione;
+	        recensioneText.textContent = testoRecensione;
 
-            // Aggiorna stelle nel popup
-            ratingVisualizza.innerHTML = ''; // reset stelle
+	        // Aggiorna stelle nel popup
+	        ratingVisualizza.innerHTML = ''; // reset stelle
 
-            for (let i = 1; i <= 5; i++) {
-                const star = document.createElement('i');
-                star.classList.add('star', 'fa-solid', 'fa-star');
-                if (i <= rating) {
-                    star.classList.add('selected');
-                } else {
-                    star.style.color = '#ccc'; // stelle grigie per non selezionate
-                }
-                ratingVisualizza.appendChild(star);
-            }
+	        for (let i = 1; i <= 5; i++) {
+	            const star = document.createElement('i');
+	            star.classList.add('star', 'fa-solid', 'fa-star');
+	            if (i <= rating) {
+	                star.classList.add('selected');
+	            } else {
+	                star.style.color = '#ccc'; // stelle grigie per non selezionate
+	            }
+	            ratingVisualizza.appendChild(star);
+	        }
 
-            popupOverlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+	        popupOverlay.style.display = 'flex';
+	        document.body.style.overflow = 'hidden';
         });
     });
 

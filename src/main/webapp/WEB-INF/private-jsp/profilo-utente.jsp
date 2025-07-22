@@ -173,7 +173,13 @@
 			                                        <p><b>Ora </b><%=o.getData() %></p>
 			                                    </div>
 			                                </div>
+			                                <%if(o.getRecensione()==null&&o.getStato().name().equalsIgnoreCase("Ritirato")){ %>
 			                                <button class="scriviRecensioneBtn" data-sezione="<%=o.getId()%>">Scrivi recensione</button>
+			                                <%} else if(o.getRecensione()!=null&&o.getStato().name().equalsIgnoreCase("Ritirato")){%>
+		                     			    <button class="visualizzaRecensioneBtn"
+								            data-recensione="<%=o.getRecensione().getTesto()%>" 
+								            data-rating="<%=o.getRecensione().getVoto()%>">Visualizza recensione</button>
+			                                <%} %>
 			                            </div>
                             		<%} %>
                             	<%} %>

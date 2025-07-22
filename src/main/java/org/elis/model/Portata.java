@@ -33,18 +33,22 @@ public class Portata {
 	@OneToMany(mappedBy = "portata")
 	private List<ElementoOrdine> elementiOrdine;
 	
+	private boolean senzaLattosio;
+	private boolean senzaGlutine;
+	
 	public Portata() {
 	}
 
 	
-	
-	public Portata(Long id, String nome, Blob foto, String descrizione, Double prezzo, Categoria categoria) {
+	public Portata(Long id, String nome, Blob foto, String descrizione, Double prezzo, Categoria categoria, boolean senzaLattosio, boolean senzaGlutine) {
 		this.id=id;
 		this.nome = nome;
 		this.foto=foto;		
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
 		this.categoria=categoria;
+		this.senzaGlutine=senzaGlutine;
+		this.senzaLattosio=senzaLattosio;
 	}
 	
 	public Portata(String nome){
@@ -118,6 +122,20 @@ public class Portata {
 		this.elementiOrdine = elementiOrdine;
 	}
 
-	
+	public boolean isSenzaLattosio() {
+		return senzaLattosio;
+	}
+
+	public void setSenzaLattosio(boolean senzaLattosio) {
+		this.senzaLattosio = senzaLattosio;
+	}
+
+	public boolean isSenzaGlutine() {
+		return senzaGlutine;
+	}
+
+	public void setSenzaGlutine(boolean senzaGlutine) {
+		this.senzaGlutine = senzaGlutine;
+	}
 	
 }

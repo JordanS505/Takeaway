@@ -8,6 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
+import java.util.List;
+
+import org.elis.dao.DaoFactory;
+import org.elis.dao.TipologiaDao;
+import org.elis.model.Tipologia;
 
 @WebServlet("/DiventaPartnerServlet")
 public class DiventaPartnerServlet extends HttpServlet {
@@ -19,8 +24,17 @@ public class DiventaPartnerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/public-jsp/registrazioneRistoratore.jsp").forward(request, response);
-	}
+        try {
+            // Carica le tipologie disponibili dal database
+            TipologiaDao tipologiaDao = DaoFactory.getDaoFactory().getTipologiaDao();
+            List<Tipologia> tipologieDisponibili = tipologiaDao.findAll();
+            request.setAttribute("tipologieDisponibili", tipologieDisponibili);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        request.getRequestDispatcher("/public-jsp/registrazioneRistoratore.jsp").forward(request, response);
+    }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}

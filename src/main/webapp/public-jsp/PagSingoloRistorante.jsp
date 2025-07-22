@@ -308,25 +308,34 @@ header {
 			                if (portata.getCategoria().getId()==cat.getId()) {
 			                    String prezzo = String.format("%.2f", portata.getPrezzo());
 			            %>
-					<div class="card mb-3 p-3 border-0 shadow rounded-5">
+					<div class="card mb-3 border-0 shadow rounded-5 overflow-hidden">
 
 						<div class="row d-flex">
-							<div class="col-3">
+							<div class="col-3 p-0 m-0 d-flex align-items-stretch overflow-hidden">
 								<% if(portata.getFoto()!=null) { %>
-		                                <img src="data:image/png;base64,<%= portata.getBase64ImageString() %>" alt="Foto"
-									class="img-fluid flex-shrink-0 img-ristorante"
-									style="object-fit: cover; height: 200px;">
-		                            <% } else { %>
-		                                <img src="" alt="Foto Portata"
-									class="img-fluid flex-shrink-0 img-ristorante"
-									style="object-fit: cover; height: 200px;">
-		                            <% } %>
+		                            <img src="data:image/png;base64,<%= portata.getBase64ImageString() %>" alt="Foto"
+									class="img-fluid object-fit-cover" style="max-height: 150px">
+		                        <% } else { %>
+		                            <img src="" alt="Foto Portata"
+									class="img-fluid p-0"
+									style="object-fit: cover;">
+		                        <% } %>
 							</div>
-							<div class="col-5">
-								<h5 class="mb-1"><%= portata.getNome() %></h5>
-								<br> <span class="mb-0 text-muted"><%= prezzo %>€</span>
+							<div class="col-5 m-0 p-0">
+								<div>
+									<h5 class="mb-1"><%= portata.getNome() %></h5>
+								</div>
+								<span class="mb-0 text-muted"><%= prezzo %>€</span>
+								<div class="justify-content-end">
+									<%if(portata.isSenzaGlutine()==true){%>
+										<img src="<%=request.getContextPath()%>/src/senzaGlutine.png" alt="Senza Glutine" style="height:30px">
+									<% } %>
+									<%if(portata.isSenzaLattosio()==true){%>
+										<img src="<%=request.getContextPath()%>/src/senzaLattosio.png" alt="Senza Lattosio" style="height:30px">
+									<% } %>
+									</div>
 							</div>
-							<div class="col-4 d-flex flex-column align-items-end">
+							<div class="col-4 pe-5 d-flex flex-column align-items-end">
 								<div class="d-flex gap-1 align-items-center">
 									<span class="fw-bold mt-2">Quantità:</span> <span
 										class="quantity mt-2" data-nome="<%= portata.getNome() %>">0</span>

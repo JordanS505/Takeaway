@@ -139,34 +139,16 @@
 			                                    </div>
 			                                </div>
 			                                <!-- Bottone centrato in basso con stella bianca -->
-			                                <% if(o.getStato().name().equalsIgnoreCase("ritirato")){ %>
-			                                <div class="recensione-footer text-center">
-			                                    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
-			                                        style="font-size: 0.9rem; cursor: pointer;"
-			                                        data-recensione="
-			                                        <%if(o.getRecensione()!=null){ 
-			                                        	 o.getRecensione().getTesto();
-			                                        }else{%>
-			                                        	Ancora non recensito
-			                                        <%}%>"
-			                                        data-rating="
-			                                        <%if(o.getRecensione()!=null){ 
-			                                        	 o.getRecensione().getVoto();
-			                                        }else{%>
-			                                         /
-			                                        <%}%>">
-			                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
-			                                    </button>
-			                                </div>    
-			                                <%}else { %>
-			                                <div class="recensione-footer text-center">
-			                                	<div class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
-			                                        style="font-size: 0.9rem; cursor: pointer;"
-			                                        data-recensione="Nessuna recensione" data-rating="0">
-			                                        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
-			                                    </div>
-			                                </div>
-			                                <%} %>
+			                                <% if(o.getStato().name().equalsIgnoreCase("ritirato") && o.getRecensione()!=null){ %>
+											<div class="recensione-footer text-center">
+											    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
+											        style="font-size: 0.9rem; cursor: pointer;"
+											        data-recensione="<%= o.getRecensione().getTesto() %>"
+											        data-rating="<%= o.getRecensione().getVoto() %>">
+											        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
+											    </button>
+											</div>    
+											<% } %>
 			                            </div>
 			                        <%} %>
                             	<%} %>

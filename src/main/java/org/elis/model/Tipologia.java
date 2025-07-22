@@ -25,6 +25,12 @@ public class Tipologia {
 		this.nome = nome;
 	}
 
+	public Tipologia(Long id, String nomeTipologia, List<Utente> ris) {
+		this.id=id;
+		this.nome=nomeTipologia;
+		this.ristoranti=ris;
+	}
+
 	public String getNome() {
 		return nome;
 	}

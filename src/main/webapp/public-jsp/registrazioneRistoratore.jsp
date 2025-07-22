@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="org.elis.model.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +12,15 @@
     <title>EnjoEat | Registrati</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
+<style>
+    #containerTipologie .row {
+        margin-bottom: 10px;
+    }
+    #containerTipologie .col-6 {
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+</style>
 <body class="d-flex flex-column min-vh-100">
 
     <nav class="navbar mb-4" style="background-color: #c1280f">
@@ -96,44 +106,50 @@
             </div>
 
             <!-- ✅ Categorie (checkbox centrate) -->
-            <div class="row mb-3">
+			<div class="row mb-3">
 			    <div class="col">
 			        <div class="mx-auto" style="max-width: 400px;">
 			            <label class="form-label fw-bold small mb-2">Scegli le categorie:</label>
 			
-			            <div class="row">
-			                <div class="col-6">
-			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="Categorie" value="pizzeria" id="pizzeria">
-			                        <label class="form-check-label" for="pizzeria">Pizzeria</label>
+			            <!-- Contenitore principale per le checkbox -->
+			            <div id="containerTipologie">
+			                <!-- Checkbox per le tipologie esistenti dal database -->
+			                <div class="row">
+			                    <%
+			                        List<Tipologia> tipologieDisponibili = (List<Tipologia>) request.getAttribute("tipologieDisponibili");
+			                        if (tipologieDisponibili != null) {
+			                            int counter = 0;
+			                            for (Tipologia tipologia : tipologieDisponibili) {
+			                                if (counter % 2 == 0 && counter > 0) {
+			                                    out.print("</div><div class=\"row\">");
+			                                }
+			                    %>
+			                    <div class="col-6">
+			                        <div class="form-check">
+			                            <input class="form-check-input" type="checkbox" name="Categorie" 
+			                                   value="<%= tipologia.getNome() %>" id="<%= tipologia.getNome().toLowerCase() %>">
+			                            <label class="form-check-label" for="<%= tipologia.getNome().toLowerCase() %>">
+			                                <%= tipologia.getNome() %>
+			                            </label>
+			                        </div>
 			                    </div>
-			                </div>
-			                <div class="col-6">
-			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="Categorie" value="ristorante" id="ristorante">
-			                        <label class="form-check-label" for="ristorante">Ristorante</label>
-			                    </div>
-			                </div>
-			                <div class="col-6">
-			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="Categorie" value="giapponese" id="giapponese">
-			                        <label class="form-check-label" for="giapponese">Giapponese</label>
-			                    </div>
-			                </div>
-			                <div class="col-6">
-			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="Categorie" value="kebab" id="kebab">
-			                        <label class="form-check-label" for="kebab">Kebab</label>
-			                    </div>
-			                </div>
-			                <div class="col-6">
-			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" name="Categorie" value="indiano" id="indiano">
-			                        <label class="form-check-label" for="indiano">Indiano</label>
-			                    </div>
+			                    <%
+			                                counter++;
+			                            }
+			                        }
+			                    %>
 			                </div>
 			            </div>
 			
+			            <!-- Campo per aggiungere una nuova tipologia -->
+						<div class="mt-3">
+						    <div class="input-group">
+						        <input type="text" class="form-control rounded-5 rounded-end-0" id="nuovaTipologia" 
+						               placeholder="Aggiungi nuova tipologia">
+						        <button class="btn btn-outline-secondary border-1 rounded-end-4" type="button" 
+						                onclick="aggiungiTipologia()">Aggiungi</button>
+						    </div>
+						</div>
 			        </div>
 			    </div>
 			</div>
@@ -150,16 +166,32 @@
                 </div>
             </div>
 
-            <!-- Password -->
             <div class="row mb-3">
-                <div class="col">
-                    <div class="mx-auto" style="max-width: 400px;">
-                        <label for="password" class="form-label fw-bold small mb-1">Inserisci password</label>
-                        <input type="password" class="form-control w-100 rounded-4" id="password" name="Password"
-                            placeholder="Password">
-                    </div>
-                </div>
-            </div>
+	            <div class="col">
+	                <div class="mx-auto" style="max-width: 400px;">
+	                    <label for="password" class="form-label fw-bold small mb-1">Inserisci password</label>
+	                    <div class="d-flex">
+					        <input type="password" class="form-control rounded-4 rounded-end-0" id="password" name="Password" placeholder="Password" style="flex-grow:1;">
+					        <button type="button" class="btn btn-outline-secondary  rounded-4 rounded-start-0 border border-light-subtle" id="togglePassword" aria-label="Mostra o nascondi password">
+					          <img id="eyeIcon" src="<%=request.getContextPath()%>/src/eye.png" alt="Mostra password" style="width: 24px; height: 24px;">
+					        </button>
+					    </div>
+	                    <div class="progress mt-2" style="height: 10px;">
+						    <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+						</div>
+						<small id="strengthText" class="fw-bold"></small>
+	                </div>
+	            </div>
+	        </div>
+	
+			<div class="row mb-3">
+	            <div class="col">
+	                <div class="mx-auto" style="max-width: 400px;">
+	                    <label for="confirmPassword" class="form-label fw-bold small mb-1">Inserisci password</label>
+					    <input type="password" class="form-control rounded-4" id="confirmPassword" name="confirmPassword" placeholder="Password" style="flex-grow:1;">
+	                </div>
+	            </div>
+	        </div>
             
 
             <!-- Bottone Registrati -->
@@ -208,5 +240,79 @@
             <small class="text-muted">&copy; 2025 EnjoEat. Tutti i diritti riservati.</small>
         </div>
     </footer>
-
+    
+	<script>
+	function aggiungiTipologia() {
+	    const nuovaTipologia = document.getElementById('nuovaTipologia').value.trim();
+	    if (nuovaTipologia === '') {
+	        alert('Inserisci un nome per la nuova tipologia');
+	        return;
+	    }
+	    
+	    // Genera un ID valido
+	    const idTipologia = nuovaTipologia.toLowerCase().replace(/\s+/g, '-');
+	    
+	    // Trova il container delle tipologie
+	    const container = document.getElementById('containerTipologie');
+	    if (!container) {
+	        console.error('Container delle tipologie non trovato');
+	        return;
+	    }
+	    
+	    // Trova tutte le righe esistenti
+	    const rows = container.getElementsByClassName('row');
+	    let lastRow = rows.length > 0 ? rows[rows.length - 1] : null;
+	    
+	    // Se non ci sono righe o l'ultima riga ha già 2 colonne, crea una nuova riga
+	    if (!lastRow || lastRow.getElementsByClassName('col-6').length >= 2) {
+	        lastRow = document.createElement('div');
+	        lastRow.className = 'row';
+	        container.appendChild(lastRow);
+	    }
+	    
+	    // Crea la nuova colonna
+	    const newCol = document.createElement('div');
+	    newCol.className = 'col-6';
+	    
+	    // Crea la checkbox e il label
+	    const formCheck = document.createElement('div');
+	    formCheck.className = 'form-check';
+	    
+	    const input = document.createElement('input');
+	    input.type = 'checkbox';
+	    input.className = 'form-check-input';
+	    input.name = 'Categorie';
+	    input.value = nuovaTipologia;
+	    input.id = idTipologia;
+	    input.checked = true;
+	    
+	    const label = document.createElement('label');
+	    label.className = 'form-check-label';
+	    label.htmlFor = idTipologia;
+	    label.textContent = nuovaTipologia;
+	    
+	    // Assembla gli elementi
+	    formCheck.appendChild(input);
+	    formCheck.appendChild(label);
+	    newCol.appendChild(formCheck);
+	    lastRow.appendChild(newCol);
+	    
+	    // Pulisci il campo di input
+	    document.getElementById('nuovaTipologia').value = '';
+	    
+	    // Invia la nuova tipologia al server
+	    fetch('<%=request.getContextPath()%>/AggiungiTipologiaServlet', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/x-www-form-urlencoded',
+	        },
+	        body: 'nome=' + encodeURIComponent(nuovaTipologia)
+	    }).catch(error => {
+	        console.error('Errore durante il salvataggio:', error);
+	    });
+	}
+	</script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+ 
+ </body>

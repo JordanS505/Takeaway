@@ -39,12 +39,14 @@ public class LogicaAggiungiPortata extends HttpServlet {
 		Long idCat = Long.parseLong(request.getParameter("sezione"));
 		Part file= request.getPart("foto");
 		byte[] arrayFile= file.getInputStream().readAllBytes();
+		boolean senzaLattosio = request.getParameter("senzaLattosio") != null;
+		boolean senzaGlutine = request.getParameter("senzaGlutine") != null;
 		Blob b=null;
 		
 		try {
 			b = new SerialBlob(arrayFile);
 			Categoria categoria = cdao.selectById(idCat); 
-			Portata portata = new Portata(null, nome, b, desc, prezzo, categoria);
+			Portata portata = new Portata(null, nome, b, desc, prezzo, categoria, senzaLattosio, senzaGlutine);
 			pdao.insert(portata);
 			
 		} catch (Exception e) {

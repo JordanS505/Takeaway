@@ -74,6 +74,14 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                 <input type="number" name="prezzo" step="0.01" min="0" placeholder="Prezzo (€)" required>
                 <input type="file" name="foto">
                 <input type="hidden" name="sezione" id="inputSezione">
+		        <div class="form-check mb-2">
+		            <input class="form-check-input" type="checkbox" name="senzaGlutine" id="senzaGlutine">
+		            <label class="form-check-label" for="senzaGlutine">Senza glutine</label>
+		        </div>
+		        <div class="form-check mb-3">
+		            <input class="form-check-input" type="checkbox" name="senzaLattosio" id="senzaLattosio">
+		            <label class="form-check-label" for="senzaLattosio">Senza lattosio</label>
+		        </div>
                 <div class="buttons">
                     <button type="button" id="closeBtn">Annulla</button>
                     <input type="submit" value="Invia">
@@ -127,48 +135,78 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 
             </div>
 			
-			<div class="col-12 col-md-7 rounded-5 shadow" id="colonnadestra">
-			<%if (categorie!=null){ %>
-		    <% for(Categoria c : categorie){ %>
-		        <div class="mb-5">
-		            <h2 class="mb-4"><%=c.getNome() %></h2>
-		            <button type="button" class="btn btn-success btn-sm aggiungi-portata-btn mb-3 rounded-3"
-		                data-sezione="<%=c.getId()%>">
-		                <i class="fa-solid fa-plus me-1"></i> Aggiungi Portata
-		            </button>
-		
-		            <% for(Portata p : portate) { 
-		                if(p.getCategoria().getId() == c.getId()) { %>
-		                
-		                <div class="card order-card flex-shrink-0 rounded-5 mb-3">
-		                    <div class="card-body vertical-align-fix d-flex">
-		                        <div class="immagine-card rounded-start-5 me-3">
-		                            <% if(p.getFoto()!=null) { %>
-		                                <img src="data:image/png;base64, <%= p.getBase64ImageString() %>" alt="Foto portata" class="rounded-start-5">
-		                            <% } else { %>
-		                                <img src="" alt="Foto portata" class="rounded-start-5">
-		                            <% } %>
-		                        </div>
-		                        <div class="order-details">
-		                            <p class="mb-2"><strong><%=p.getNome() %></strong></p>
-		                            <p class="mb-2"><%=p.getDescrizione() %></p>
-		                            <p class="mb-2">€ <%=p.getPrezzo() %></p>
-									<form id="rimozione_<%=p.getId()%>" action="<%=request.getContextPath() %>/RimuoviPortata" method="post">
-										<input name="idPortata" type="hidden" value="<%=p.getId() %>">
-										<input type="submit" value="Rimuovi">
-									</form>
-		                        </div>
-		                    </div>
-		                </div>
-		            <% } } %>
-		        </div>
-		    <% }} %>
-		    
-		<button type="button" id="btnApriCategoria">Aggiungi Categoria</button>
-
-		</div>
-		</div>
-	</div>
+			<!-- Colonna destra -->
+            <div class="col-12 col-md-7 rounded-5 shadow" id="colonnadestra">
+                <%if (categorie!=null && !categorie.isEmpty()) { %>
+                    <% for(Categoria c : categorie) { %>
+                        <div class="mb-5 categoria-section">
+                            <div class="categoria-header">
+                                <h2><%=c.getNome() %></h2>
+                                <div class="categoria-actions">
+                                    <form action="<%=request.getContextPath() %>/RimuoviCategoria" method="post" 
+                                          onsubmit="return confirm('Sei sicuro di voler eliminare la categoria <%=c.getNome()%> e tutte le sue portate?')">
+                                        <input type="hidden" name="idCategoria" value="<%=c.getId()%>">
+                                        <button type="submit" class="btn btn-danger btn-sm rounded-3">
+                                            <i class="fa-solid fa-trash me-1"></i> Rimuovi
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-success btn-sm aggiungi-portata-btn rounded-3"
+                                        data-sezione="<%=c.getId()%>">
+                                        <i class="fa-solid fa-plus me-1"></i> Aggiungi
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <% if(portate != null && !portate.isEmpty()) { 
+                                boolean hasPortate = false;
+                                for(Portata p : portate) { 
+                                    if(p.getCategoria().getId() == c.getId()) { 
+                                        hasPortate = true; %>
+                                        <div class="card order-card flex-shrink-0 rounded-5 mb-3">
+                                            <div class="card-body vertical-align-fix d-flex">
+                                                <div class="immagine-card rounded-start-5 me-3">
+                                                    <% if(p.getFoto()!=null) { %>
+                                                        <img src="data:image/png;base64, <%= p.getBase64ImageString() %>" alt="Foto portata" class="rounded-start-5">
+                                                    <% } else { %>
+                                                        <img src="" alt="Foto portata" class="rounded-start-5">
+                                                    <% } %>
+                                                </div>
+                                                <div class="order-details">
+                                                    <p class="mb-2"><strong><%=p.getNome() %></strong></p>
+                                                    <p class="mb-2"><%=p.getDescrizione() %></p>
+                                                    <p class="mb-2">€ <%=String.format(Locale.ITALY, "%.2f", p.getPrezzo()) %></p>
+                                                    <div class="portata-actions">
+                                                        <form action="<%=request.getContextPath() %>/RimuoviPortata" method="post"
+                                                              onsubmit="return confirm('Rimuovere questa portata dal menù?')">
+                                                            <input type="hidden" name="idPortata" value="<%=p.getId() %>">
+                                                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                                <i class="fa-solid fa-trash"></i> Rimuovi
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } 
+                                } 
+                                if(!hasPortate) { %>
+                                    <div class="alert alert-info">Nessuna portata in questa categoria</div>
+                                <% }
+                            } else { %>
+                                <div class="alert alert-info">Nessuna portata in questa categoria</div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <div class="alert alert-warning">Nessuna categoria disponibile</div>
+                <% } %>
+                
+                <button type="button" id="btnApriCategoria" class="btn btn-primary mt-3">
+                    <i class="fa-solid fa-plus me-1"></i> Aggiungi Nuova Categoria
+                </button>
+            </div>
+        </div>
+    </div>
 
 
 

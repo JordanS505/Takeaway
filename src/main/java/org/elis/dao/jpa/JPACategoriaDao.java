@@ -45,11 +45,21 @@ public class JPACategoriaDao implements CategoriaDao {
 
 	@Override
 	public void delete(Categoria entity) throws Exception {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction et = em.getTransaction();
-		et.begin();
-		em.remove(entity);
-		et.commit();
+	    EntityManager em = emf.createEntityManager();
+	    EntityTransaction et = em.getTransaction();
+	    try {
+	        et.begin();
+	        Categoria categoria = em.merge(entity);
+	        em.remove(categoria);
+	        et.commit();
+	    } catch (Exception e) {
+	        if (et != null && et.isActive()) {
+	            et.rollback();
+	        }
+	        throw e;
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override

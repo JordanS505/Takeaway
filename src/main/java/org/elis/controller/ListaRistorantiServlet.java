@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.List;
 
 import org.elis.dao.DaoFactory;
+import org.elis.dao.TipologiaDao;
 import org.elis.dao.UtenteDao;
+import org.elis.model.Tipologia;
 import org.elis.model.Utente;
 
 @WebServlet("/ListaRistorantiServlet")
@@ -20,10 +22,13 @@ public class ListaRistorantiServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtenteDao uDao = DaoFactory.getDaoFactory().getUtenteDao();
-		
+		TipologiaDao tipologiaDao = DaoFactory.getDaoFactory().getTipologiaDao();
+
 		try {
 			List<Utente> ristoranti = uDao.findRistoratori(); // solo quelli con ruolo ristoratore
 			request.setAttribute("ristoranti", ristoranti);
+			List<Tipologia> tutteTipologie = tipologiaDao.findAll();
+			request.setAttribute("tutteTipologie", tutteTipologie);
 			request.getRequestDispatcher("/public-jsp/ListaRistoranti.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

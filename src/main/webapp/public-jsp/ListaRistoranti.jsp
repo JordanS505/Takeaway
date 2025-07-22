@@ -302,67 +302,64 @@
     <div class="container-fluid">
         <div class="row gx-3 gap-4">
 			<div class="col"></div>
-            <!-- Sidebar -->
-            <div class="sidebar col-12 col-md-3 mb-3 border-0 rounded-5 p-0 shadow" style="position: sticky; top: 75px; height: fit-content;">
-			  <div>
-			    <h5 class="fw-bold mt-3 mb-3 text-center">Filtro per tipologia</h5>
-			    <div class="row mt-2 ms-2">
-			      <div class="col d-flex flex-column">
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Pizzeria" id="Pizzeria">
-			          <label class="form-check-label" for="Pizzeria">Pizzeria</label>
+           <!-- Sidebar -->
+			<div class="sidebar col-12 col-md-3 mb-3 border-0 rounded-5 p-0 shadow" style="position: sticky; top: 75px; height: fit-content;">
+			    <div>
+			        <h5 class="fw-bold mt-3 mb-3 text-center">Filtro per tipologia</h5>
+			        <div class="row mt-2 ms-2">
+			            <div class="col d-flex flex-column">
+			                <%
+			                    List<Tipologia> tutteTipologie = (List<Tipologia>) request.getAttribute("tutteTipologie");
+			                    if (tutteTipologie != null) {
+			                        int meta = (int) Math.ceil(tutteTipologie.size() / 2.0);
+			                        for (int i = 0; i < meta; i++) {
+			                            Tipologia t = tutteTipologie.get(i);
+			                %>
+			                <div class="form-check">
+			                    <input class="form-check-input filtroTipologia" type="checkbox" 
+			                           value="<%= t.getNome() %>" id="<%= t.getNome() %>">
+			                    <label class="form-check-label" for="<%= t.getNome() %>"><%= t.getNome() %></label>
+			                </div>
+			                <%
+			                        }
+			                %>
+			            </div>
+			            <div class="col d-flex flex-column">
+			                <%
+			                        for (int i = meta; i < tutteTipologie.size(); i++) {
+			                            Tipologia t = tutteTipologie.get(i);
+			                %>
+			                <div class="form-check">
+			                    <input class="form-check-input filtroTipologia" type="checkbox" 
+			                           value="<%= t.getNome() %>" id="<%= t.getNome() %>">
+			                    <label class="form-check-label" for="<%= t.getNome() %>"><%= t.getNome() %></label>
+			                </div>
+			                <%
+			                        }
+			                    }
+			                %>
+			            </div>
 			        </div>
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Italiana" id="Italiana">
-			          <label class="form-check-label" for="Italiana">Italiana</label>
+			        
+			        <!-- Filtro per voto (rimane uguale) -->
+			        <h5 class="fw-bold mt-4 text-center">Filtro per voto</h5>
+			        <div class="row mt-2 ms-2">
+			            <div class="col d-flex flex-column">
+			                <div class="form-check">
+			                    <input class="form-check-input filtroVoto" type="checkbox" value="3" id="voto3">
+			                    <label class="form-check-label" for="voto3">3+ stelle</label>
+			                </div>
+			                <div class="form-check">
+			                    <input class="form-check-input filtroVoto" type="checkbox" value="4" id="voto4">
+			                    <label class="form-check-label" for="voto4">4+ stelle</label>
+			                </div>
+			                <div class="form-check mb-3">
+			                    <input class="form-check-input filtroVoto" type="checkbox" value="5" id="voto5">
+			                    <label class="form-check-label" for="voto5">Solo 5 stelle</label>
+			                </div>
+			            </div>
 			        </div>
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Kebab" id="Kebab">
-			          <label class="form-check-label" for="Kebab">Kebab</label>
-			        </div>
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Dolci" id="Dolci">
-			          <label class="form-check-label" for="Dolci">Dolci</label>
-			        </div>
-			      </div>
-			      <div class="col d-flex flex-column">
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Orientale" id="Orientale">
-			          <label class="form-check-label" for="Orientale">Orientale</label>
-			        </div>
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Vino" id="Vino">
-			          <label class="form-check-label" for="Vino">Vino</label>
-			        </div>
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Hamburger" id="Hamburger">
-			          <label class="form-check-label" for="Hamburger">Hamburger</label>
-			        </div>
-			        <div class="form-check">
-			          <input class="form-check-input filtroTipologia" type="checkbox" value="Healthy" id="Healthy">
-			          <label class="form-check-label" for="Healthy">Healthy</label>
-			        </div>
-			      </div>
 			    </div>
-			
-			    <h5 class="fw-bold mt-4 text-center">Filtro per voto</h5>
-			    <div class="row mt-2 ms-2">
-			      <div class="col d-flex flex-column">
-			        <div class="form-check">
-			          <input class="form-check-input filtroVoto" type="checkbox" value="3" id="voto3">
-			          <label class="form-check-label" for="voto3">3+ stelle</label>
-			        </div>
-			        <div class="form-check">
-			          <input class="form-check-input filtroVoto" type="checkbox" value="4" id="voto4">
-			          <label class="form-check-label" for="voto4">4+ stelle</label>
-			        </div>
-			        <div class="form-check mb-3">
-			          <input class="form-check-input filtroVoto" type="checkbox" value="5" id="voto5">
-			          <label class="form-check-label" for="voto5">Solo 5 stelle</label>
-			        </div>
-			      </div>
-			    </div>
-			  </div>
 			</div>
 
             <!-- Contenuto principale -->
@@ -397,16 +394,18 @@
 				    <%} %>
 				        <div class="card-body d-flex flex-column justify-content-center flex-grow-1">
 				            <h3 class="card-title fw-bold"><%= r.getNomeRistorante() %></h3>
-				            <%
-							    List<Tipologia> tipologie = r.getTipologie();
-							    if (tipologie != null && !tipologie.isEmpty()) {
-							        for (Tipologia t : tipologie) {
-							%>
-							    <span class="form control bg-light border rounded-5 me-1 text-center" style="min-width:80px; max-width:120px;"><%= t.getNome() %></span>
-							<%
-							        }
-							    } 
-							%>
+				            <div>
+				            	<%
+								    List<Tipologia> tipologie = r.getTipologie();
+								    if (tipologie != null && !tipologie.isEmpty()) {
+								        for (Tipologia t : tipologie) {
+								%>
+								    <span class="form control bg-light border rounded-5 me-1 text-center object-fit ps-2 pe-2" style="min-width:80px; max-width:120px;"><%= t.getNome() %></span>
+								<%
+								        }
+								    } 
+								%>
+				            </div>
 				            <div class="d-flex align-items-center">
 				                <div class="rating mt-2">
 

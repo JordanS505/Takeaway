@@ -18,6 +18,7 @@ import java.util.List;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.elis.dao.DaoFactory;
+import org.elis.dao.TipologiaDao;
 import org.elis.dao.UtenteDao;
 import org.elis.model.Ordine;
 import org.elis.model.Tipologia;
@@ -46,9 +47,28 @@ public class LogicaDiventaPartner extends HttpServlet {
 		String[] a = request.getParameterValues("Categorie");
 		Part file= request.getPart("fileFoto");
 		List<Tipologia> tipi= new ArrayList<>();
-		List<Ordine> ordini = new ArrayList<>();
 		List<Ordine> ordiniRist = new ArrayList<>();
-		
+	    String[] categorieSelezionate = request.getParameterValues("Categorie");
+	    TipologiaDao tipologiaDao = DaoFactory.getDaoFactory().getTipologiaDao();
+	    
+	    if(categorieSelezionate == null || categorieSelezionate.length == 0) {
+	        response.sendRedirect(request.getContextPath()+"/DiventaPartnerServlet?error=categorieMancanti");
+	        return;
+	    }
+	    
+	    for(String nomeCategoria : categorieSelezionate) {
+	        try {
+	            Tipologia tipo = tipologiaDao.findTipologiaByNome(nomeCategoria);
+	            if(tipo == null) {
+	                // Se non esiste, la creiamo
+	                tipo = new Tipologia(nomeCategoria);
+	                tipologiaDao.insert(tipo);
+	            }
+	            tipi.add(tipo);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
 		
 	//	PreparedStatement ps = null;
 	//	ps.setBlob(0, file.getInputStream());
