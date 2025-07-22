@@ -9,10 +9,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import org.elis.model.Utente;
-
-import com.mysql.cj.Session;
-
 /**
  * Servlet implementation class HomePageUtenteServlet
  */

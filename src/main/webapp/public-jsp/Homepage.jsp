@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*" %>
+<%@ page import="org.elis.model.*" %>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -172,87 +174,69 @@
     </div>
 
     <!-- Sezione 4 - Recensioni -->
-    <div class="row" id="rigarec">
-      <h2 id="cosadicono">Cosa dicono di noi</h2>
-      <div id="recensioniCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000"
-        data-bs-pause="hover">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="recensione-card">
-              <div class="recensione-left">
-                <img src="<%=request.getContextPath() %>/src/res/ragazza1.jpg" alt="Profilo Anna Bianchi" class="recensione-img" />
-                <h5 class="recensione-nome">Anna Bianchi</h5>
-              </div>
-              <div class="recensione-right">
-                <div class="star-rating" aria-label="Valutazione: 5 su 5 stelle">
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                </div>
-                <h5 class="recensione-titolo">Ottimo servizio!</h5>
-                <p class="recensione-testo">
-                  Sono rimasto molto soddisfatto dalla rapidità con cui è stato evaso il mio ordine e dalla
-                  qualità eccellente del cibo ricevuto. Tutto è stato curato nei minimi dettagli, dalla
-                  preparazione alla consegna. Consiglio vivamente questo servizio a chi cerca efficienza e
-                  gusto senza compromessi!
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="recensione-card">
-              <div class="recensione-left">
-                <img src="<%=request.getContextPath() %>/src/res/ragazzo2.jpg" alt="Profilo Marco Rossi" class="recensione-img" />
-                <h5 class="recensione-nome">Marco Rossi</h5>
-              </div>
-              <div class="recensione-right">
-                <div class="star-rating" aria-label="Valutazione: 4.5 su 5 stelle">
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star half">&#9733;</span>
-                </div>
-                <h5 class="recensione-titolo">Fantastico!</h5>
-                <p class="recensione-testo">
-                  Servizio impeccabile, dall’ordine alla consegna. Ho trovato l’interfaccia facile da usare e il cibo è
-                  arrivato puntuale e ancora caldo. La qualità ha superato le mie aspettative, davvero un’esperienza da
-                  ripetere. Complimenti per l’ottima organizzazione!
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="recensione-card">
-              <div class="recensione-left">
-                <img src="<%=request.getContextPath() %>/src/res/ragazza2.jpg" alt="Profilo Laura Verdi" class="recensione-img" />
-                <h5 class="recensione-nome">Laura Verdi</h5>
-              </div>
-              <div class="recensione-right">
-                <div class="star-rating" aria-label="Valutazione: 5 su 5 stelle">
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star full">&#9733;</span>
-                  <span class="star half">&#9733;</span>
-                </div>
-                <h5 class="recensione-titolo">Esperienza top</h5>
-                <p class="recensione-testo">
-                  EnjoEat è diventato il mio punto di riferimento per il cibo da asporto. Ordini semplici, tempi di
-                  attesa
-                  brevi
-                  e piatti sempre gustosi. Apprezzo molto anche la possibilità di personalizzare ogni ordine. Ottima
-                  soluzione per
-                  chi ha poco tempo ma non vuole rinunciare alla qualità.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+	<div class="row" id="rigarec">
+	    <h2 id="cosadicono">Cosa dicono di noi</h2>
+	    <div id="recensioniCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="hover">
+	        <div class="carousel-inner">
+	            <%
+	                List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni");
+	                if (recensioni != null && !recensioni.isEmpty()) {
+	                    for (int i = 0; i < recensioni.size(); i++) {
+	                        Recensione recensione = recensioni.get(i);
+	            %>
+	                        <div class="carousel-item <%= i == 0 ? "active" : "" %>">
+	                            <div class="recensione-card d-flex flex-column">
+	                            	<p class="fw-bold mb-0"><%=recensione.getUtente().getNome() %> <%=recensione.getUtente().getCognome() %></p>
+                                    <div class="star-rating">
+                                        <% 
+                                            int voto = recensione.getVoto().intValue();
+                                            for (int j = 1; j <= 5; j++) {
+                                        %>
+                                            <span class="star <%= j <= voto ? "full" : "" %>">&#9733;</span>
+                                        <% } %>
+                                    </div>
+                                    <p class="recensione-testo"><%= recensione.getTesto() %></p>
+	                            </div>
+	                        </div>
+	            <%
+	                    }
+	                } else {
+	                    // Recensioni di default se non ce ne sono nel DB
+	            %>
+	                    <div class="carousel-item active">
+	                        <div class="recensione-card">
+	                            <div class="recensione-left">
+	                                <img src="<%=request.getContextPath()%>/src/res/user-default.png" alt="Profilo utente" class="recensione-img" />
+	                                <h5 class="recensione-nome">Utente</h5>
+	                            </div>
+	                            <div class="recensione-right">
+	                                <div class="star-rating">
+	                                    <span class="star full">&#9733;</span>
+	                                    <span class="star full">&#9733;</span>
+	                                    <span class="star full">&#9733;</span>
+	                                    <span class="star full">&#9733;</span>
+	                                    <span class="star full">&#9733;</span>
+	                                </div>
+	                                <p class="recensione-testo">Servizio eccellente e cibo delizioso!</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	            <%
+	                }
+	            %>
+	        </div>
+	        
+	        <!-- Controlli del carosello -->
+	        <button class="carousel-control-prev" type="button" data-bs-target="#recensioniCarousel" data-bs-slide="prev">
+	            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	            <span class="visually-hidden">Previous</span>
+	        </button>
+	        <button class="carousel-control-next" type="button" data-bs-target="#recensioniCarousel" data-bs-slide="next">
+	            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	            <span class="visually-hidden">Next</span>
+	        </button>
+	    </div>
+	</div>
 
   </div> <!-- Chiusura Container-Fluid -->
 

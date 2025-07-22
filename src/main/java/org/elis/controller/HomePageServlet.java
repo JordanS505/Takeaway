@@ -6,6 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import org.elis.dao.DaoFactory;
+import org.elis.dao.RecensioneDao;
+import org.elis.dao.jpa.JPARecensioneDao;
+import org.elis.model.Recensione;
 
 @WebServlet("/HomePageServlet")
 public class HomePageServlet extends HttpServlet {
@@ -16,7 +22,14 @@ public class HomePageServlet extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/public-jsp/Homepage.jsp").forward(request, response);
+		RecensioneDao recensioneDao = DaoFactory.getDaoFactory().getRecensioneDao();
+	    try {
+	        List<Recensione> recensioni = recensioneDao.findAll();
+	        request.setAttribute("recensioni", recensioni);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    request.getRequestDispatcher("/public-jsp/Homepage.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
