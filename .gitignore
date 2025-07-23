@@ -4,4 +4,5 @@ src/main/resources/db_password
 .project
 /target/
 /build/
+/bin/
 src/main/java/META-INF/persistence.xml
