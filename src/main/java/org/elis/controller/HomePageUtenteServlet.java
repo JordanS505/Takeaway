@@ -8,6 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
+
+import org.elis.dao.DaoFactory;
+import org.elis.dao.RecensioneDao;
+import org.elis.model.Recensione;
 
 /**
  * Servlet implementation class HomePageUtenteServlet
@@ -30,10 +35,20 @@ public class HomePageUtenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		if(session.getAttribute("UtenteLoggato")!=null)
-		request.getRequestDispatcher("/WEB-INF/private-jsp/HomepageUtente.jsp").forward(request, response);
-		else
+		if(session.getAttribute("UtenteLoggato")!=null) {
+			RecensioneDao recensioneDao = DaoFactory.getDaoFactory().getRecensioneDao();
+		    try {
+		        List<Recensione> recensioni = recensioneDao.findAll();
+		        request.setAttribute("recensioni", recensioni);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		
+		    request.getRequestDispatcher("/WEB-INF/private-jsp/HomepageUtente.jsp").forward(request, response);
+		
+		}else {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+		}
 	}
 
 	/**

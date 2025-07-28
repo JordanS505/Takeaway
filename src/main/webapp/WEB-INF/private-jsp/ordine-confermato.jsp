@@ -9,8 +9,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ordine Confermato</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
+    
     <!-- CSS -->
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/ordine-inviato.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/ordine-confermato.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -29,24 +31,11 @@
                 <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
             </a>
         </div>
-        <div class="hamburger" id="hamburger">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-        <nav class="navmenu" id="navmenu">
-            <a href="#" class="mobile-only">Accedi</a>
-            <a href="#" class="mobile-only">Diventa Partner</a>
-            <a href="#" class="mobile-only">Iscrizione Utente</a>
-        </nav>
-        <div class="icone">
-            <a href="<%=request.getContextPath() %>/ProfiloUtenteServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-            <%if(u!=null){
-            	if(u.getRuolo().name().equalsIgnoreCase("ristoratore")){%>
-            <a href="<%=request.getContextPath() %>/PaginaProfiloRistoratoreServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
-        </div>
     </header>
-	<%}} %>
+
     <!-- Contenuto principale -->
-    <div class="container-fluid thank-you-container" id="contenuto">
+    <div class="container-fluid thank-you-container" id="contenuto" style="background-image: url('<%=request.getContextPath()%>/src/res/Frame 12.png');
+    ">
         <div class="thank-you-box text-center p-5 rounded-4 shadow-lg">
             <h1 class="mb-3">Grazie per aver ordinato!</h1>
             <p class="mb-4">
@@ -54,6 +43,7 @@
                 Ti contatteremo a breve con i dettagli.
             </p>
             <a href="<%=request.getContextPath() %>/HomePageUtenteServlet" class="btn btn-success btn-lg px-4 py-2 fw-semibold rounded-pill">Torna alla Home</a>
+            <a href="<%=request.getContextPath() %>/ProfiloUtenteServlet" class="btn btn-success btn-lg px-4 py-2 fw-semibold rounded-pill">Vai al Profilo</a>
         </div>
     </div>
 
@@ -78,16 +68,17 @@
                 <!-- Colonna Link utili -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">Link utili</h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Chi siamo</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">FAQ</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Contatti</a></p>
-                </div>
-                <!-- Colonna Profili -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">Profili</h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Utente</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Diventa Partner</a></p>
+                    <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+			          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+			          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+			        </div>
+			        <!-- Colonna Profili -->
+			        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+			          <h6 class="text-uppercase fw-bold mb-4">
+			            Profili
+			          </h6>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
                 </div>
                 <!-- Colonna Contatti -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -106,7 +97,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<%=request.getContextPath() %>/js/ordine-inviato.js"></script>
 </body>
 
 </html>

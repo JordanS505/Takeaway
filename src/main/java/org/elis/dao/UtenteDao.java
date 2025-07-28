@@ -26,6 +26,8 @@ public interface UtenteDao extends GeneralDao<Utente> {
 	Utente findUtenteByLogin(String email, String password) throws Exception;
 
 	public Utente findUtenteByEmail(String email) throws Exception;
+
+	Double VotoMediobyIdRist(Long idRist) throws Exception;
 	
 	
 }

@@ -16,10 +16,10 @@
 
 </head>
 
-<body class="d-flex flex-column">
+<body class="d-flex flex-column" style="background-image: url('<%=request.getContextPath() %>/src/res/Frame 12.png')">
 <header id="scroll-header">
     <div class="logo">
-      <a href="#">
+      <a href="<%= request.getContextPath()%>/HomePageServlet">
         <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
       </a>
     </div>
@@ -31,13 +31,9 @@
       <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" class="mobile-only">Diventa Partner</a>
       <a href="<%=request.getContextPath() %>/Registrazione" class="mobile-only">Iscrizione Utente</a>
     </nav>
-    <div class="icone">
-      <a href="<%=request.getContextPath() %>/LoginServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-      <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
-    </div>
   </header>
 
-	<div class="container d-flex flex-column" id="contenuto">
+	<div class="container d-flex flex-column" id="contenuto" >
 		<div class="row justify-content-center">
 
 			<div class="col rounded-5 shadow bg-white" style="max-width: 500px">
@@ -149,30 +145,17 @@
 				<!-- Colonna Link utili -->
 				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 					<h6 class="text-uppercase fw-bold mb-4">Link utili</h6>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Chi siamo</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">FAQ</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Contatti</a>
-					</p>
-				</div>
-				<!-- Colonna Profili -->
-				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-					<h6 class="text-uppercase fw-bold mb-4">Profili</h6>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Profilo
-							Utente</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Profilo
-							Ristoratore</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Carrello</a>
-					</p>
+					<p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+			          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+			          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+			        </div>
+			        <!-- Colonna Profili -->
+			        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+			          <h6 class="text-uppercase fw-bold mb-4">
+			            Profili
+			          </h6>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
 				</div>
 				<!-- Colonna Contatti -->
 				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

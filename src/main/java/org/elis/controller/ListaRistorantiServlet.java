@@ -26,6 +26,9 @@ public class ListaRistorantiServlet extends HttpServlet {
 
 		try {
 			List<Utente> ristoranti = uDao.findRistoratori(); // solo quelli con ruolo ristoratore
+			for(Utente r : ristoranti) {
+				r.setVotoM(uDao.VotoMediobyIdRist(r.getIdUtente()));
+			}
 			request.setAttribute("ristoranti", ristoranti);
 			List<Tipologia> tutteTipologie = tipologiaDao.findAll();
 			request.setAttribute("tutteTipologie", tutteTipologie);

@@ -74,7 +74,6 @@ header {
         width: 100%;
         height: calc(100vh - 70px);
         background-color: #c1280f;
-        /* Fisso anche su mobile */
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
@@ -122,16 +121,9 @@ header {
     }
 }
 
-
-
-
 #primotitolo {
     margin-top: 75px;
-    
 }
-
-
-
 
 h1, h2 {
     font-family: 'Raleway';
@@ -162,7 +154,7 @@ p {
     background: rgba(0, 0, 0, 0.6);
     align-items: center;
     justify-content: center;
-    z-index: 11000; /* più alto del popup portata */
+    z-index: 11000;
 }
 
 #popupCategoria form {
@@ -214,10 +206,6 @@ p {
     color: white;
 }
 
-
-
-
-
 /* POPUP AGGIUNGI PORTATA*/
 #popup {
     display: none;
@@ -228,26 +216,26 @@ p {
     align-items: center;
     justify-content: center;
     z-index: 10000;
-  }
+}
   
-  #popup form {
+#popup form {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     max-width: 350px;
     width: 90%;
     box-sizing: border-box;
-  }
+}
   
-  #popup form h3 {
+#popup form h3 {
     margin-top: 0;
     margin-bottom: 15px;
-  }
+}
   
-  #popup input[type="text"],
-  #popup input[type="number"],
-  #popup textarea,
-  #popup input[type="file"] {
+#popup input[type="text"],
+#popup input[type="number"],
+#popup textarea,
+#popup input[type="file"] {
     width: 100%;
     margin: 6px 0;
     padding: 8px;
@@ -257,39 +245,35 @@ p {
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
-  }
+}
   
-  #popup textarea {
+#popup textarea {
     min-height: 60px;
-  }
+}
   
-  .buttons {
+.buttons {
     margin-top: 10px;
     text-align: right;
-  }
+}
   
-  .buttons button {
+.buttons button {
     padding: 6px 12px;
     margin-left: 8px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
-  }
+}
   
-  #closeBtn {
+#closeBtn {
     background: #ccc;
     color: #333;
-  }
+}
   
-  #popup button[type="submit"] {
+#popup button[type="submit"] {
     background: #198754;
     color: white;
-  }
- /* POPUP AGGIUNGI PORTATA*/
-
-
-
+}
 
 /* POPUP ELIMINA PORTATA*/
 #popupElimina {
@@ -301,31 +285,30 @@ p {
     align-items: center;
     justify-content: center;
     z-index: 11000;
-  }
+}
   
-  #popupElimina .popup-box {
+#popupElimina .popup-box {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     max-width: 500px;
-  }
+}
 
-  #popupElimina .popup-buttons {
+#popupElimina .popup-buttons {
     display: flex !important;
     justify-content: center !important;
-    gap: 15px; /* spazio tra i due bottoni */
+    gap: 15px;
     margin-top: 20px;
-  }
+}
   
-  
-  #popupElimina .popup-buttons {
+#popupElimina .popup-buttons {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
-  }
+}
   
-  #notificaEliminata {
+#notificaEliminata {
     display: none;
     position: fixed;
     top: 50%;
@@ -339,23 +322,11 @@ p {
     z-index: 12000;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-/* POPUP ELIMINA PORTATA*/
-
-
-
-
-
-
-
-
-
-
+}
 
 #colonnasinistra, #colonnadestra {
     padding: 20px;
-    align-self: flex-start; /* <-- chiave per evitare stretching */
+    align-self: flex-start;
 }
 
 @media screen and (max-width: 768px) {
@@ -367,9 +338,8 @@ p {
     #colonnadestra{
         margin-top:50px;
     }
-  }
+}
   
-
 #colonnasinistra p {
     font-size: 16px;
     margin-bottom: 12px;
@@ -380,28 +350,23 @@ p {
     color: #198754;
 }
 
-
-
 .ristorante-img-wrapper img {
     max-height: 200px;
     object-fit: cover;
 }
 
-
-
 /* CSS CARD */
 .vertical-align-fix {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* centra verticalmente */
+    align-items: center;
     gap: 1rem;
-    flex-wrap: nowrap; /* evita wrap */
-
+    flex-wrap: nowrap;
 }
 
 .order-details {
     flex-grow: 1;
-    min-width: 0; /* previene overflow */
+    min-width: 0;
 }
 
 .order-meta {
@@ -410,28 +375,24 @@ p {
 }
 
 hr {
-
     margin-top: 0px !important;
     margin-bottom: 0px !important;
-  }
-
-/* FIX SPAZIO TRA CARD E IMMAGINI */
+}
 
 .order-card {
     margin-bottom: 20px;
-    border: none !important; /* Rimuove il bordo */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Aggiunge ombra */
-    border-radius: 20px; /* Opzionale: per bordi più morbidi */
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
 
-
 .immagine-card {
-    width: 130px;
-    height: 130px;
+    width: 225px;
+    height:100%;
     margin: 0 !important;
     padding: 0 !important;
     border-radius: 0 !important;
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -444,101 +405,80 @@ hr {
     display: block;
     margin: 0 !important;
     padding: 0 !important;
- 
 }
 
 .card-body {
     padding: 0 !important;
+    height: 150px;
 }
-
-
-
-
-
-
-/* CSS CARD */
-
-
 
 /* CSS CARD MOBILE */
 @media screen and (max-width: 768px) {
+    /* Card mobile completamente riorganizzata */
+    .card.order-card {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        overflow: hidden;
+        padding: 0 !important; /* Aggiunto */
+        margin: 0 0 20px 0 !important; /* Solo margine inferiore */
+    }
+    
     .card-body.vertical-align-fix {
         flex-direction: column;
-        align-items: center;
-        gap: 15px;
+        height: auto;
+        padding: 0 !important;
+        margin: 0 !important;
     }
-
-    .card-body.vertical-align-fix > div {
-        width: 100%;
-        text-align: center;
-    }
-
-    .card-body.vertical-align-fix > .immagine-card,
-    .card-body.vertical-align-fix > .order-details,
-    .card-body.vertical-align-fix > .order-meta {
-        width: 100%;
-    }
-
-    /* Mantieni immagine quadrata e centra */
+    
     .immagine-card {
-        width: 200px;
-        height: 200px;
-        flex-shrink: 0;
-        margin: 0 auto;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        width: 100% !important;
+        height: 200px !important;
+        margin: 0 !important;
+        padding: 0 !important;
         overflow: hidden;
+        
     }
-
+    
     .immagine-card img {
         width: 100%;
+        max-width: 100%; /* Aggiunto */
         height: 100%;
         object-fit: cover;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 0 !important;
-        border-bottom-right-radius: 0;
         display: block;
-        margin: 0 auto;
+        margin: 0 !important;
+        padding: 0 !important;
     }
-
-    .order-details p {
-        margin: 0 auto 10px auto;
-    }
-
-    .order-meta {
-        text-align: center;
+    
+    .order-details {
+        padding: 15px;
         width: 100%;
-        display: flex;
-        justify-content: center;
+        text-align: left;
     }
-
-    .order-meta button {
+    
+    .portata-actions {
+        width: 100%;
+        padding: 0 15px 15px 15px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .portata-actions form {
         width: auto;
-        min-width: 120px;
-        margin-bottom: 20px; /* aggiunto */
+    }
+    
+    .categoria-actions form {
+        margin-bottom: 10px;
+    }
+    
+    .categoria-actions button {
+        width: 100%;
+    }
+    
+    .aggiungi-portata-btn {
+        width: 100%;
     }
 }
-
-/* CSS CARD MOBILE */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* FOOTER */
 #logofooter {
@@ -592,5 +532,3 @@ hr {
         justify-content: center !important;
     }
 }
-
-

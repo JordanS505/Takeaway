@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/faq.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/faq.css" />
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -26,26 +26,26 @@
     <!-- Header -->
     <header id="scroll-header">
         <div class="logo">
-            <a href="#">
-                <img src="../res/logo-bianco.png" alt="Logo" />
+            <a href="<%=request.getContextPath() %>/HomePageServlet">
+                <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
             </a>
         </div>
         <div class="hamburger" id="hamburger">
             <i class="fa-solid fa-bars"></i>
         </div>
         <nav class="navmenu" id="navmenu">
-            <a href="#" class="mobile-only">Accedi</a>
-            <a href="#" class="mobile-only">Diventa Partner</a>
-            <a href="#" class="mobile-only">Iscrizione Utente</a>
-        </nav>
-        <div class="icone">
-            <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-            <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
+            <a href="<%=request.getContextPath() %>/LoginServlet" class="mobile-only">Accedi</a>
+		      <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" class="mobile-only">Diventa Partner</a>
+		      <a href="<%=request.getContextPath() %>/Registrazione" class="mobile-only">Iscrizione Utente</a>
+		    </nav>
+		    <div class="icone">
+		      <a href="<%=request.getContextPath() %>/LoginServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
+		      <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
         </div>
     </header>
 
     <!-- Immagine hero -->
-    <div class="immChiSiamo">
+    <div class="immChiSiamo" style="background-image: url('<%=request.getContextPath()%>/src/res/ramen.jpg')">
         <h1 class="hero-title">FAQ</h1>
     </div>
 
@@ -296,18 +296,17 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         Link utili</h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Chi siamo</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">FAQ</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Contatti</a></p>
-                </div>
-                <!-- Colonna Profili -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Profili
-                    </h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Utente</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Diventa Partner</a></p>
+                    <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+			          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+			          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+			        </div>
+			        <!-- Colonna Profili -->
+			        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+			          <h6 class="text-uppercase fw-bold mb-4">
+			            Profili
+			          </h6>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
                 </div>
                 <!-- Colonna Contatti -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -329,7 +328,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/contatti.js"></script>
+    <script src="<%=request.getContextPath() %>/js/contatti.js"></script>
 </body>
 
 </html>

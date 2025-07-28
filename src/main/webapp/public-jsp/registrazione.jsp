@@ -8,6 +8,9 @@
     <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
     <title>EnjoEat | Registrati</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-...==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
     	@font-face {
     		font-family: 'Rubik';
@@ -25,9 +28,72 @@
 	    	filter: brightness(115%);
 	     	cursor: pointer;
 	    }
+	    
+	    /* FOOTER */
+
+
+		#logofooter {
+		   width: 150px;
+		   padding-bottom: 25px;
+		}
+		
+		
+		#sezionefooter {
+		   background-color: #c1280f;
+		   margin-top:100px;
+		   padding-top: 40px;
+		   padding-bottom: 10px;
+		}
+		
+		
+		#instagram-icon,
+		#facebook-icon,
+		#x-icon,
+		#linkedin-icon {
+		   color: white;
+		   font-size: 25px;
+		}
+		
+		
+		#fame {
+		   color: white;
+		}
+		
+		
+		#sezionefooter a {
+		   color: white !important;
+		}
+		
+		
+		#sezionefooter p {
+		   color: white !important;
+		}
+		
+		
+		#sezionefooter h6 {
+		   color: #ff9b19;
+		}
+		
+		
+		#sezionecopyright {
+		   height: 70px;
+		   background-color: #7f2d07;
+		}
+		
+		
+		#testocopyright {
+		   color: white;
+		}
+		
+		
+		/* Centrare icone footer su dispositivi mobili */
+		@media (max-width: 768px) {
+		   .iconefooter {
+		       justify-content: center !important;
+		   }
     </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background-image: url('<%=request.getContextPath() %>/src/res/Frame 12.png')">
 
   <nav class="navbar mb-4" style="background-color: #c1280f">
         <div class="container-fluid" style="height:55px">
@@ -37,9 +103,11 @@
             </a>
         </div>
     </nav>
-
+	
     <div class="container pt-5">
-        <div class="row mb-3">
+    	<div class="row justify-content-center">
+    	<div class="col rounded-5 shadow bg-white" style="max-width: 500px">
+        <div class="row mt-3 mb-3">
             <div class="col">
                 <h1 class="mx-auto" style="max-width: 400px;">Registrati</h1>
             </div>
@@ -179,14 +247,59 @@
             	<p class="text-muted small">Sei già registrato? <a href="<%=request.getContextPath()%>/LoginServlet" class="small">Accedi</a></p>
             </div>
         </div>
+        </div>
+        </div>
     </div>
     
-    <footer class="bg-light text-center py-3 border-top mt-auto">
-        <div class="container">
-            <img src="<%=request.getContextPath()%>/src/icon.png" alt="icon" height="40">
-            <small class="text-muted">&copy; 2025 EnjoEat. Tutti i diritti riservati.</small>
-        </div>
-    </footer>
+    <!-- Footer -->
+   <footer id="sezionefooter">
+       <div class="container text-center text-md-start">
+           <div class="row mt-3">
+               <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                   <!-- Logo -->
+                   <img src="<%=request.getContextPath() %>/src/res/logo_giallo.png" alt="" id="logofooter">
+                   <p id="fame">
+                       Entra in Enjoeat: che tu voglia ordinare o diventare partner,
+                       sei nel posto giusto.
+                   </p>
+                   <div class="iconefooter d-flex gap-3">
+                       <i class="fa-brands fa-square-instagram" id="instagram-icon"></i>
+                       <i class="fa-brands fa-square-facebook" id="facebook-icon"></i>
+                       <i class="fa-brands fa-square-x-twitter" id="x-icon"></i>
+                       <i class="fa-brands fa-linkedin" id="linkedin-icon"></i>
+                   </div>
+               </div>
+               <!-- Colonna Link utili -->
+               <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                   <h6 class="text-uppercase fw-bold mb-4">
+                       Link utili</h6>
+                   <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+		          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+		          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+		        </div>
+		        <!-- Colonna Profili -->
+		        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+		          <h6 class="text-uppercase fw-bold mb-4">
+		            Profili
+		          </h6>
+		          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+		          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
+               	</div>
+               <!-- Colonna Contatti -->
+               <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                   <h6 class="text-uppercase fw-bold mb-4">Contatti</h6>
+                   <p>Roma, RM 00100, IT</p>
+                   <p>enjoeat@enjoeatapp.com</p>
+                   <p>+39 023 85 94 747</p>
+               </div>
+           </div>
+       </div>
+   </footer>
+   <!-- Copyright -->
+   <div class="d-flex align-items-center justify-content-center pt-3" id="sezionecopyright">
+       <p id="testocopyright">Copyright © 2025 EnjoEat | All rights reserved.</p>
+   </div>
+
     
     <script>
 		document.getElementById("password").addEventListener("input", function() {

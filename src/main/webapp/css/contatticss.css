@@ -161,7 +161,6 @@ h2 {
     position: relative;
     /* necessario per posizionare il titolo */
     height: 50vh;
-    background-image: url('../res/sfondosushi.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

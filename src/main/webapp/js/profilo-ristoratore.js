@@ -1,10 +1,5 @@
 // Hamburger menu toggle
-const hamburger = document.getElementById('hamburger');
 const navmenu = document.getElementById('navmenu');
-
-hamburger.addEventListener('click', () => {
-  navmenu.classList.toggle('active');
-});
 
 // Chiudi menu al click su link (opzionale)
 document.querySelectorAll('.navmenu a').forEach(link => {

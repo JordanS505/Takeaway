@@ -11,6 +11,9 @@
     <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
     <title>EnjoEat | Registrati</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-...==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <style>
     #containerTipologie .row {
@@ -86,7 +89,7 @@
 }
     
 </style>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background-image: url('<%=request.getContextPath() %>/src/res/Frame 12.png')">
 
     <nav class="navbar mb-4" style="background-color: #c1280f">
         <div class="container-fluid" style="height:55px">
@@ -310,7 +313,7 @@
            <div class="row mt-3">
                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                    <!-- Logo -->
-                   <img src="../res/logo_giallo.png" alt="" id="logofooter">
+                   <img src="<%=request.getContextPath() %>/src/res/logo_giallo.png" alt="" id="logofooter">
                    <p id="fame">
                        Entra in Enjoeat: che tu voglia ordinare o diventare partner,
                        sei nel posto giusto.
@@ -326,19 +329,18 @@
                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                    <h6 class="text-uppercase fw-bold mb-4">
                        Link utili</h6>
-                   <p><a href="#!" class="text-reset text-decoration-none">Chi siamo</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">FAQ</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">Contatti</a></p>
-               </div>
-               <!-- Colonna Profili -->
-               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                   <h6 class="text-uppercase fw-bold mb-4">
-                       Profili
-                   </h6>
-                   <p><a href="#!" class="text-reset text-decoration-none">Profilo Utente</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">Carrello</a></p>
-               </div>
+                   <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+		          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+		          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+		        </div>
+		        <!-- Colonna Profili -->
+		        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+		          <h6 class="text-uppercase fw-bold mb-4">
+		            Profili
+		          </h6>
+		          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+		          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
+               	</div>
                <!-- Colonna Contatti -->
                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                    <h6 class="text-uppercase fw-bold mb-4">Contatti</h6>

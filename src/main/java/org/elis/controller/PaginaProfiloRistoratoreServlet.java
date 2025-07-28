@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.elis.dao.DaoFactory;
 import org.elis.dao.OrdineDao;
+import org.elis.dao.UtenteDao;
 import org.elis.model.Ordine;
 import org.elis.model.Utente;
 
@@ -26,10 +27,12 @@ public class PaginaProfiloRistoratoreServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		OrdineDao oDao = DaoFactory.getDaoFactory().getOrdineDao();
+		UtenteDao uDao = DaoFactory.getDaoFactory().getUtenteDao();
 		Utente u = (Utente)session.getAttribute("UtenteLoggato");
 		try {
 			List<Long> idOrdini = oDao.findAllIdOrdinebyIDRistoratore(u.getIdUtente());
 			List<Ordine> ordini = new ArrayList<>();
+			u.setVotoM(uDao.VotoMediobyIdRist(u.getIdUtente()));
 			for(Long id : idOrdini) {
 				Ordine ordine = oDao.selectById(id);
 				ordini.add(ordine);

@@ -20,6 +20,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EnjoEat | Modifica Menù</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
     <!-- CSS -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/aggiungi-portata.css" />
     <!-- Google Fonts -->
@@ -31,6 +32,14 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -38,21 +47,12 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
     <!-- Header -->
     <header id="scroll-header">
         <div class="logo">
-            <a href="#">
-                <img src="<%=request.getContextPath()%>/res/logo-bianco.png" alt="Logo" />
+            <a href="<%=request.getContextPath()%>/HomePageUtenteServlet">
+                <img src="<%=request.getContextPath()%>/src/res/logo-bianco.png" alt="Logo" />
             </a>
         </div>
         <div class="hamburger" id="hamburger">
             <i class="fa-solid fa-bars"></i>
-        </div>
-        <nav class="navmenu" id="navmenu">
-            <a href="#" class="mobile-only">Accedi</a>
-            <a href="#" class="mobile-only">Diventa Partner</a>
-            <a href="#" class="mobile-only">Iscrizione Utente</a>
-        </nav>
-        <div class="icone">
-            <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-            <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
         </div>
     </header>
 
@@ -84,7 +84,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
 		        </div>
                 <div class="buttons">
                     <button type="button" id="closeBtn">Annulla</button>
-                    <input type="submit" value="Invia">
+                    <button type="submit" class="btn btn-success">Invia</button>
                 </div>
             </form>
         </div>
@@ -110,10 +110,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                 <h2 class="mb-4"><%=u.getNomeRistorante()%></h2>
                 <!-- Immagine profilo ristorante con icona modifica -->
                 <div class="ristorante-img-wrapper d-flex align-items-center gap-2 mb-4">
-                    <img src="<%=u.getFoto() %>" alt="Foto Ristorante" class="img-fluid shadow-sm"
-                        style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
-                    <a href="#" class="text-decoration-none" title="Modifica Foto">
-                    </a>
+                    <img src="data:image/png;base64, <%= u.getBase64ImageString() %>" alt="Foto ristorante" style="width: 150px; height: 150px; border-radius: 50%;">
                 </div>
                 <p>
                     <i class="fa-solid fa-user me-2"></i><strong><%=u.getNome() %> <%=u.getCognome() %></strong>
@@ -123,8 +120,6 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                 <p><i class="fa-solid fa-envelope me-2"></i><%=u.getEmail() %></p>
                 <p>
                     <i class="fa-solid fa-key me-2"></i>********
-                    <a href="#" class="text-decoration-none ms-2" title="Modifica Password">
-                    </a>
                 </p>
                 <p><i class="fa-solid fa-location-dot me-2"></i><%=u.getIndirizzoRistorante() %></p>
                 <p><i class="fa-solid fa-clock me-2"></i>10:00 - 22:30</p>
@@ -140,65 +135,74 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                 <%if (categorie!=null && !categorie.isEmpty()) { %>
                     <% for(Categoria c : categorie) { %>
                         <div class="mb-5 categoria-section">
-                            <div class="categoria-header">
+                            <div class="categoria-header d-flex justify-content-between">
                                 <h2><%=c.getNome() %></h2>
                                 <div class="categoria-actions">
                                     <form action="<%=request.getContextPath() %>/RimuoviCategoria" method="post" 
                                           onsubmit="return confirm('Sei sicuro di voler eliminare la categoria <%=c.getNome()%> e tutte le sue portate?')">
                                         <input type="hidden" name="idCategoria" value="<%=c.getId()%>">
                                         <button type="submit" class="btn btn-danger btn-sm rounded-3">
-                                            <i class="fa-solid fa-trash me-1"></i> Rimuovi
+                                            <i class="fa-solid fa-trash me-1"></i> Rimuovi Categoria
                                         </button>
                                     </form>
-                                    <button type="button" class="btn btn-success btn-sm aggiungi-portata-btn rounded-3"
-                                        data-sezione="<%=c.getId()%>">
-                                        <i class="fa-solid fa-plus me-1"></i> Aggiungi
-                                    </button>
+                                    
                                 </div>
+                              
                             </div>
-                            
+                            <button type="button" class="btn btn-success btn-sm aggiungi-portata-btn rounded-3 mb-3"
+                                        data-sezione="<%=c.getId()%>">
+                                        <i class="fa-solid fa-plus me-1"></i> Aggiungi Portata
+                                    </button>
                             <% if(portate != null && !portate.isEmpty()) { 
                                 boolean hasPortate = false;
                                 for(Portata p : portate) { 
                                     if(p.getCategoria().getId() == c.getId()) { 
                                         hasPortate = true; %>
-                                        <div class="card order-card flex-shrink-0 rounded-5 mb-3">
-                                            <div class="card-body vertical-align-fix d-flex">
-                                                <div class="immagine-card rounded-start-5 me-3">
+                                        <div class="card order-card flex-shrink-0 rounded-5 mb-3 overflow-hidden">
+                                            <div class="card-body vertical-align-fix d-flex ">
+                                                <div class="immagine-card  me-md-3">
                                                     <% if(p.getFoto()!=null) { %>
-                                                        <img src="data:image/png;base64, <%= p.getBase64ImageString() %>" alt="Foto portata" class="rounded-start-5">
+                                                        <img src="data:image/png;base64, <%= p.getBase64ImageString() %>" alt="Foto portata">
                                                     <% } else { %>
                                                         <img src="" alt="Foto portata" class="rounded-start-5">
                                                     <% } %>
                                                 </div>
                                                 <div class="order-details">
-                                                    <p class="mb-2"><strong><%=p.getNome() %></strong></p>
+                                                    <h4 class="mb-2"><strong><%=p.getNome() %></strong></h4>
                                                     <p class="mb-2"><%=p.getDescrizione() %></p>
                                                     <p class="mb-2">€ <%=String.format(Locale.ITALY, "%.2f", p.getPrezzo()) %></p>
-                                                    <div class="portata-actions">
-                                                        <form action="<%=request.getContextPath() %>/RimuoviPortata" method="post"
-                                                              onsubmit="return confirm('Rimuovere questa portata dal menù?')">
-                                                            <input type="hidden" name="idPortata" value="<%=p.getId() %>">
-                                                            <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                                <i class="fa-solid fa-trash"></i> Rimuovi
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                                    <div>
+														<%if(p.isSenzaGlutine()==true){%>
+															<img src="<%=request.getContextPath()%>/src/senzaGlutine.png" alt="Senza Glutine" style="height:30px">
+														<% } %>
+														<%if(p.isSenzaLattosio()==true){%>
+															<img src="<%=request.getContextPath()%>/src/senzaLattosio.png" alt="Senza Lattosio" style="height:30px">
+														<% } %>
+													</div>
+                                                </div>
+                                                <div class="portata-actions me-3">
+	                                                <form action="<%=request.getContextPath() %>/RimuoviPortata" method="post"
+	                                                      onsubmit="return confirm('Rimuovere questa portata dal menù?')">
+	                                                    <input type="hidden" name="idPortata" value="<%=p.getId() %>">
+	                                                    <button type="submit" class="btn btn-danger btn-sm rounded-3">
+	                                                        <i class="fa-solid fa-trash"></i> Rimuovi Portata
+	                                                    </button>
+	                                                </form>
                                                 </div>
                                             </div>
                                         </div>
                                     <% } 
                                 } 
                                 if(!hasPortate) { %>
-                                    <div class="alert alert-info">Nessuna portata in questa categoria</div>
+                                    <div class="alert alert-info border rounded-3">Nessuna portata in questa categoria</div>
                                 <% }
                             } else { %>
-                                <div class="alert alert-info">Nessuna portata in questa categoria</div>
+                                <div class="alert alert-info border rounded-3">Nessuna portata in questa categoria</div>
                             <% } %>
                         </div>
                     <% } %>
                 <% } else { %>
-                    <div class="alert alert-warning">Nessuna categoria disponibile</div>
+                    <div class="alert alert-warning rounded-3">Nessuna categoria disponibile</div>
                 <% } %>
                 
                 <button type="button" id="btnApriCategoria" class="btn btn-primary mt-3">
@@ -218,7 +222,7 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Logo -->
-                    <img src="<%=request.getContextPath()%>/res/logo_giallo.png" alt="" id="logofooter">
+                    <img src="<%=request.getContextPath()%>/src/res/logo_giallo.png" alt="" id="logofooter">
                     <p id="fame">
                         Entra in Enjoeat: che tu voglia ordinare o diventare partner,
                         sei nel posto giusto.
@@ -234,18 +238,17 @@ List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         Link utili</h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Chi siamo</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">FAQ</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Contatti</a></p>
-                </div>
-                <!-- Colonna Profili -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Profili
-                    </h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Utente</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Carrello</a></p>
+                    <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+			          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+			          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+			        </div>
+			        <!-- Colonna Profili -->
+			        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+			          <h6 class="text-uppercase fw-bold mb-4">
+			            Profili
+			          </h6>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
                 </div>
                 <!-- Colonna Contatti -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

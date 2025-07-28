@@ -11,6 +11,8 @@ body {
     font-size: 20px;
 }
 
+
+
 header {
     display: flex;
     align-items: center;
@@ -24,6 +26,18 @@ header {
     left: 0;
     z-index: 1000;
 }
+
+.visualizzaRecensioneBtn {
+    margin: 10px 0;
+    padding: 8px 15px;
+    background-color: #c1280f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+
 
 .logo img {
     height: 32px;
@@ -480,6 +494,6 @@ p {
     }
 }
 
-
+ 
 
 

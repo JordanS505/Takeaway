@@ -194,5 +194,12 @@ public class JPAUtenteDao implements UtenteDao{
             return null;
         }
 	}
-
+	
+	@Override
+	public Double VotoMediobyIdRist(Long idRist) throws Exception{
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("SELECT AVG(r.voto) from Recensione r join Ordine o on r.ordine.id=o.id where o.ristoratore.idUtente= :idRist");
+        q.setParameter("idRist", idRist);
+        return (Double) q.getSingleResult();
+	}
 }

@@ -29,7 +29,7 @@
 	
 	#sezionefooter {
 	   background-color: #c1280f;
-	   margin-top:100px;
+	   margin-top:75px;
 	   padding-top: 40px;
 	   padding-bottom: 10px;
 	}
@@ -300,7 +300,7 @@
 
 
     <div class="container-fluid">
-        <div class="row gx-3 gap-4">
+        <div class="row gx-3 gap-4" style="margin-top: 75px">
 			<div class="col"></div>
            <!-- Sidebar -->
 			<div class="sidebar col-12 col-md-3 mb-3 border-0 rounded-5 p-0 shadow" style="position: sticky; top: 75px; height: fit-content;">
@@ -380,7 +380,8 @@
 					        }
 					    }
 					%>"
-					data-rating="<%= r.getVotoM() != null ? (r.getVotoM()) : 0 %>">
+					<%int voto = r.getVotoM() != null ? (int) Math.round(r.getVotoM()) : 0; %>
+					data-rating="<%= voto%>">
 					<%if(r.getFoto()!=null){ %>
 				        <img src="data:image/png;base64, <%= r.getBase64ImageString() %>"
 				             alt="Foto ristorante"
@@ -410,14 +411,14 @@
 				                <div class="rating mt-2">
 
 				                	
-				                    <% int voto = r.getVotoM() != null ? (int) Math.round(r.getVotoM()) : 0;
+				                    <% 
 				                       for (int i = 0; i < 5; i++) { %>
 				                        <i class="fa-solid fa-star <%= i < voto ? "star-on" : "text-secondary" %>"></i>
 				                    <% } %>
 				                    
 				                    
 				                </div>
-				                <span class="ms-2 rating-value mt-2"><%= r.getVotoM() %></span>
+				                <span class="ms-2 rating-value mt-2"><%= voto != 0 ? voto+"/5" : "Nessuna recensione"%></span>
 				            </div>
 				            <div class="row pt-2">
 				                <div class="col-8 d-flex align-items-center">
@@ -466,18 +467,17 @@
                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                    <h6 class="text-uppercase fw-bold mb-4">
                        Link utili</h6>
-                   <p><a href="#!" class="text-reset text-decoration-none">Chi siamo</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">FAQ</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">Contatti</a></p>
-               </div>
-               <!-- Colonna Profili -->
-               <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                   <h6 class="text-uppercase fw-bold mb-4">
-                       Profili
-                   </h6>
-                   <p><a href="#!" class="text-reset text-decoration-none">Profilo Utente</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-                   <p><a href="#!" class="text-reset text-decoration-none">Carrello</a></p>
+                   <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+		          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+		          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+		        </div>
+		        <!-- Colonna Profili -->
+		        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+		          <h6 class="text-uppercase fw-bold mb-4">
+		            Profili
+		          </h6>
+		          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+		          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
                </div>
                <!-- Colonna Contatti -->
                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

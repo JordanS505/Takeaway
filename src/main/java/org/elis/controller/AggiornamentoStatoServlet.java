@@ -50,7 +50,7 @@ public class AggiornamentoStatoServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		request.getRequestDispatcher("/PaginaProfiloRistoratoreServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/PaginaProfiloRistoratoreServlet");
 	}
 
 }

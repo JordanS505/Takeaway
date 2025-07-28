@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*" %>
+<%@ page import="java.util.*" %>
 <%@ page import="org.elis.model.*" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -25,7 +25,7 @@
   <!-- Header -->
   <header id="scroll-header">
     <div class="logo">
-      <a href="#">
+      <a href="<%=request.getContextPath() %>/HomePageServlet">
         <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
       </a>
     </div>
@@ -40,7 +40,6 @@
     <div class="icone">
       <a href="<%=request.getContextPath() %>/LoginServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
       <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
-      <a href="#" title="Carrello"><i class="fa-solid fa-cart-shopping" id="cart-icon"></i></a>
     </div>
   </header>
 
@@ -169,7 +168,7 @@
         </div>
       </div>
       <div class="col-12 d-flex justify-content-center mt-4">
-        <a href="#" class="btn mt-2 btn-lg rounded-5 p-3" id="ctabtn">ORDINA SUBITO!</a>
+        <a href="<%=request.getContextPath() %>/ListaRistorantiServlet" class="btn mt-2 btn-lg rounded-5 p-3" id="ctabtn">ORDINA SUBITO!</a>
       </div>
     </div>
 
@@ -263,9 +262,9 @@
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
           <h6 class="text-uppercase fw-bold mb-4">
             Link utili</h6>
-          <p><a href="#!" class="text-reset text-decoration-none">Chi siamo</a></p>
-          <p><a href="#!" class="text-reset text-decoration-none">FAQ</a></p>
-          <p><a href="#!" class="text-reset text-decoration-none">Contatti</a></p>
+          <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
         </div>
         <!-- Colonna Profili -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -273,8 +272,7 @@
             Profili
           </h6>
           <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
-          <p><a href="/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-          <p><a href="#" class="text-reset text-decoration-none">Carrello</a></p>
+          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
         </div>
         <!-- Colonna Contatti -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

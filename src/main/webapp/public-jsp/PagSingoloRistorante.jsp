@@ -18,8 +18,7 @@
 	%>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="<%=request.getContextPath()%>/src/icon.png"
-	type="image/png">
+<link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
 <title>EnjoEat | Ordina</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
@@ -252,16 +251,13 @@ header {
 			<i class="fa-solid fa-bars"></i>
 		</div>
 		<nav class="navmenu" id="navmenu">
-			<a href="#" class="mobile-only">Accedi</a> <a href="#"
-				class="mobile-only">Diventa Partner</a> <a href="#"
-				class="mobile-only">Iscrizione Utente</a>
+			<a href="<%=request.getContextPath()%>/LoginServlet" class="mobile-only">Accedi</a> 
+			<a href="<%=request.getContextPath()%>/DiventaPartnerServlet" class="mobile-only">Diventa Partner</a>
+			<a href="<%=request.getContextPath()%>/Registrazione" class="mobile-only">Iscrizione Utente</a>
 		</nav>
 		<div class="icone">
-			<a href="#" title="Profilo Utente"><i class="fa-solid fa-user"
-				id="user-icon"></i></a> <a href="#" title="Profilo Ristoratore"><i
-				class="fa-solid fa-shop" id="shop-icon"></i></a> <a href="#"
-				title="Carrello"><i class="fa-solid fa-cart-shopping"
-				id="cart-icon"></i></a>
+			<a href="<%=request.getContextPath()%>/LoginServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
+			<a href="<%=request.getContextPath()%>/LoginServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
 		</div>
 	</header>
 
@@ -333,7 +329,7 @@ header {
 									<%if(portata.isSenzaLattosio()==true){%>
 										<img src="<%=request.getContextPath()%>/src/senzaLattosio.png" alt="Senza Lattosio" style="height:30px">
 									<% } %>
-									</div>
+								</div>
 							</div>
 							<div class="col-4 pe-5 d-flex flex-column align-items-end">
 								<div class="d-flex gap-1 align-items-center">
@@ -367,7 +363,7 @@ header {
 			<div class="row mt-3">
 				<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 					<!-- Logo -->
-					<img src="../res/logo_giallo.png" alt="" id="logofooter">
+					<img src="<%=request.getContextPath()%>/src/res/logo_giallo.png" alt="" id="logofooter">
 					<p id="fame">Entra in Enjoeat: che tu voglia ordinare o
 						diventare partner, sei nel posto giusto.</p>
 					<div class="iconefooter d-flex gap-3">
@@ -380,30 +376,17 @@ header {
 				<!-- Colonna Link utili -->
 				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 					<h6 class="text-uppercase fw-bold mb-4">Link utili</h6>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Chi siamo</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">FAQ</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Contatti</a>
-					</p>
-				</div>
-				<!-- Colonna Profili -->
-				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-					<h6 class="text-uppercase fw-bold mb-4">Profili</h6>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Profilo
-							Utente</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Profilo
-							Ristoratore</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset text-decoration-none">Carrello</a>
-					</p>
+					<p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+			          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+			          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+			        </div>
+			        <!-- Colonna Profili -->
+			        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+			          <h6 class="text-uppercase fw-bold mb-4">
+			            Profili
+			          </h6>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
 				</div>
 				<!-- Colonna Contatti -->
 				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

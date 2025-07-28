@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contatti</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/contatti.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/contatticss.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
@@ -26,26 +26,26 @@
     <!-- Header -->
     <header id="scroll-header">
         <div class="logo">
-            <a href="#">
-                <img src="../res/logo-bianco.png" alt="Logo" />
+            <a href="<%=request.getContextPath()%>/HomePageServlet">
+                <img src="<%=request.getContextPath()%>/src/res/logo-bianco.png" alt="Logo" />
             </a>
         </div>
         <div class="hamburger" id="hamburger">
             <i class="fa-solid fa-bars"></i>
         </div>
         <nav class="navmenu" id="navmenu">
-            <a href="#" class="mobile-only">Accedi</a>
-            <a href="#" class="mobile-only">Diventa Partner</a>
-            <a href="#" class="mobile-only">Iscrizione Utente</a>
-        </nav>
-        <div class="icone">
-            <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-            <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
+            <a href="<%=request.getContextPath() %>/LoginServlet" class="mobile-only">Accedi</a>
+		      <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" class="mobile-only">Diventa Partner</a>
+		      <a href="<%=request.getContextPath() %>/Registrazione" class="mobile-only">Iscrizione Utente</a>
+		    </nav>
+		    <div class="icone">
+		      <a href="<%=request.getContextPath() %>/LoginServlet" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
+		      <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
         </div>
     </header>
 
     <!-- Immagine hero -->
-    <div class="immChiSiamo">
+    <div class="immChiSiamo" style="background-image: url('<%=request.getContextPath() %>/src/res/sfondosushi.jpg')">
         <h1 class="hero-title mb-4">Contatti</h1>
     </div>
 
@@ -153,7 +153,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/contatti.js"></script>
+    <script src="<%=request.getContextPath() %>/js/contatti.js"></script>
 </body>
 
 </html>

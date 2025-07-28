@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import="org.elis.model.*" %>
 <%@page import="java.util.*" %>
+<%@page import="java.time.format.DateTimeFormatter"%>
+
     
    <!DOCTYPE html>
 <html lang="it">
@@ -10,6 +12,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profilo Utente</title>
+    <link rel="icon" href="<%=request.getContextPath()%>/src/icon.png" type="image/png">
+    
     <!-- CSS -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/profilo-utente.css" />
     <!-- Google Fonts -->
@@ -20,7 +24,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />     
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-...==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <%Utente u = (Utente)session.getAttribute("UtenteLoggato"); %>
 <%List<Ordine> ordini = (List<Ordine>) request.getAttribute("Ordini"); %>
@@ -28,22 +39,9 @@
     <!-- Header -->
     <header id="scroll-header">
         <div class="logo">
-            <a href="#">
-                <img src="../res/logo-bianco.png" alt="Logo" />
+            <a href="<%=request.getContextPath() %>/HomePageUtenteServlet">
+                <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
             </a>
-        </div>
-        <div class="hamburger" id="hamburger">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-        <nav class="navmenu" id="navmenu">
-            <a href="#" class="mobile-only">Accedi</a>
-            <a href="#" class="mobile-only">Diventa Partner</a>
-            <a href="#" class="mobile-only">Iscrizione Utente</a>
-        </nav>
-        <div class="icone">
-            <a href="#" title="Profilo Utente"><i class="fa-solid fa-user" id="user-icon"></i></a>
-            <a href="#" title="Profilo Ristoratore"><i class="fa-solid fa-shop" id="shop-icon"></i></a>
-            <a href="#" title="Carrello"><i class="fa-solid fa-cart-shopping" id="cart-icon"></i></a>
         </div>
     </header>
 
@@ -66,14 +64,11 @@
 
                 <p>
                     <i class="fa-solid fa-user me-2"></i><strong><%=u.getUsername()%></strong>
-                    <a href="#" class="text-decoration-none ms-2" title="Modifica Nome">
-                        <i class="fa-solid fa-pen-to-square" id="iconamodifica"></i>
-                    </a>
                 </p>
                 <p><i class="fa-solid fa-envelope me-2"></i><%=u.getEmail() %></p>
                 <p>
                     <i class="fa-solid fa-key me-2"></i>********
-                    <a href="#" class="text-decoration-none ms-2" title="Modifica Password">
+                    <a href="<%=request.getContextPath() %>/ResetPasswordServlet" class="text-decoration-none ms-2" title="Modifica Password">
                         <i class="fa-solid fa-pen-to-square" id="iconamodifica"></i>
                     </a>
                 </p>
@@ -117,9 +112,19 @@
 			                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i><%=totale %></p>
 			                                    </div>
 			                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-			                                        <span class="badge bg-primary mb-2"><i
-			                                                class="fa-solid fa-hourglass-half me-1"></i><%=o.getStato().name() %></span>
-			                                        <p><b>Ora </b><%=o.getData() %></p>
+			                                        <%switch(o.getStato().name()){
+				                                    	case "RICEVUTO" :
+				                                    		%>
+				                                    		<span class="badge bg-warning mb-2"><i class="fa-solid fa-check-circle me-1">
+				                                            </i><%=o.getStato().name() %></span> <%
+				                                        	break;
+				                                    	case "CONFERMATO" :%>
+				                                         	<span class="badge bg-success mb-2"><i class="fa-solid fa-check-circle me-1">
+				                                            </i><%=o.getStato().name() %></span> <%
+				                                            break;
+														}%>
+			                                        <%DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm"); %>
+			                                        <p><b>Ora </b><%=o.getData().format(format) %></p>
 			                                    </div>
 			                                </div>
 			                            </div>
@@ -168,17 +173,43 @@
 			                                        <p class="mb-2"><i class="fa-solid fa-euro-sign me-2"></i><%=totale %></p>
 			                                    </div>
 			                                    <div class="order-meta text-md-end text-start mt-3 mt-md-0">
-			                                        <span class="badge bg-primary mb-2"><i
-			                                                class="fa-solid fa-hourglass-half me-1"></i><%=o.getStato().name() %></span>
-			                                        <p><b>Ora </b><%=o.getData() %></p>
+			                                        <%switch(o.getStato().name()){
+			                                    	case "RITIRATO" :
+			                                    		%>
+			                                    		<span class="badge bg-primary mb-2"><i class="fa-solid fa-check-circle me-1">
+			                                            </i><%=o.getStato().name() %></span> <%
+			                                        	break;
+			                                    	case "RIFIUTATO" :%>
+			                                         	<span class="badge bg-danger mb-2"><i class="fa-solid fa-check-circle me-1">
+			                                            </i><%=o.getStato().name() %></span> <%
+			                                            break;
+			                                    	case "ANNULLATO" :%>
+		                                         	<span class="badge bg-secondary mb-2"><i class="fa-solid fa-check-circle me-1">
+		                                            </i><%=o.getStato().name() %></span> <%
+		                                            break;
+			                                    	}
+			                                    	%>
+			                                    <%DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm"); %>
+			                                        <p><b>Ora </b><%=o.getData().format(format) %></p>
 			                                    </div>
 			                                </div>
 			                                <%if(o.getRecensione()==null&&o.getStato().name().equalsIgnoreCase("Ritirato")){ %>
-			                                <button class="scriviRecensioneBtn" data-sezione="<%=o.getId()%>">Scrivi recensione</button>
+			                                <div class="recensione-footer text-center">
+											    <button class="badge bg-success text-white border-0 mb-3 scriviRecensioneBtn"
+											        style="font-size: 0.9rem; cursor: pointer;"
+											        data-sezione="<%=o.getId()%>">
+											        <i class="fa-solid fa-star me-1 text-white"></i>Scrivi recensione
+											    </button>
+											</div>
 			                                <%} else if(o.getRecensione()!=null&&o.getStato().name().equalsIgnoreCase("Ritirato")){%>
-		                     			    <button class="visualizzaRecensioneBtn"
-								            data-recensione="<%=o.getRecensione().getTesto()%>" 
-								            data-rating="<%=o.getRecensione().getVoto()%>">Visualizza recensione</button>
+		                     			 		<div class="recensione-footer text-center">
+											    <button class="badge bg-success text-white border-0 mb-3 visualizzaRecensioneBtn"
+											        style="font-size: 0.9rem; cursor: pointer;"
+											        data-recensione="<%= o.getRecensione().getTesto() %>"
+											        data-rating="<%= o.getRecensione().getVoto() %>">
+											        <i class="fa-solid fa-star me-1 text-white"></i>Visualizza recensione
+											    </button>
+											</div>    
 			                                <%} %>
 			                            </div>
                             		<%} %>
@@ -203,7 +234,7 @@
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Logo -->
-                    <img src="../res/logo_giallo.png" alt="" id="logofooter">
+                    <img src="<%=request.getContextPath() %>/src/res/logo_giallo.png" alt="" id="logofooter">
                     <p id="fame">
                         Entra in Enjoeat: che tu voglia ordinare o diventare partner,
                         sei nel posto giusto.
@@ -219,18 +250,17 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
                         Link utili</h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Chi siamo</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">FAQ</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Contatti</a></p>
-                </div>
-                <!-- Colonna Profili -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Profili
-                    </h6>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Utente</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
-                    <p><a href="#!" class="text-reset text-decoration-none">Carrello</a></p>
+                    <p><a href="<%=request.getContextPath() %>/ChiSiamoServlet" class="text-reset text-decoration-none">Chi siamo</a></p>
+			          <p><a href="<%=request.getContextPath() %>/FAQServlet" class="text-reset text-decoration-none">FAQ</a></p>
+			          <p><a href="<%=request.getContextPath() %>/ContattiServlet" class="text-reset text-decoration-none">Contatti</a></p>
+			        </div>
+			        <!-- Colonna Profili -->
+			        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+			          <h6 class="text-uppercase fw-bold mb-4">
+			            Profili
+			          </h6>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Utente</a></p>
+			          <p><a href="<%=request.getContextPath() %>/LoginServlet" class="text-reset text-decoration-none">Profilo Ristoratore</a></p>
                 </div>
                 <!-- Colonna Contatti -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -261,7 +291,6 @@
     <div id="scriviRecensionePopup" class="popup-overlay">
         <div class="popup-content">
         <form id="form" method="POST" action="<%=request.getContextPath()%>/LogicaRecensione">
-            <button id="chiudiScriviPopup">Chiudi</button>
             <h3>Scrivi la tua recensione</h3>
             <div id="ratingStars" class="rating-stars">
             	<input class="radioStella" type="radio" id="stella1" name="stella" value="1">
@@ -279,8 +308,10 @@
                 <input class="radioStella" type="radio" id="stella5" name="stella" value="5">
                 <label for="stella5"><i class="star fa-solid fa-star" data-value="5"></i></label>
             </div>
+            <div>
             <textarea id="inputRecensione" name="Testo" rows="4" placeholder="Scrivi qui la tua recensione..."
                 class="rounded-3"></textarea>
+            </div>
                 <input type="hidden" name="sezione" id="inputSezione">
             <button type="submit" id="inviaRecensione">Invia recensione</button>
             </form>
