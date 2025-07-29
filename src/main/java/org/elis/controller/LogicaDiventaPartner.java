@@ -63,8 +63,9 @@ public class LogicaDiventaPartner extends HttpServlet {
 	                // Se non esiste, la creiamo
 	                tipo = new Tipologia(nomeCategoria);
 	                tipologiaDao.insert(tipo);
+	                tipo = tipologiaDao.findTipologiaByNome(nomeCategoria);
 	            }
-	            tipi.add(tipo);
+	            tipi.add(tipologiaDao.selectById(tipo.getId()));
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -78,10 +79,6 @@ public class LogicaDiventaPartner extends HttpServlet {
 		if(a==null) {
 			response.sendRedirect(request.getContextPath()+"/DiventaPartnerServlet?error=categorieMancanti");
 			return;
-		}
-		for(String c : a) {
-			Tipologia tipo = new Tipologia(c);
-			tipi.add(tipo);
 		}
 		
 		UtenteDao accessoRistorante = DaoFactory.getDaoFactory().getUtenteDao();

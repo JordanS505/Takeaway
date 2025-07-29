@@ -57,8 +57,12 @@ private EntityManagerFactory emf;
 		Query q = em.createQuery("SELECT t FROM Tipologia t WHERE t.nome = :nome");
         q.setParameter("nome", nome);
         
-		Tipologia t = (Tipologia) q.getSingleResult();
-		
+		Tipologia t = null;
+		try {
+		t= (Tipologia) q.getSingleResult();
+		}catch(Exception e){
+			return null;
+		}
 		return t;
 	}
 
