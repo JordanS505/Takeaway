@@ -59,13 +59,14 @@ public class LogicaDiventaPartner extends HttpServlet {
 	    for(String nomeCategoria : categorieSelezionate) {
 	        try {
 	            Tipologia tipo = tipologiaDao.findTipologiaByNome(nomeCategoria);
+	            
 	            if(tipo == null) {
-	                // Se non esiste, la creiamo
 	                tipo = new Tipologia(nomeCategoria);
 	                tipologiaDao.insert(tipo);
-	                tipo = tipologiaDao.findTipologiaByNome(nomeCategoria);
 	            }
-	            tipi.add(tipologiaDao.selectById(tipo.getId()));
+	            
+	            tipi.add(tipo); // Aggiungi alla lista solo se tutto va bene
+	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
