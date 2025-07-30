@@ -27,7 +27,7 @@
   <!-- Header -->
   <header id="scroll-header">
     <div class="logo">
-      <a href="#">
+      <a href="<%=request.getContextPath() %>/HomePageUtenteServlet">
         <img src="<%=request.getContextPath() %>/src/res/logo-bianco.png" alt="Logo" />
       </a>
     </div>
@@ -60,8 +60,12 @@
           <p class="lead">Ordina online e passa a ritirare senza attese. EnjoEat è il
         tuo punto di riferimento per l’asporto veloce e delizioso.</p>
           <a href="<%=request.getContextPath() %>/ListaRistorantiServlet" id="primobtn" class="btn mt-2 btn-lg rounded-5 p-3">ORDINA SUBITO!</a>
-          <a href="<%=request.getContextPath() %>/DiventaPartnerServlet" id="secondobtn" class="btn mt-2 btn-lg rounded-5 p-3">DIVENTA PARTNER</a>
-        </div>
+          <%if(u.getRuolo().name().equalsIgnoreCase("RISTORATORE")){ %>
+      	<a href="<%=request.getContextPath() %>/PaginaProfiloRistoratoreServlet" id="secondobtn" class="btn mt-2 btn-lg rounded-5 p-3">VAI AL PROFILO</a>
+      		<% }else{ %>
+      	  <a href="<%=request.getContextPath() %>/ProfiloUtenteServlet" id="secondobtn" class="btn mt-2 btn-lg rounded-5 p-3">VAI AL PROFILO</a>
+      		<%} %>
+      </div>
   </div>
 
   <div class="container-fluid">
@@ -191,7 +195,7 @@
 	            %>
 	                        <div class="carousel-item <%= i == 0 ? "active" : "" %>">
 	                            <div class="recensione-card d-flex flex-column">
-	                            	<p class="fw-bold mb-0"><%=recensione.getUtente().getNome() %> <%=recensione.getUtente().getCognome() %></p>
+	                            	<p class="fw-bold mb-0 recensione-nome"><%=recensione.getUtente().getNome() %> <%=recensione.getUtente().getCognome() %></p>
                                     <div class="star-rating">
                                         <% 
                                             int voto = recensione.getVoto().intValue();

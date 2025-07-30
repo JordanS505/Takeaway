@@ -13,12 +13,16 @@
     integrity="sha512-...==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
     	@font-face {
-    		font-family: 'Rubik';
-    		src: url('${pageContext.request.contextPath}/src/Rubik-Black.ttf') format('truetype');
+    		font-family: 'Raleway', sans-serif;
 		}
     	
+    	body{
+    		font-family: 'Raleway', sans-serif;
+    		
+    	}
+    	
     	h1, input[type="submit"] {
-    		font-family: 'Rubik', sans-serif;
+    		font-family: 'Raleway', sans-serif;
     	}
     	
 	    input[type="submit"] {
@@ -107,9 +111,9 @@
     <div class="container pt-5">
     	<div class="row justify-content-center">
     	<div class="col rounded-5 shadow bg-white" style="max-width: 500px">
-        <div class="row mt-3 mb-3">
+        <div class="row mt-4 mb-2">
             <div class="col">
-                <h1 class="mx-auto" style="max-width: 400px;">Registrati</h1>
+                <h1 class="mx-auto fw-bold" style="max-width: 400px;">Registrati</h1>
             </div>
         </div>
 

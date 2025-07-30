@@ -83,7 +83,7 @@
               <div class="card-body">
                 <p class="card-text">Hai voglia di cucina italiana? Dalle lasagne alla parmigiana, scegli il tuo piatto
                   e ritiralo subito!</p>
-                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Italiana" class="btn w-100 rounded-5">ITALIANO</a>
+                <a href="<%=request.getContextPath()%>/ListaRistorantiServlet?filtro=Italiano" class="btn w-100 rounded-5">ITALIANO</a>
               </div>
             </div>
             <div class="card text-center rounded-5">
@@ -185,7 +185,7 @@
 	            %>
 	                        <div class="carousel-item <%= i == 0 ? "active" : "" %>">
 	                            <div class="recensione-card d-flex flex-column">
-	                            	<p class="fw-bold mb-0"><%=recensione.getUtente().getNome() %> <%=recensione.getUtente().getCognome() %></p>
+	                            	<p class="fw-bold mb-0 recensione-nome"><%=recensione.getUtente().getNome() %> <%=recensione.getUtente().getCognome() %></p>
                                     <div class="star-rating">
                                         <% 
                                             int voto = recensione.getVoto().intValue();

@@ -16,7 +16,7 @@
 
 </head>
 
-<body class="d-flex flex-column" style="background-image: url('<%=request.getContextPath() %>/src/res/Frame 12.png')">
+<body class="d-flex flex-column mt-4" style="background-image: url('<%=request.getContextPath() %>/src/res/Frame 12.png')">
 <header id="scroll-header">
     <div class="logo">
       <a href="<%= request.getContextPath()%>/HomePageServlet">

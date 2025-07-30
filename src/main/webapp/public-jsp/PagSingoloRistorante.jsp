@@ -141,6 +141,14 @@ header {
 	.mobile-only {
 		display: none;
 	}
+	
+	.immcard{
+		align-items: center;
+    	justify-content: center;
+    	width: 100%;
+    	margin: 0 !important;
+    	padding: 0 !important;
+	}
 }
 
 /* FOOTER */
@@ -242,7 +250,7 @@ header {
 	<!-- Header -->
 	<header id="scroll-header">
 		<div class="logo">
-			<a href="#"> <img
+			<a href="<%=request.getContextPath() %>/HomePageServlet"> <img
 				src="<%=request.getContextPath()%>/src/enjoEat-w.png" alt="Logo" />
 			</a>
 		</div>
@@ -310,7 +318,7 @@ header {
 							<div class="col-3 p-0 m-0 d-flex align-items-stretch overflow-hidden">
 								<% if(portata.getFoto()!=null) { %>
 		                            <img src="data:image/png;base64,<%= portata.getBase64ImageString() %>" alt="Foto"
-									class="img-fluid object-fit-cover" style="max-height: 150px">
+									class="img-fluid immcard object-fit-cover" style="max-height: 150px">
 		                        <% } else { %>
 		                            <img src="" alt="Foto Portata"
 									class="img-fluid p-0"
@@ -319,10 +327,10 @@ header {
 							</div>
 							<div class="col-5 m-0 p-0">
 								<div>
-									<h5 class="mb-1"><%= portata.getNome() %></h5>
+									<h5 class="mb-1 mt-3 ms-3"><%= portata.getNome() %></h5>
 								</div>
-								<span class="mb-0 text-muted"><%= prezzo %>€</span>
-								<div class="justify-content-end">
+								<span class="mb-0 ms-3 text-muted"><%= prezzo %>€</span>
+								<div class="justify-content-end ms-3">
 									<%if(portata.isSenzaGlutine()==true){%>
 										<img src="<%=request.getContextPath()%>/src/senzaGlutine.png" alt="Senza Glutine" style="height:30px">
 									<% } %>
