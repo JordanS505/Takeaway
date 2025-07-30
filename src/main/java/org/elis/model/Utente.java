@@ -40,7 +40,7 @@ public class Utente {
 	
 	private String nomeRistorante;
 	
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany
 	@JoinTable(
 		    name = "Utente_Tipologia",
 		    joinColumns = @JoinColumn(name="idUtente"),
